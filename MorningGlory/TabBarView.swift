@@ -8,15 +8,33 @@
 import SwiftUI
 
 
-struct TabBar: View {
+struct TabBarView: View {
     @State private var selectedTab: Int = 2
     
+    @State private var date = Date()
+    
     var body: some View {
+        Spacer()
         tabbarView()
     }
     
     private func tabbarView() -> some View {
         VStack {
+            VStack {
+                switch selectedTab {
+                case 1:
+                    PostView()
+                case 2:
+                    CalendarView(currentDate: $date)
+                case 3:
+                    UserInfoView()
+                case 4:
+                    PostView()
+                default:
+                    CalendarView(currentDate: $date)
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             HStack {
                 Spacer()
                 configureTabbar(image: "calendar", tabIndex: 1)
@@ -36,11 +54,12 @@ struct TabBar: View {
             .shadow(radius: 10)
         }
     }
-
+    
     private func configureTabbar(image: String, tabIndex: Int) -> some View {
         Button(action: {
             selectedTab = tabIndex
         }) {
+            
             Image(systemName: image)
                 .foregroundColor(selectedTab == tabIndex ? .white : .gray)
                 .padding()
@@ -51,5 +70,5 @@ struct TabBar: View {
 }
 
 #Preview {
-    TabBar()
+    TabBarView()
 }

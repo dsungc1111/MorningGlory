@@ -11,7 +11,7 @@ import SwiftUI
 struct MorningGloryApp: App {
     var body: some Scene {
         WindowGroup {
-            TabBar()
+            TabBarView()
         }
     }
 }

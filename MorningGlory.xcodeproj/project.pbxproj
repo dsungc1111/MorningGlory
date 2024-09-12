@@ -8,19 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		8B8012962C93185000E8AADD /* MorningGloryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012952C93185000E8AADD /* MorningGloryApp.swift */; };
-		8B8012982C93185000E8AADD /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012972C93185000E8AADD /* TabBar.swift */; };
+		8B8012982C93185000E8AADD /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012972C93185000E8AADD /* TabBarView.swift */; };
 		8B80129A2C93185200E8AADD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B8012992C93185200E8AADD /* Assets.xcassets */; };
 		8B80129D2C93185200E8AADD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B80129C2C93185200E8AADD /* Preview Assets.xcassets */; };
 		8B8012A52C9318B400E8AADD /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012A42C9318B400E8AADD /* Color+.swift */; };
+		8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012A72C9319BA00E8AADD /* CalendarView.swift */; };
+		8B8012AA2C931C0100E8AADD /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012A92C931C0100E8AADD /* ToDoView.swift */; };
+		8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012AD2C931C3700E8AADD /* UserInfoView.swift */; };
+		8B8012B12C931CFB00E8AADD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012B02C931CFB00E8AADD /* PostView.swift */; };
+		8B8012B42C931F4700E8AADD /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012B32C931F4700E8AADD /* DateValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8B8012922C93185000E8AADD /* MorningGlory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorningGlory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8012952C93185000E8AADD /* MorningGloryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningGloryApp.swift; sourceTree = "<group>"; };
-		8B8012972C93185000E8AADD /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		8B8012972C93185000E8AADD /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		8B8012992C93185200E8AADD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B80129C2C93185200E8AADD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8B8012A42C9318B400E8AADD /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		8B8012A72C9319BA00E8AADD /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		8B8012A92C931C0100E8AADD /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
+		8B8012AD2C931C3700E8AADD /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		8B8012B02C931CFB00E8AADD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		8B8012B32C931F4700E8AADD /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +63,14 @@
 		8B8012942C93185000E8AADD /* MorningGlory */ = {
 			isa = PBXGroup;
 			children = (
-				8B8012A32C9318A900E8AADD /* Extension */,
+				8B8012B22C931F3C00E8AADD /* Data */,
 				8B8012952C93185000E8AADD /* MorningGloryApp.swift */,
-				8B8012972C93185000E8AADD /* TabBar.swift */,
+				8B8012A32C9318A900E8AADD /* Extension */,
+				8B8012972C93185000E8AADD /* TabBarView.swift */,
+				8B8012A62C93199F00E8AADD /* CalendarView */,
+				8B8012AB2C931C0600E8AADD /* ToDoView */,
+				8B8012AC2C931C2900E8AADD /* UserInfo */,
+				8B8012AF2C931C4300E8AADD /* PostView */,
 				8B8012992C93185200E8AADD /* Assets.xcassets */,
 				8B80129B2C93185200E8AADD /* Preview Content */,
 			);
@@ -76,6 +91,46 @@
 				8B8012A42C9318B400E8AADD /* Color+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8B8012A62C93199F00E8AADD /* CalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				8B8012A72C9319BA00E8AADD /* CalendarView.swift */,
+			);
+			path = CalendarView;
+			sourceTree = "<group>";
+		};
+		8B8012AB2C931C0600E8AADD /* ToDoView */ = {
+			isa = PBXGroup;
+			children = (
+				8B8012A92C931C0100E8AADD /* ToDoView.swift */,
+			);
+			path = ToDoView;
+			sourceTree = "<group>";
+		};
+		8B8012AC2C931C2900E8AADD /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				8B8012AD2C931C3700E8AADD /* UserInfoView.swift */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		8B8012AF2C931C4300E8AADD /* PostView */ = {
+			isa = PBXGroup;
+			children = (
+				8B8012B02C931CFB00E8AADD /* PostView.swift */,
+			);
+			path = PostView;
+			sourceTree = "<group>";
+		};
+		8B8012B22C931F3C00E8AADD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8B8012B32C931F4700E8AADD /* DateValue.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,9 +203,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B8012982C93185000E8AADD /* TabBar.swift in Sources */,
+				8B8012B12C931CFB00E8AADD /* PostView.swift in Sources */,
+				8B8012982C93185000E8AADD /* TabBarView.swift in Sources */,
 				8B8012A52C9318B400E8AADD /* Color+.swift in Sources */,
+				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,
+				8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */,
+				8B8012B42C931F4700E8AADD /* DateValue.swift in Sources */,
 				8B8012962C93185000E8AADD /* MorningGloryApp.swift in Sources */,
+				8B8012AA2C931C0100E8AADD /* ToDoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
