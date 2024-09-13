@@ -8,7 +8,7 @@
 import Foundation
 
 struct DateValue: Identifiable {
-   let id = UUID()
+    let id = UUID()
     let day: Int
     let date: Date
 }

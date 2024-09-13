@@ -7,20 +7,6 @@
 
 import SwiftUI
 
-//struct CalendarView: View {
-//    var body: some View {
-//        Text("캘린더뷰")
-//
-//    }
-//}
-//
-
-struct BoxView: View {
-    @State var date = Date()
-    var body: some View {
-        CalendarView(currentDate: $date)
-    }
-}
 
 struct CalendarView: View {
     @Binding var currentDate: Date
@@ -29,12 +15,22 @@ struct CalendarView: View {
     let weekDays = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
+    let list = [
+        "이거 할래요!",
+        "저거 할래요!",
+        "하기 싫어요!"
+    ]
+    
     var body: some View {
-        
-        VStack(spacing: 20) {
-            topCalendarView()
-            weekdaysView()
-            daysComponentView(colums: columns)
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: 20) {
+                topCalendarView()
+                weekdaysView()
+                daysComponentView(colums: columns)
+                ForEach(list, id: \.self) { item in
+                    Text(item)
+                }
+            }
         }
     }
 }
@@ -44,12 +40,9 @@ extension CalendarView {
     func topCalendarView() -> some View {
         HStack(spacing: 20) {
             dayInfo()
-            Spacer()
-//            buttonForChangeView()
         }
         .padding()
     }
-    
     
     func daysComponentView(colums: [GridItem]) -> some View {
         
@@ -76,34 +69,27 @@ extension CalendarView {
         }
     }
     
-    
     @ViewBuilder
-    func buttonForChangeView() -> some View {
+    func dayInfo() -> some View {
+        
+        let monthLabel = getDateData(for: getCurrentMonth())
+        
         Button(action: {
             currentMonth -= 1
         }, label: {
             Image(systemName: "chevron.left")
                 .font(.title2)
         })
+        Text(monthLabel[1])
+            .font(.custom("Menlo-Bold", size: 30))
+            .foregroundStyle(Color(hex: "#57a3ff"))
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
         Button(action: {
             currentMonth += 1
         }, label: {
             Image(systemName: "chevron.right")
                 .font(.title2)
         })
-    }
-    
-    @ViewBuilder
-    func dayInfo() -> some View {
-        
-        let monthLabel = getDateData(for: getCurrentMonth())
-        
-//        VStack(alignment: .leading, spacing: 10) {
-            Text(monthLabel[1])
-                .font(.custom("Menlo-Bold", size: 30))
-                .foregroundStyle(Color(hex: "#57a3ff"))
-                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
-//        }
     }
     
     
@@ -113,9 +99,12 @@ extension CalendarView {
             if value.day != -1 {
                 Text("\(value.day)")
                     .font(.title3.bold())
+                Image("file")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .background(.clear)
             }
         }
-//        .padding(.vertical, 8)
         .frame(height: 100, alignment: .top)
     }
 }
@@ -166,28 +155,6 @@ extension CalendarView {
     }
 }
 
-
-extension Date {
-    
-    func getDates() -> [Date] {
-        
-        let calendar = Calendar.current
-        
-        let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: self))!
-        let range = calendar.range(of: .day, in: .month, for: self)!
-        
-        
-        return range.compactMap { day -> Date in
-            
-            return calendar.date(byAdding: .day, value: day - 1, to: startDate)!
-        }
-    }
-}
-
-
-
-
-
 #Preview {
-    BoxView()
+    TabBarView()
 }
