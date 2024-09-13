@@ -23,7 +23,7 @@ struct TabBarView: View {
             VStack {
                 switch selectedTab {
                 case 1:
-                    PostView()
+                    ToDoView()
                 case 2:
                     CalendarView(currentDate: $date)
                 case 3:

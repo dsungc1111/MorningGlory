@@ -26,6 +26,8 @@
 		8BC463B32C93D9C400701B4B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC463B22C93D9C400701B4B /* FirebaseAnalytics */; };
 		8BC463B52C93D9C400701B4B /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC463B42C93D9C400701B4B /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		8BC463B72C93D9C400701B4B /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC463B62C93D9C400701B4B /* FirebaseCrashlytics */; };
+		8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */; };
+		8BC463BC2C9415FE00701B4B /* TimeCircleWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463BB2C9415FE00701B4B /* TimeCircleWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFamousSaying.swift; sourceTree = "<group>"; };
 		8BC463AD2C93D80900701B4B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8BC463AF2C93D96200701B4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		8BC463BB2C9415FE00701B4B /* TimeCircleWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCircleWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 			children = (
 				8BC463AF2C93D96200701B4B /* GoogleService-Info.plist */,
 				8B8012952C93185000E8AADD /* MorningGloryApp.swift */,
+				8BC463BA2C9415E700701B4B /* Wrapper */,
 				8BC463A42C93D60F00701B4B /* NetWork */,
 				8B8012B22C931F3C00E8AADD /* Data */,
 				8B8012A32C9318A900E8AADD /* Extension */,
@@ -151,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				8B8012B32C931F4700E8AADD /* DateValue.swift */,
+				8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -161,6 +167,14 @@
 				8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */,
 			);
 			path = NetWork;
+			sourceTree = "<group>";
+		};
+		8BC463BA2C9415E700701B4B /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				8BC463BB2C9415FE00701B4B /* TimeCircleWrapper.swift */,
+			);
+			path = Wrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +265,8 @@
 				8B8012B12C931CFB00E8AADD /* PostView.swift in Sources */,
 				8B8012982C93185000E8AADD /* TabBarView.swift in Sources */,
 				8B8012A52C9318B400E8AADD /* Color+.swift in Sources */,
+				8BC463BC2C9415FE00701B4B /* TimeCircleWrapper.swift in Sources */,
+				8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */,
 				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,
 				8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */,
 				8B8012B42C931F4700E8AADD /* DateValue.swift in Sources */,

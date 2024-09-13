@@ -25,20 +25,6 @@ struct CalendarView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 20) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                        .fill(.gray)
-                        .frame(width: 350, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-                    HStack {
-                        Image("파랑우주먼지")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .padding()
-                        Text(saying)
-                            .padding()
-                    }
-                    .frame(alignment: .trailing)
-                }
                 topCalendarView()
                 weekdaysView()
                 daysComponentView(colums: columns)
@@ -47,16 +33,7 @@ struct CalendarView: View {
                 }
             }
         }
-        .task {
-            RandomFamousSaying.shared.getSaying { result in
-                switch result {
-                case .success(let success):
-                    saying = success.message
-                case .failure(let failure):
-                    saying = "다시 도전"
-                }
-            }
-        }
+       
     }
 }
 //MARK: about View
