@@ -196,7 +196,7 @@ struct ToDoView: View {
                    .multilineTextAlignment(.leading)
                    .frame(maxWidth: .infinity, alignment: .leading)
            }
-           .padding() // 내부 여백 추가
+           .padding() 
            .background(
                RoundedRectangle(cornerRadius: 25)
                    .fill(Color(.white))

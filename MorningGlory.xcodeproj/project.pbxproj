@@ -31,6 +31,10 @@
 		8BC463BD2C946EEA00701B4B /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8BC463AB2C93D70A00701B4B /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8BC463C12C95311F00701B4B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC463C02C95311F00701B4B /* IQKeyboardManagerSwift */; };
 		8BC463C32C95335300701B4B /* KeyBoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463C22C95335300701B4B /* KeyBoardManager.swift */; };
+		8BC463C52C959F0900701B4B /* GetWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463C42C959F0900701B4B /* GetWeather.swift */; };
+		8BC463C72C959F4800701B4B /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463C62C959F4800701B4B /* Weather.swift */; };
+		8BC463C92C959F5A00701B4B /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463C82C959F5A00701B4B /* APIKey.swift */; };
+		8BC463CB2C95A86700701B4B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463CA2C95A86700701B4B /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +70,10 @@
 		8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		8BC463BB2C9415FE00701B4B /* TimeCircleWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCircleWrapper.swift; sourceTree = "<group>"; };
 		8BC463C22C95335300701B4B /* KeyBoardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardManager.swift; sourceTree = "<group>"; };
+		8BC463C42C959F0900701B4B /* GetWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWeather.swift; sourceTree = "<group>"; };
+		8BC463C62C959F4800701B4B /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		8BC463C82C959F5A00701B4B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		8BC463CA2C95A86700701B4B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +126,7 @@
 				8B8012AF2C931C4300E8AADD /* PostView */,
 				8B8012992C93185200E8AADD /* Assets.xcassets */,
 				8B80129B2C93185200E8AADD /* Preview Content */,
+				8BC463C82C959F5A00701B4B /* APIKey.swift */,
 			);
 			path = MorningGlory;
 			sourceTree = "<group>";
@@ -167,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				8B8012B02C931CFB00E8AADD /* PostView.swift */,
+				8BC463CA2C95A86700701B4B /* LocationManager.swift */,
 			);
 			path = PostView;
 			sourceTree = "<group>";
@@ -176,6 +186,7 @@
 			children = (
 				8B8012B32C931F4700E8AADD /* DateValue.swift */,
 				8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */,
+				8BC463C62C959F4800701B4B /* Weather.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -184,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */,
+				8BC463C42C959F0900701B4B /* GetWeather.swift */,
 			);
 			path = NetWork;
 			sourceTree = "<group>";
@@ -285,13 +297,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B7B13EB2C93CC0D00AFE31F /* Date+.swift in Sources */,
+				8BC463CB2C95A86700701B4B /* LocationManager.swift in Sources */,
 				8B8012B12C931CFB00E8AADD /* PostView.swift in Sources */,
 				8B8012982C93185000E8AADD /* TabBarView.swift in Sources */,
 				8B8012A52C9318B400E8AADD /* Color+.swift in Sources */,
+				8BC463C72C959F4800701B4B /* Weather.swift in Sources */,
 				8BC463BC2C9415FE00701B4B /* TimeCircleWrapper.swift in Sources */,
+				8BC463C52C959F0900701B4B /* GetWeather.swift in Sources */,
 				8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */,
 				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,
 				8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */,
+				8BC463C92C959F5A00701B4B /* APIKey.swift in Sources */,
 				8B8012B42C931F4700E8AADD /* DateValue.swift in Sources */,
 				8B8012962C93185000E8AADD /* MorningGloryApp.swift in Sources */,
 				8BC463C32C95335300701B4B /* KeyBoardManager.swift in Sources */,
@@ -435,6 +451,7 @@
 				DEVELOPMENT_TEAM = 83K785968Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -469,6 +486,7 @@
 				DEVELOPMENT_TEAM = 83K785968Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
