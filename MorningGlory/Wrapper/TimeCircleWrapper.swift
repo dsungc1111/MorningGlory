@@ -19,7 +19,6 @@ private struct TimeCircleWrapper: ViewModifier {
                 .frame(width: 10, height: 10)
                 .padding(4)
                 .background(.white.shadow(.drop(color: .black.opacity(0.5), radius: 1)), in: Circle())
-//                .padding()
         } else {
             circle
                 .fill(Color.blue)
@@ -27,7 +26,6 @@ private struct TimeCircleWrapper: ViewModifier {
                 .padding(4)
                 .background(Color.white)
                 .shadow(color: .black.opacity(0.5), radius: 1)
-//                .padding()
         }
     }
 }

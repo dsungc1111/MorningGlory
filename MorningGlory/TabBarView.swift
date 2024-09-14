@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import IQKeyboardManagerSwift
 
 struct TabBarView: View {
     @State private var selectedTab: Int = 2
@@ -16,6 +16,7 @@ struct TabBarView: View {
     var body: some View {
         Spacer()
         tabbarView()
+        
     }
     
     private func tabbarView() -> some View {
@@ -51,7 +52,7 @@ struct TabBarView: View {
             .padding(.vertical, 10)
             .background(Color(UIColor.systemBackground).shadow(radius: 20))
             .clipShape(Capsule())
-            .shadow(radius: 10)
+            .shadow(radius: 5)
         }
     }
     

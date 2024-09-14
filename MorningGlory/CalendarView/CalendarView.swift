@@ -12,6 +12,8 @@ struct CalendarView: View {
     @Binding var currentDate: Date
     @State private var currentMonth: Int = 0
     
+    private let calendar = Calendar.current
+    
     let weekDays = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     @State var saying = ""
@@ -101,10 +103,10 @@ extension CalendarView {
             if value.day != -1 {
                 Text("\(value.day)")
                     .font(.title3.bold())
-                Image("file")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .background(.clear)
+//                Image("file")
+//                    .resizable()
+//                    .frame(width: 50, height: 50)
+//                    .background(.clear)
             }
         }
         .frame(height: 100, alignment: .top)
@@ -116,9 +118,9 @@ extension CalendarView {
 extension CalendarView {
     
     
-    func isSameDay(date1: Date, date2: Date) -> Bool {
     
-        let calendar = Calendar.current
+    func isSameDay(date1: Date, date2: Date) -> Bool {
+//        let calendar = Calendar.current
         return calendar.isDate(date1, inSameDayAs: date2)
     }
     
@@ -132,7 +134,7 @@ extension CalendarView {
 
     
     func getCurrentMonth() -> Date {
-        guard let currentMonth = Calendar.current.date(byAdding: .month, value: currentMonth, to: Date()) else { return Date() }
+        guard let currentMonth = calendar.date(byAdding: .month, value: currentMonth, to: Date()) else { return Date() }
         
         return currentMonth
     }
@@ -140,14 +142,14 @@ extension CalendarView {
     
     func getDate() -> [DateValue] {
         
-        guard let currentMonth = Calendar.current.date(byAdding: .month, value: self.currentMonth, to: Date()) else { return [] }
+        guard let currentMonth = calendar.date(byAdding: .month, value: self.currentMonth, to: Date()) else { return [] }
         
         var days = currentMonth.getDates().compactMap { date -> DateValue in
-            let day = Calendar.current.component(.day, from: date )
+            let day = calendar.component(.day, from: date )
             return DateValue(day: day, date: date)
         }
         
-        let firstWeekday = Calendar.current.component(.weekday, from: days.first?.date ?? Date())
+        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
         
         for _ in 0..<firstWeekday - 1 {
             days.insert(DateValue(day: -1, date: Date()), at: 0)

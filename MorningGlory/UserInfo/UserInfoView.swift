@@ -8,9 +8,56 @@
 import SwiftUI
 
 struct UserInfoView: View {
+    let totalDays = 30
+    let completedDays = 14
+    
+    @State private var progress: Double = 0.0
+    @State private var timer: Timer? = nil
+    let totalDuration: Double = 60
+    
     var body: some View {
-        Text("UserInfoView")
+        progressView()
+        RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+            .fill(.gray)
+            .frame(width: 300, height: 100)
     }
+    
+    func progressView() -> some View {
+        VStack {
+            ProgressView(value: progress, total: 1.0)
+                .progressViewStyle(LinearProgressViewStyle())
+                .padding()
+                .animation(.linear(duration: 2.0), value: progress)
+            
+            Text("\(Int(progress * 100))% 완료")
+                .font(.headline)
+                .padding()
+            
+            Button(action: startProgress) {
+                Text("Start Progress")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+    }
+    
+    func startProgress() {
+        
+        timer?.invalidate()
+        progress = 0.0
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if progress < 1.0 {
+                progress += 1.0 / totalDuration
+            } else {
+                timer?.invalidate()
+            }
+        }
+    }
+    
+    
 }
 
 #Preview {
