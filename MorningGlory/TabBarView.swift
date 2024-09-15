@@ -14,9 +14,22 @@ struct TabBarView: View {
     @State private var date = Date()
     
     var body: some View {
-        Spacer()
-        tabbarView()
-        
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .edgesIgnoringSafeArea(.all)
+            
+            Spacer()
+            Image("file")
+                .resizable()
+                .frame(width: 70, height: 70)
+                .offset(x: 140, y: 300)
+                .shadow(color: Color.orange, radius: 10, x: 0, y: 0)
+            tabbarView()
+        }
     }
     
     private func tabbarView() -> some View {
@@ -50,7 +63,7 @@ struct TabBarView: View {
             .frame(width: 280)
             .padding(.horizontal)
             .padding(.vertical, 10)
-            .background(Color(UIColor.systemBackground).shadow(radius: 20))
+            .background(Color(hex: "#e3d4ae").shadow(radius: 20))
             .clipShape(Capsule())
             .shadow(radius: 5)
         }

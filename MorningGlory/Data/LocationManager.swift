@@ -9,10 +9,12 @@ import SwiftUI
 import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    
     private let locationManager = CLLocationManager()
-
+    
     @Published var location: CLLocation? = nil
     @Published var authorizationStatus: CLAuthorizationStatus?
+    @Published var userLocation: String?
 
     override init() {
         super.init()
@@ -33,6 +35,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.first
+    }
+    
+    func getLocation(lat: Double, lon: Double) {
+        let findLocation = CLLocation(latitude: lat, longitude: lon)
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale, completionHandler: { [weak self] (placemarks, error) in
+            if let address: [CLPlacemark] = placemarks {
+                if let name: String = address.last?.name { self?.userLocation = name }
+            }
+        })
     }
 }
 

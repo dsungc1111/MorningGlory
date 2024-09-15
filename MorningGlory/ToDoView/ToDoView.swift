@@ -7,12 +7,26 @@
 
 import SwiftUI
 
+enum PostItColor {
+    static let pink = PostItItem(background: "#FCC8C8", foldColor: "#FF8D8D", time: "05:30")
+    static let yellow = PostItItem(background: "#F2F5D5", foldColor: "#FCEB00", time: "06:30")
+    static let orange = PostItItem(background: "FFD9AA", foldColor: "FDBD70", time: "07:30")
+}
+
+struct PostItItem {
+    let background: String
+    let foldColor: String
+    let time: String
+}
+
 struct ToDoView: View {
     
+    @StateObject private var locationManager = LocationManager()
     @State private var mission1 = ""
     @State private var mission2 = ""
     @State private var mission3 = ""
-    
+    @State private var weatherIcon: String = ""
+    @State private var temperature: Double = 0.0
     
     var body: some View {
         KeyBoardManager().edgesIgnoringSafeArea(.all)
@@ -21,6 +35,7 @@ struct ToDoView: View {
                 .offset(y: -20)
             missionList()
         }
+        .offset(y: -10)
     }
     
     func buttonView() -> some View {
@@ -38,129 +53,73 @@ struct ToDoView: View {
     }
     
     func missionList() -> some View {
-        
-        VStack(alignment: .leading) {
-            
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("05:00")
-                        .font(.system(size: 20).bold())
-                    timeCircle(circle: Circle())
-                    Text("기상")
-                        .font(.system(size: 20).bold())
-                    Spacer()
+        VStack {
+            ZStack {
+                Rectangle()
+                    .fill(Color(hex: "#C8CAFC"))
+                    .frame(width: 350, height: 60)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .shadow(radius: 5)
+                    Text("5시 기상")
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/.bold())
+                        .offset(x: -120)
+                    
                     buttonView()
-                        .padding(.trailing, 30)
-                }
-//                Rectangle()
-//                    .frame(width: 1, height: 20, alignment: .leading)
-//                    .background(.red)
-//                    .padding(.leading, 73)
-//                    .offset(y: -20)
             }
-
+            ZStack {
+                postItView(backGround: PostItColor.pink.background, fold: PostItColor.pink.foldColor, time: PostItColor.pink.time, textfield: $mission1)
+//                TextField("Mission1", text: $mission1)
+//                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+//                    .offset(x: 30, y: 10)
+            }
+            ZStack {
+                postItView(backGround: PostItColor.yellow.background, fold: PostItColor.yellow.foldColor, time: PostItColor.yellow.time, textfield: $mission2)
+//                TextField("Mission2", text: $mission2)
+//                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+//                    .offset(x: 30, y: 10)
+            }
+            ZStack {
+                postItView(backGround: PostItColor.orange.background, fold: PostItColor.orange.foldColor, time: PostItColor.orange.time, textfield: $mission3)
+//                TextField("Mission3", text: $mission3)
+//                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+//                    .offset(x: 30, y: 10)
+            }
+           
+        }
+        
+    }
+    func postItView(backGround: String, fold: String, time: String, textfield: Binding<String>) -> some View {
+        ZStack {
+            Rectangle()
+                .fill(Color(hex: backGround))
+                .frame(width: 350, height: 130)
+                .overlay(
+                    FoldedCornerShape()
+                        .fill(Color(hex: fold))
+                        .frame(width: 50, height: 50)
+                        .offset(x: 150, y: 40)
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(radius: 5)
             VStack(alignment: .leading) {
-                HStack {
-                    Text("05:30")
-                        .font(.system(size: 20).bold())
-                    timeCircle(circle: Circle())
-                }
-                HStack {
-                    timelineBar()
-                        .padding(.leading, 64)
-                    ZStack {
-                        TextField("", text: $mission1)
-                            .font(.system(size: 24))
-                            .frame(width: 250, height: 80)
-                            .padding(.leading, 10)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.blue, lineWidth: 1)
-                            )
-                            .foregroundColor(.blue)
-                            .padding(.horizontal)
-                        ZStack {
-                            Rectangle()
-                                .fill(.white)
-                                .frame(width: 85, height: 28)
-                            Text("Mission1")
-                                .foregroundStyle(.blue)
-                                .background(.white)
-                        }
-                        .offset(x: -75, y: -42)
-                    }
-                }
+                Text(time)
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/.bold())
+//                    .offset(x: 10, y: -20)
+//                    .padding(.leading, 40)
+                TextField("미션을 입력하세요", text: textfield)
+                    .font(.title2)
+                    .offset(x: 20)
             }
-            .offset(y: -10)
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("06:30")
-                        .font(.system(size: 20).bold())
-                    timeCircle(circle: Circle())
-                }
-                HStack {
-                    timelineBar()
-                        .padding(.leading, 64)
-                    ZStack {
-                        TextField("", text: $mission2)
-                            .font(.system(size: 24))
-                            .frame(width: 250, height: 80)
-                            .padding(.leading, 10)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.blue, lineWidth: 1)
-                            )
-                            .foregroundColor(.blue)
-                            .padding(.horizontal)
-                        ZStack {
-                            Rectangle()
-                                .fill(.white)
-                                .frame(width: 85, height: 28)
-                            Text("Mission2")
-                                .foregroundStyle(.blue)
-                                .background(.white)
-                        }
-                        .offset(x: -75, y: -42)
-                    }
-                }
-            }
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("07:30")
-                        .font(.system(size: 20).bold())
-                    timeCircle(circle: Circle())
-                }
-                HStack {
-                    timelineBar()
-                        .padding(.leading, 64)
-                    ZStack {
-                        TextField("", text: $mission3)
-                            .font(.system(size: 24))
-                            .frame(width: 250, height: 80)
-                            .padding(.leading, 10)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.blue, lineWidth: 1)
-                            )
-                            .foregroundColor(.blue)
-                            .padding(.horizontal)
-                        ZStack {
-                            Rectangle()
-                                .fill(.white)
-                                .frame(width: 85, height: 28)
-                            Text("Mission3")
-                                .foregroundStyle(.blue)
-                                .background(.white)
-                        }
-                        .offset(x: -75, y: -42)
-                    }
-                }
-            }
+            .background(.gray)
+            
+            
+//            .offset(x: -125 , y: -40)
             
            
         }
-        .padding(.leading)
+
     }
+    
     
     func timelineBar() -> some View {
         Rectangle()
@@ -184,31 +143,41 @@ struct ToDoView: View {
     
     func sayingView() -> some View {
         HStack {
-               Image(systemName: "cloud.sun.fill")
-                   .resizable()
-                   .cornerRadius(25)
-                   .frame(width: 50, height: 50)
-                   .padding()
-               
+            VStack {
+                if let iconURL = URL(string: "https://openweathermap.org/img/wn/\(weatherIcon)@2x.png") {
+                    AsyncImage(url: iconURL) { image in
+                        image.resizable()
+                            .frame(width: 100, height: 100)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                }
+                Text( String(format: "%.1f", temperature)  + "℃")
+            }
                Text(UserDefaultsManager.saying)
-                   .foregroundColor(Color(hex: "#57a3ff"))
-                   .font(.system(size: 20).bold())
+                .foregroundColor(.black)
+                   .font(.system(size: 20))
                    .multilineTextAlignment(.leading)
                    .frame(maxWidth: .infinity, alignment: .leading)
            }
            .padding() 
-           .background(
-               RoundedRectangle(cornerRadius: 25)
-                   .fill(Color(.white))
-                   .shadow(radius: 10)
-           )
-           .padding()
+//           .background(
+//               RoundedRectangle(cornerRadius: 25)
+//                   .fill(Color(.white))
+//                   .shadow(radius: 10)
+//           )
            .task {
-//               UserDefaultsManager.saying = ""
-               print("명언", UserDefaultsManager.saying)
-               print("시간", UserDefaultsManager.dayDate)
-               print("과연", shouldFetchNewSaying())
+//               print("명언", UserDefaultsManager.saying)
+//               print("시간", UserDefaultsManager.dayDate)
+//               print("과연", shouldFetchNewSaying())
                if shouldFetchNewSaying() { saveInfo() }
+               if let location = locationManager.location {
+                   GetWeather.shared.callWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude) { result in
+                       self.weatherIcon = result.weather.first?.icon ?? "아이콘"
+                       self.temperature = result.main.temp
+                   }
+                   
+               }
            }
         
         
@@ -217,18 +186,33 @@ struct ToDoView: View {
         let lastFetchDate = UserDefaultsManager.dayDate
         let calendar = Calendar.current
         if let daysBetween = calendar.dateComponents([.day], from: lastFetchDate, to: Date()).day, daysBetween >= 1 {
-            print("2")
+//            print("2")
             return true
         } else if UserDefaultsManager.saying == "" {
-            print("3")
+//            print("3")
             return true
         } else {
-            print("4")
+//            print("4")
             return false
         }
     }
 }
 
+
+struct FoldedCornerShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        // 시작점
+        path.move(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addQuadCurve(to: CGPoint(x: rect.maxX, y: rect.minY),
+                          control: CGPoint(x: rect.midX, y: rect.midY))
+        return path
+    }
+}
 #Preview {
     TabBarView()
 }
+ 

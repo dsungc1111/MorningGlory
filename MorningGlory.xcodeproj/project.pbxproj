@@ -176,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				8B8012B02C931CFB00E8AADD /* PostView.swift */,
-				8BC463CA2C95A86700701B4B /* LocationManager.swift */,
 			);
 			path = PostView;
 			sourceTree = "<group>";
@@ -184,6 +183,7 @@
 		8B8012B22C931F3C00E8AADD /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				8BC463CA2C95A86700701B4B /* LocationManager.swift */,
 				8B8012B32C931F4700E8AADD /* DateValue.swift */,
 				8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */,
 				8BC463C62C959F4800701B4B /* Weather.swift */,

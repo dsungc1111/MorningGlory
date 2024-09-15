@@ -3,49 +3,33 @@ import SwiftUI
 
 struct PostView: View {
     @StateObject private var locationManager = LocationManager()
-    @State private var weatherDescription: String = ""
+    @State private var weatherIcon: String = ""
     @State private var temperature: Double = 0.0
     
     var body: some View {
         VStack {
-            if let location = locationManager.location {
-                
-                Text("Fetching weather for: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-                    .onAppear {
-                        GetWeather.shared.callWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude) { result in
-                            self.weatherDescription = result.weather.first?.main ?? ""
-                            self.temperature = result.main.temp
-                        }
-                    }
-            } else {
-                Text("Fetching location...")
-            }
             
+            if let iconURL = URL(string: "https://openweathermap.org/img/wn/\(weatherIcon)@2x.png") {
+                AsyncImage(url: iconURL) { image in
+                    image.resizable()
+                        .frame(width: 100, height: 100)
+                } placeholder: {
+                    ProgressView()
+                }
+            }
             Text("\(Int(temperature))°C")
                 .font(.largeTitle)
                 .padding()
-            
-            Text(weatherDescription)
-                .font(.title)
-                .padding()
-            
-            weatherImage(for: weatherDescription)
         }
-        
-    }
-    
-    func weatherImage(for description: String) -> Image {
-        switch description {
-        case "Clear":
-            return Image(systemName: "sun.max.fill")
-        case "Clouds":
-            return Image(systemName: "cloud.fill")
-        case "Rain":
-            return Image(systemName: "cloud.rain.fill")
-        case "Snow":
-            return Image(systemName: "cloud.snow.fill")
-        default:
-            return Image(systemName: "cloud.fill")
+        .task {
+            if let location = locationManager.location {
+                GetWeather.shared.callWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude) { result in
+                    self.weatherIcon = result.weather.first?.icon ?? "아이콘"
+                    self.temperature = result.main.temp
+                    print(self.weatherIcon)
+                }
+                
+            }
         }
     }
 }

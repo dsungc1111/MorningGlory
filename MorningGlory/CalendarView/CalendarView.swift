@@ -53,7 +53,7 @@ extension CalendarView {
         LazyVGrid(columns: colums) {
             ForEach(getDate()) { item in
                 daysView(value: item)
-                    .foregroundStyle(isSameDay(date1: item.date, date2: currentDate) ? .pink : Color(hex: "#57a3ff"))
+                    .foregroundStyle(isSameDay(date1: item.date, date2: currentDate) ? .pink : .black)
                     .onTapGesture {
                         currentDate = item.date
                     }
@@ -83,16 +83,19 @@ extension CalendarView {
         }, label: {
             Image(systemName: "chevron.left")
                 .font(.title2)
+                .foregroundStyle(.black)
         })
         Text(monthLabel[1])
             .font(.custom("Menlo-Bold", size: 30))
-            .foregroundStyle(Color(hex: "#57a3ff"))
+//            .foregroundStyle(Color(hex: "#57a3ff"))
+            .foregroundStyle(.black)
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
         Button(action: {
             currentMonth += 1
         }, label: {
             Image(systemName: "chevron.right")
                 .font(.title2)
+                .foregroundStyle(.black)
         })
     }
     
