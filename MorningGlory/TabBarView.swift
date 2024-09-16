@@ -21,7 +21,6 @@ struct TabBarView: View {
                 endPoint: .bottomTrailing
             )
             .edgesIgnoringSafeArea(.all)
-            
             Spacer()
             Image("file")
                 .resizable()

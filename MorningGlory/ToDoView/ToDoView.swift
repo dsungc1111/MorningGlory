@@ -29,13 +29,12 @@ struct ToDoView: View {
     @State private var temperature: Double = 0.0
     
     var body: some View {
-        KeyBoardManager().edgesIgnoringSafeArea(.all)
+        KeyBoardManager().frame(width: 0, height: 0)
+        
         VStack {
             sayingView()
-                .offset(y: -20)
             missionList()
         }
-        .offset(y: -10)
     }
     
     func buttonView() -> some View {
@@ -55,10 +54,10 @@ struct ToDoView: View {
     func missionList() -> some View {
         VStack {
             ZStack {
-                Rectangle()
+                RoundedRectangle(cornerRadius: 10)
                     .fill(Color(hex: "#C8CAFC"))
-                    .frame(width: 350, height: 60)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .padding(.horizontal, 20)
+                    .frame(height: 60)
                     .shadow(radius: 5)
                     Text("5시 기상")
                         .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/.bold())
@@ -66,68 +65,45 @@ struct ToDoView: View {
                     
                     buttonView()
             }
-            ZStack {
-                postItView(backGround: PostItColor.pink.background, fold: PostItColor.pink.foldColor, time: PostItColor.pink.time, textfield: $mission1)
-//                TextField("Mission1", text: $mission1)
-//                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-//                    .offset(x: 30, y: 10)
-            }
-            ZStack {
-                postItView(backGround: PostItColor.yellow.background, fold: PostItColor.yellow.foldColor, time: PostItColor.yellow.time, textfield: $mission2)
-//                TextField("Mission2", text: $mission2)
-//                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-//                    .offset(x: 30, y: 10)
-            }
-            ZStack {
-                postItView(backGround: PostItColor.orange.background, fold: PostItColor.orange.foldColor, time: PostItColor.orange.time, textfield: $mission3)
-//                TextField("Mission3", text: $mission3)
-//                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-//                    .offset(x: 30, y: 10)
-            }
-           
+            
+            postItView(backGround: PostItColor.pink.background, fold: PostItColor.pink.foldColor, time: PostItColor.pink.time, textfield: $mission1)
+            
+            
+            postItView(backGround: PostItColor.yellow.background, fold: PostItColor.yellow.foldColor, time: PostItColor.yellow.time, textfield: $mission2)
+            
+            
+            postItView(backGround: PostItColor.orange.background, fold: PostItColor.orange.foldColor, time: PostItColor.orange.time, textfield: $mission3)
+            
+            
         }
         
     }
     func postItView(backGround: String, fold: String, time: String, textfield: Binding<String>) -> some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             Rectangle()
                 .fill(Color(hex: backGround))
-                .frame(width: 350, height: 130)
+                .frame(height: 130)
                 .overlay(
                     FoldedCornerShape()
                         .fill(Color(hex: fold))
                         .frame(width: 50, height: 50)
-                        .offset(x: 150, y: 40)
+                        .offset(x: 170, y: 40)
                 )
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .shadow(radius: 5)
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 30) {
                 Text(time)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/.bold())
-//                    .offset(x: 10, y: -20)
-//                    .padding(.leading, 40)
                 TextField("미션을 입력하세요", text: textfield)
                     .font(.title2)
-                    .offset(x: 20)
             }
-            .background(.gray)
-            
-            
-//            .offset(x: -125 , y: -40)
-            
-           
+            .padding(.leading, 10)
         }
-
+        .padding(.top, 10)
+        .padding(.horizontal, 20)
+        
     }
-    
-    
-    func timelineBar() -> some View {
-        Rectangle()
-            .frame(width: 1, height: 100, alignment: .leading)
-            .background(.red)
-            .padding(.leading, 9)
-    }
-    
+ 
     func saveInfo() {
         print("과연 여기가 실행이될까요?")
         RandomFamousSaying.shared.getSaying { result in
@@ -160,12 +136,7 @@ struct ToDoView: View {
                    .multilineTextAlignment(.leading)
                    .frame(maxWidth: .infinity, alignment: .leading)
            }
-           .padding() 
-//           .background(
-//               RoundedRectangle(cornerRadius: 25)
-//                   .fill(Color(.white))
-//                   .shadow(radius: 10)
-//           )
+           .padding()
            .task {
 //               print("명언", UserDefaultsManager.saying)
 //               print("시간", UserDefaultsManager.dayDate)
