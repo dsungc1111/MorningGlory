@@ -14,21 +14,18 @@ struct TabBarView: View {
     @State private var date = Date()
     
     var body: some View {
-        ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .edgesIgnoringSafeArea(.all)
-            Spacer()
-            Image("file")
-                .resizable()
-                .frame(width: 70, height: 70)
-                .offset(x: 140, y: 300)
-                .shadow(color: Color.orange, radius: 10, x: 0, y: 0)
-            tabbarView()
-        }
+        
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .edgesIgnoringSafeArea(.all)
+                Spacer()
+                tabbarView()
+            }
+        
     }
     
     private func tabbarView() -> some View {

@@ -22,9 +22,11 @@ struct PostItItem {
 struct ToDoView: View {
     
     @StateObject private var locationManager = LocationManager()
+    
     @State private var mission1 = ""
     @State private var mission2 = ""
     @State private var mission3 = ""
+    
     @State private var weatherIcon: String = ""
     @State private var temperature: Double = 0.0
     
@@ -141,7 +143,9 @@ struct ToDoView: View {
 //               print("명언", UserDefaultsManager.saying)
 //               print("시간", UserDefaultsManager.dayDate)
 //               print("과연", shouldFetchNewSaying())
-               if shouldFetchNewSaying() { saveInfo() }
+               if shouldFetchNewSaying() {
+                   saveInfo()
+               }
                if let location = locationManager.location {
                    GetWeather.shared.callWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude) { result in
                        self.weatherIcon = result.weather.first?.icon ?? "아이콘"
@@ -149,6 +153,7 @@ struct ToDoView: View {
                    }
                    
                }
+              
            }
         
         
@@ -174,7 +179,6 @@ struct FoldedCornerShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         
-        // 시작점
         path.move(to: CGPoint(x: rect.maxX, y: rect.minY))
         path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
         path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))

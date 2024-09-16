@@ -19,15 +19,16 @@ struct UserInfoView: View {
         progressView()
         RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
             .fill(.gray)
-            .frame(width: 300, height: 100)
+            .frame(height: 100)
+            .padding(.horizontal, 20)
     }
     
     func progressView() -> some View {
         VStack {
             ProgressView(value: progress, total: 1.0)
                 .progressViewStyle(LinearProgressViewStyle())
-                .padding()
-                .animation(.linear(duration: 2.0), value: progress)
+                .padding(.horizontal, 60)
+//                .animation(.linear(duration: 2.0), value: progress)
             
             Text("\(Int(progress * 100))% 완료")
                 .font(.headline)
