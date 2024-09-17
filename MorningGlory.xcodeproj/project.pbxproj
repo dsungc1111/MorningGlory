@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B65008E2C986CFE00D924E9 /* PostItData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65008D2C986CFE00D924E9 /* PostItData.swift */; };
 		8B7B13EB2C93CC0D00AFE31F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B13EA2C93CC0D00AFE31F /* Date+.swift */; };
 		8B8012962C93185000E8AADD /* MorningGloryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012952C93185000E8AADD /* MorningGloryApp.swift */; };
 		8B8012982C93185000E8AADD /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012972C93185000E8AADD /* TabBarView.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B65008D2C986CFE00D924E9 /* PostItData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItData.swift; sourceTree = "<group>"; };
 		8B7B13EA2C93CC0D00AFE31F /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		8B8012922C93185000E8AADD /* MorningGlory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorningGlory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8012952C93185000E8AADD /* MorningGloryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorningGloryApp.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				8B8012B32C931F4700E8AADD /* DateValue.swift */,
 				8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */,
 				8BC463C62C959F4800701B4B /* Weather.swift */,
+				8B65008D2C986CFE00D924E9 /* PostItData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				8BC463C52C959F0900701B4B /* GetWeather.swift in Sources */,
 				8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */,
 				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,
+				8B65008E2C986CFE00D924E9 /* PostItData.swift in Sources */,
 				8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */,
 				8BC463C92C959F5A00701B4B /* APIKey.swift in Sources */,
 				8B8012B42C931F4700E8AADD /* DateValue.swift in Sources */,

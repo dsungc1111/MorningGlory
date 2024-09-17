@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct UserInfoView: View {
+    
     let totalDays = 30
     let completedDays = 14
     
     @State private var progress: Double = 0.0
     @State private var timer: Timer? = nil
+    
     let totalDuration: Double = 60
     
     var body: some View {
-        progressView()
-        RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-            .fill(.gray)
-            .frame(height: 100)
-            .padding(.horizontal, 20)
+        VStack {
+            progressView()
+            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                .fill(.gray)
+                .frame(height: 100)
+                .padding(.horizontal, 20)
+        }
     }
     
     func progressView() -> some View {

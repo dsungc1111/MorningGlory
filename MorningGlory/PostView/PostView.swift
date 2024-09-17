@@ -20,13 +20,13 @@ struct PostView: View {
         UINavigationBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
         UINavigationBar.appearance().compactAppearance = appearance
     }
+    
     var body: some View {
         
         NavigationView {
             ZStack {
                 viewBackground()
                 userReviewView()
-                
             }
         }
         
@@ -62,7 +62,7 @@ struct PostView: View {
     private func userReviewView() -> some View {
         ScrollView(.vertical) {
             
-            ForEach(0..<4) { _ in
+            ForEach(0..<2) { _ in
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
                         .fill(.brown)
@@ -74,15 +74,14 @@ struct PostView: View {
                         Rectangle()
                             .frame(width: 180, height: 200)
                             .clipShape(RoundedCorner(radius: 20, corners: [.topLeft, .bottomLeft]))
-                            .offset(x: -20)
-                        
-                        
-                        VStack {
+                            .offset(x: -32)
+                        VStack(alignment: .leading, spacing: 20) {
                             Text("2024-04-04")
-                                .padding(.leading, 25)
+                                .bold()
                             Text("오미완!")
-                                .padding(.horizontal, 20)
                         }
+                        .offset(x: -30, y: -60)
+                        
                     }
                     
                     
