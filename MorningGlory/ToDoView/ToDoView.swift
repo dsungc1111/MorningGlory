@@ -6,10 +6,33 @@
 //
 
 import SwiftUI
+import RealmSwift
+
+final class MissionData: Object, ObjectKeyIdentifiable {
+    
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var wakeUpTime: Date
+    @Persisted var mission1: String
+    @Persisted var mission2: String
+    @Persisted var mission3: String
+    @Persisted var success: Bool
+    
+    convenience init(wakeUpTime: Date, mission1: String, mission2: String, mission3: String, success: Bool = false) {
+        self.init()
+        self.wakeUpTime = wakeUpTime
+        self.mission1 = mission1
+        self.mission2 = mission2
+        self.mission3 = mission3
+        self.success = success
+    }
+}
 
 struct ToDoView: View {
     
     @StateObject private var locationManager = LocationManager()
+    
+    @ObservedResults(MissionData.self)
+    var userMissionList
     
     @State private var mission1 = ""
     @State private var mission2 = ""
@@ -24,7 +47,12 @@ struct ToDoView: View {
         NavigationView {
             KeyBoardManager().frame(width: 0, height: 0)
             ZStack {
-                viewBackground()
+                ViewBackground()
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            buttonView()
+                        }
+                    }
                 VStack {
                     sayingView()
                     missionList()
@@ -32,8 +60,10 @@ struct ToDoView: View {
             }
             Spacer()
         }
+        .onAppear {
+            print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
+        }
     }
-    
     
     func missionList() -> some View {
         VStack {
@@ -48,7 +78,6 @@ struct ToDoView: View {
                     .offset(x: -120)
                     .padding(.leading, 20)
             }
-            
             postItView(backGround: PostItColor.pink.background, fold: PostItColor.pink.foldColor, time: PostItColor.pink.time, textfield: $mission1)
             
             
@@ -63,7 +92,7 @@ struct ToDoView: View {
     func postItView(backGround: String, fold: String, time: String, textfield: Binding<String>) -> some View {
         
         ZStack(alignment: .bottomTrailing) {
-         
+            
             ZStack(alignment: .topLeading) {
                 Rectangle()
                     .fill(Color(hex: backGround))
@@ -141,19 +170,6 @@ struct ToDoView: View {
         }
     }
     
-    func buttonView() -> some View {
-        Button {
-            print("저장저장!")
-        } label: {
-            Image((!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty) ? "file" : "sad")
-                .resizable()
-                .frame(width: 40, height: 40)
-            Text("저장")
-                .font(.system(size: 24).bold())
-                .foregroundStyle((!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty) ? .blue : .gray)
-        }
-        .disabled(!(!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty))
-    }
     
     func shouldFetchNewSaying() -> Bool {
         let lastFetchDate = UserDefaultsManager.dayDate
@@ -169,19 +185,37 @@ struct ToDoView: View {
             return false
         }
     }
-    private func viewBackground() -> some View {
+    func buttonView() -> some View {
+        Button {
+            let mission = MissionData(wakeUpTime: Date(), mission1: mission1, mission2: mission2, mission3: mission3)
+            
+            $userMissionList.append(mission)
+            
+            print("usermissionlist = ", userMissionList)
+        } label: {
+            Image((!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty) ? "file" : "sad")
+                .resizable()
+                .frame(width: 40, height: 40)
+            Text("저장")
+                .font(.system(size: 24).bold())
+                .foregroundStyle((!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty) ? .blue : .gray)
+        }
+        .disabled(!(!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty))
+    }
+}
+
+struct ViewBackground: View {
+    
+    var body: some View {
         LinearGradient(
             gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
         .edgesIgnoringSafeArea(.all)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                buttonView()
-            }
-        }
     }
+    
+    
 }
 
 

@@ -18,12 +18,17 @@ struct UserInfoView: View {
     let totalDuration: Double = 60
     
     var body: some View {
-        VStack {
-            progressView()
-            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                .fill(.gray)
-                .frame(height: 100)
-                .padding(.horizontal, 20)
+        ZStack {
+            ViewBackground()
+            ScrollView {
+                VStack {
+                    progressView()
+                    RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                        .fill(.gray)
+                        .frame(height: 100)
+                        .padding(.horizontal, 20)
+                }
+            }
         }
     }
     

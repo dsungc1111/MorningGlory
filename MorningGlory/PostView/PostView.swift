@@ -4,31 +4,33 @@ import SwiftUI
 struct PostView: View {
     
     
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(Color(hex: "#78ade5"))
-        
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        
-        
-        let scrollEdgeAppearance = UINavigationBarAppearance()
-        scrollEdgeAppearance.configureWithTransparentBackground()
-        scrollEdgeAppearance.backgroundColor = UIColor.clear
-        
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
-        UINavigationBar.appearance().compactAppearance = appearance
-    }
     
     var body: some View {
         
         NavigationView {
             ZStack {
-                viewBackground()
+                ViewBackground()
+                    .navigationTitle("인증샷")
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(action: {
+                                print("츄가버튼l")
+                            }, label: {
+                                HStack {
+                                    Image("file")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                        .shadow(color: Color.orange, radius: 10, x: 0, y: 0)
+                                    Text("글 추가")
+                                        .foregroundStyle(.black)
+                                }
+                            })
+                        }
+                    }
                 userReviewView()
             }
         }
+        
         
     }
     

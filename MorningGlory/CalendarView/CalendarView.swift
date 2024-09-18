@@ -26,17 +26,29 @@ struct CalendarView: View {
     
     var body: some View {
         
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack(spacing: 20) {
-                topCalendarView()
-                weekdaysView()
-                daysComponentView(colums: columns)
-                ForEach(list, id: \.self) { item in
-                    Text(item)
+        
+            NavigationView {
+                
+                ZStack {
+                    ViewBackground()
+                ScrollView(.vertical, showsIndicators: false) {
+                    
+                    VStack(spacing: 20) {
+                        topCalendarView()
+                        weekdaysView()
+                        daysComponentView(colums: columns)
+                        ForEach(list, id: \.self) { item in
+                            Text(item)
+                        }
+                    }
                 }
+                .background(Color.clear)
             }
+                
         }
-       
+     
+
+        
     }
 }
 //MARK: about View
