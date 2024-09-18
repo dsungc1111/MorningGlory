@@ -7,26 +7,22 @@
 
 import SwiftUI
 import FirebaseCore
-//import RealmSwift
+import RealmSwift
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        setupRealm()
+        return true
+    }
 }
 
 @main
-struct YourApp: App {
-  // register app delegate for Firebase setup
-  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-
-//    init() {
-//        setupRealm()
-//    }
+struct YourApp: SwiftUI.App {
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
@@ -36,15 +32,18 @@ struct YourApp: App {
         }
     }
 }
-//func setupRealm() {
-//       let config = Realm.Configuration(
-//           schemaVersion: 0, // 스키마 버전이 바뀌면 증가시킴
-//           migrationBlock: { migration, oldSchemaVersion in
-//               if oldSchemaVersion < 0 {
-//                   // 필요하다면 마이그레이션 코드 작성
-//               }
-//           }
-//       )
-//       Realm.Configuration.defaultConfiguration = config
-//   }
+func setupRealm() {
+    let config = Realm.Configuration(
+        schemaVersion: 2,
+        migrationBlock: { migration, oldSchemaVersion in
+            if oldSchemaVersion < 1 {
+               // 날짜 세분화
+            }
+            if oldSchemaVersion < 2 {
+               // 미션 1,2,3에 대한 T/F 추가
+            }
+        }
+    )
+    Realm.Configuration.defaultConfiguration = config
+}
 

@@ -11,18 +11,26 @@ import RealmSwift
 final class MissionData: Object, ObjectKeyIdentifiable {
     
     @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var todayDate: Date
     @Persisted var wakeUpTime: Date
     @Persisted var mission1: String
     @Persisted var mission2: String
     @Persisted var mission3: String
+    @Persisted var mission1Complete: Bool
+    @Persisted var mission2Complete: Bool
+    @Persisted var mission3Complete: Bool
     @Persisted var success: Bool
     
-    convenience init(wakeUpTime: Date, mission1: String, mission2: String, mission3: String, success: Bool = false) {
+    convenience init(todayDate: Date, wakeUpTime: Date, mission1: String, mission2: String, mission3: String, mission1Complete: Bool = false, mission2Complete: Bool = false, mission3Complete: Bool = false, success: Bool = false) {
         self.init()
+        self.todayDate = todayDate
         self.wakeUpTime = wakeUpTime
         self.mission1 = mission1
         self.mission2 = mission2
         self.mission3 = mission3
+        self.mission1Complete = mission1Complete
+        self.mission2Complete = mission2Complete
+        self.mission3Complete = mission3Complete
         self.success = success
     }
 }
@@ -53,11 +61,14 @@ struct ToDoView: View {
                             buttonView()
                         }
                     }
+
                 VStack {
                     sayingView()
                     missionList()
                 }
+                .offset(y: -40)
             }
+            
             Spacer()
         }
         .onAppear {
@@ -137,21 +148,20 @@ struct ToDoView: View {
                 if let iconURL = URL(string: "https://openweathermap.org/img/wn/\(weatherIcon)@2x.png") {
                     AsyncImage(url: iconURL) { image in
                         image.resizable()
-                            .frame(width: 80, height: 80)
+                            .frame(width: 70, height: 70)
                     } placeholder: {
                         ProgressView()
                     }
                 }
                 Text( String(format: "%.1f", temperature)  + "℃")
             }
-            
             Text(UserDefaultsManager.saying)
                 .foregroundColor(.black)
                 .font(.system(size: 18))
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding()
+        .padding(20)
         .task {
             //               print("명언", UserDefaultsManager.saying)
             //               print("시간", UserDefaultsManager.dayDate)
@@ -187,7 +197,12 @@ struct ToDoView: View {
     }
     func buttonView() -> some View {
         Button {
-            let mission = MissionData(wakeUpTime: Date(), mission1: mission1, mission2: mission2, mission3: mission3)
+            let date = Date()
+            
+            let todayDate = Date.todayDate(from: date)
+            let wakeuptime = Date.getWakeUpTime(from: date)
+            
+            let mission = MissionData(todayDate: todayDate, wakeUpTime: wakeuptime, mission1: mission1, mission2: mission2, mission3: mission3)
             
             $userMissionList.append(mission)
             

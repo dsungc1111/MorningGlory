@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 
 struct CalendarView: View {
+    
+    @ObservedResults(MissionData.self)
+    var userMissionList
+    
+    
     @Binding var currentDate: Date
     @State private var currentMonth: Int = 0
     
@@ -26,19 +32,17 @@ struct CalendarView: View {
     
     var body: some View {
         
-        
             NavigationView {
                 
                 ZStack {
                     ViewBackground()
                 ScrollView(.vertical, showsIndicators: false) {
-                    
                     VStack(spacing: 20) {
                         topCalendarView()
                         weekdaysView()
                         daysComponentView(colums: columns)
-                        ForEach(list, id: \.self) { item in
-                            Text(item)
+                        ForEach(userMissionList, id: \.id) { item in
+                            MissionListView(userMissionList: item)
                         }
                     }
                 }
@@ -46,9 +50,51 @@ struct CalendarView: View {
             }
                 
         }
-     
+    }
+}
 
-        
+struct MissionListView: View {
+    
+    @ObservedRealmObject
+    var userMissionList: MissionData
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text(userMissionList.mission1)
+                Spacer()
+                Button(action: {
+                    print("토글됨")
+                    $userMissionList.mission1Complete.wrappedValue.toggle()
+                }, label: {
+                    Image(systemName: userMissionList.mission1Complete ? "checkmark.square.fill" : "checkmark.square" )
+                })
+            }
+            
+            HStack {
+                Text(userMissionList.mission2)
+                Spacer()
+                Button(action: {
+                    print("토글됨")
+                    $userMissionList.mission2Complete.wrappedValue.toggle()
+                }, label: {
+                    Image(systemName: userMissionList.mission2Complete ? "checkmark.square.fill" : "checkmark.square" )
+                })
+            }
+            
+            HStack {
+                Text(userMissionList.mission3)
+                Spacer()
+                Button(action: {
+                    print("토글됨")
+                    $userMissionList.mission3Complete.wrappedValue.toggle()
+                }, label: {
+                    Image(systemName: userMissionList.mission3Complete ? "checkmark.square.fill" : "checkmark.square" )
+                })
+            }
+            
+        }
+        .padding(.horizontal, 30)
     }
 }
 //MARK: about View

@@ -63,7 +63,6 @@ struct PostView: View {
     
     private func userReviewView() -> some View {
         ScrollView(.vertical) {
-            
             ForEach(0..<2) { _ in
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
