@@ -9,29 +9,31 @@ struct PostView: View {
         
         NavigationView {
             ZStack {
-                ViewBackground()
-                    .navigationTitle("인증샷")
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button(action: {
-                                print("츄가버튼l")
-                            }, label: {
-                                HStack {
-                                    Image("file")
-                                        .resizable()
-                                        .frame(width: 40, height: 40)
-                                        .shadow(color: Color.orange, radius: 10, x: 0, y: 0)
-                                    Text("글 추가")
-                                        .foregroundStyle(.black)
-                                }
-                            })
-                        }
-                    }
+                setNavigation()
                 userReviewView()
             }
         }
-        
-        
+    }
+    
+    private func setNavigation() -> some View {
+        ViewBackground()
+            .navigationTitle("인증샷")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        print("츄가버튼l")
+                    }, label: {
+                        HStack {
+                            Image("file")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .shadow(color: Color.orange, radius: 10, x: 0, y: 0)
+                            Text("글 추가")
+                                .foregroundStyle(.black)
+                        }
+                    })
+                }
+            }
     }
     
     private func viewBackground() -> some View {
@@ -41,23 +43,7 @@ struct PostView: View {
             endPoint: .bottomTrailing
         )
         .edgesIgnoringSafeArea(.all)
-        .navigationTitle("인증샷")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
-                    print("츄가버튼l")
-                }, label: {
-                    HStack {
-                        Image("file")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .shadow(color: Color.orange, radius: 10, x: 0, y: 0)
-                        Text("글 추가")
-                            .foregroundStyle(.black)
-                    }
-                })
-            }
-        }
+        
     }
     
     
@@ -96,15 +82,7 @@ struct PostView: View {
     }
     
 }
-struct RoundedCorner: Shape {
-    var radius: CGFloat = 0.0
-    var corners: UIRectCorner = .allCorners
-    
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
+
 
 #Preview {
     TabBarView()

@@ -1,0 +1,48 @@
+//
+//  Shapes.swift
+//  MorningGlory
+//
+//  Created by 최대성 on 9/19/24.
+//
+
+import SwiftUI
+
+//MARK: 특정 모서리 깎기
+struct RoundedCorner: Shape {
+    var radius: CGFloat = 0.0
+    var corners: UIRectCorner = .allCorners
+    
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+
+//MARK: 배경색
+struct ViewBackground: View {
+    
+    var body: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .edgesIgnoringSafeArea(.all)
+    }
+    
+    
+}
+
+//MARK: 포스트잇 접힌 부분
+struct FoldedCornerShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        path.move(to: CGPoint(x: rect.maxX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        path.addQuadCurve(to: CGPoint(x: rect.maxX, y: rect.minY),
+                          control: CGPoint(x: rect.midX, y: rect.midY))
+        return path
+    }
+}

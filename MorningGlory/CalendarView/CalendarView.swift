@@ -31,24 +31,32 @@ struct CalendarView: View {
     ]
     
     var body: some View {
-        
-            NavigationView {
+        mainView()
+    }
+    
+    func mainView() -> some View {
+        NavigationView {
+            ZStack {
+                ViewBackground()
                 
-                ZStack {
-                    ViewBackground()
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 20) {
-                        topCalendarView()
-                        weekdaysView()
-                        daysComponentView(colums: columns)
-                        ForEach(userMissionList, id: \.id) { item in
-                            MissionListView(userMissionList: item)
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(spacing: 20) {
+                            topCalendarView()
+                            weekdaysView()
+                            daysComponentView(colums: columns)
+                            ForEach(userMissionList, id: \.id) { item in
+                                MissionListView(userMissionList: item)
+                            }
                         }
                     }
+                    .background(Color.clear)
+//                    Image("file")
+//                        .resizable()
+//                        .frame(width: 80, height: 80)
+//                        .shadow(color: .orange, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+//                        .offset(x: 100, y: 200)
                 }
-                .background(Color.clear)
-            }
-                
+            
         }
     }
 }
@@ -146,7 +154,7 @@ extension CalendarView {
         })
         Text(monthLabel[1])
             .font(.custom("Menlo-Bold", size: 30))
-//            .foregroundStyle(Color(hex: "#57a3ff"))
+        //            .foregroundStyle(Color(hex: "#57a3ff"))
             .foregroundStyle(.black)
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
         Button(action: {
@@ -165,10 +173,10 @@ extension CalendarView {
             if value.day != -1 {
                 Text("\(value.day)")
                     .font(.title3.bold())
-//                Image("file")
-//                    .resizable()
-//                    .frame(width: 50, height: 50)
-//                    .background(.clear)
+                //                Image("file")
+                //                    .resizable()
+                //                    .frame(width: 50, height: 50)
+                //                    .background(.clear)
             }
         }
         .frame(height: 100, alignment: .top)
@@ -179,10 +187,8 @@ extension CalendarView {
 
 extension CalendarView {
     
-    
-    
     func isSameDay(date1: Date, date2: Date) -> Bool {
-//        let calendar = Calendar.current
+        
         return calendar.isDate(date1, inSameDayAs: date2)
     }
     
@@ -193,7 +199,7 @@ extension CalendarView {
         let dateString = formatter.string(from: date)
         return dateString.components(separatedBy: " ")
     }
-
+    
     
     func getCurrentMonth() -> Date {
         guard let currentMonth = calendar.date(byAdding: .month, value: currentMonth, to: Date()) else { return Date() }

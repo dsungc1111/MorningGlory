@@ -7,33 +7,8 @@
 
 import SwiftUI
 import RealmSwift
+import Toast
 
-final class MissionData: Object, ObjectKeyIdentifiable {
-    
-    @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var todayDate: Date
-    @Persisted var wakeUpTime: Date
-    @Persisted var mission1: String
-    @Persisted var mission2: String
-    @Persisted var mission3: String
-    @Persisted var mission1Complete: Bool
-    @Persisted var mission2Complete: Bool
-    @Persisted var mission3Complete: Bool
-    @Persisted var success: Bool
-    
-    convenience init(todayDate: Date, wakeUpTime: Date, mission1: String, mission2: String, mission3: String, mission1Complete: Bool = false, mission2Complete: Bool = false, mission3Complete: Bool = false, success: Bool = false) {
-        self.init()
-        self.todayDate = todayDate
-        self.wakeUpTime = wakeUpTime
-        self.mission1 = mission1
-        self.mission2 = mission2
-        self.mission3 = mission3
-        self.mission1Complete = mission1Complete
-        self.mission2Complete = mission2Complete
-        self.mission3Complete = mission3Complete
-        self.success = success
-    }
-}
 
 struct ToDoView: View {
     
@@ -45,13 +20,18 @@ struct ToDoView: View {
     @State private var mission1 = ""
     @State private var mission2 = ""
     @State private var mission3 = ""
+    @State private var toast: Toast? = nil
     
     @State private var weatherIcon: String = ""
     @State private var temperature: Double = 0.0
     
     var body: some View {
-        
-        
+        mainView()
+            .toastView(toast: $toast)
+    }
+    
+    
+    func mainView() -> some View {
         NavigationView {
             KeyBoardManager().frame(width: 0, height: 0)
             ZStack {
@@ -59,22 +39,28 @@ struct ToDoView: View {
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             buttonView()
+                            
                         }
                     }
-
                 VStack {
                     sayingView()
                     missionList()
                 }
-                .offset(y: -40)
+                .offset(y: -10)
             }
+            .navigationBarBackButtonHidden(true)
             
             Spacer()
         }
-        .onAppear {
-            print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
-        }
+        //        .onAppear {
+        //            print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
+        //        }
     }
+    
+}
+
+//MARK: - about View
+extension ToDoView {
     
     func missionList() -> some View {
         VStack {
@@ -111,9 +97,10 @@ struct ToDoView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(radius: 5)
                 
-                VStack(alignment: .leading, spacing: 30) {
+                VStack(alignment: .leading, spacing: 20) {
                     Text(time)
                         .font(.system(size: 24).bold())
+                        .padding(.top, 10)
                     TextField("미션을 입력하세요", text: textfield)
                         .font(.title2)
                 }
@@ -128,6 +115,10 @@ struct ToDoView: View {
         }
         
     }
+    
+}
+//MARK: - about logic
+extension ToDoView {
     
     func saveInfo() {
         
@@ -146,12 +137,34 @@ struct ToDoView: View {
         HStack {
             VStack {
                 if let iconURL = URL(string: "https://openweathermap.org/img/wn/\(weatherIcon)@2x.png") {
-                    AsyncImage(url: iconURL) { image in
-                        image.resizable()
-                            .frame(width: 70, height: 70)
-                    } placeholder: {
-                        ProgressView()
+                    AsyncImage(url: iconURL) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            
+                            image.resizable()
+                                .frame(width: 70, height: 70)
+                                .onAppear {
+                                    if let uiImage = image.asUIImage() {
+                                        let imageData = uiImage.pngData()
+                                        UserDefaultsManager.weather = imageData
+                                        print("이미지 저장 성공")
+                                        UserDefaults.standard.synchronize()
+                                    }
+                                }
+                        case .failure:
+                            Image(systemName: "sun.max.circle")
+                                .resizable()
+                                .frame(width: 70, height: 70)
+                        @unknown default:
+                            Image(systemName: "exclamationmark.triangle")
+                                .resizable()
+                                .frame(width: 70, height: 70)
+                        }
                     }
+                    .frame(width: 70, height: 70)
+                    
                 }
                 Text( String(format: "%.1f", temperature)  + "℃")
             }
@@ -185,16 +198,14 @@ struct ToDoView: View {
         let lastFetchDate = UserDefaultsManager.dayDate
         let calendar = Calendar.current
         if let daysBetween = calendar.dateComponents([.day], from: lastFetchDate, to: Date()).day, daysBetween >= 1 {
-            //            print("2")
             return true
         } else if UserDefaultsManager.saying == "" {
-            //            print("3")
             return true
         } else {
-            //            print("4")
             return false
         }
     }
+    
     func buttonView() -> some View {
         Button {
             let date = Date()
@@ -204,11 +215,29 @@ struct ToDoView: View {
             
             let mission = MissionData(todayDate: todayDate, wakeUpTime: wakeuptime, mission1: mission1, mission2: mission2, mission3: mission3)
             
-            $userMissionList.append(mission)
-            
-            print("usermissionlist = ", userMissionList)
+            if let existingMission = userMissionList.first(where: { $0.todayDate == todayDate }) {
+                
+                
+                if let editMission = existingMission.thaw() {
+                    try? editMission.realm?.write {
+                        editMission.wakeUpTime = wakeuptime
+                        editMission.mission1 = mission1
+                        editMission.mission2 = mission2
+                        editMission.mission3 = mission3
+                        print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
+                    }
+                }
+                print("🔫🔫🔫🔫데이터 수정 완료: ", userMissionList)
+                toast = Toast(type: .edit, title: "수정완료 🌞🌞", message: "미션을 수정했어요!", duration: 3.0)
+            } else {
+                
+                let newMission = MissionData(todayDate: todayDate, wakeUpTime: wakeuptime, mission1: mission1, mission2: mission2, mission3: mission3)
+                $userMissionList.append(newMission)
+                print("🔫🔫🔫🔫새 데이터 추가 완료: ", newMission)
+                toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
+            }
         } label: {
-            Image((!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty) ? "file" : "sad")
+            Image((!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty) ? "file" : "")
                 .resizable()
                 .frame(width: 40, height: 40)
             Text("저장")
@@ -217,35 +246,10 @@ struct ToDoView: View {
         }
         .disabled(!(!mission1.isEmpty && !mission2.isEmpty && !mission3.isEmpty))
     }
-}
-
-struct ViewBackground: View {
-    
-    var body: some View {
-        LinearGradient(
-            gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .edgesIgnoringSafeArea(.all)
-    }
-    
     
 }
 
 
-struct FoldedCornerShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        path.move(to: CGPoint(x: rect.maxX, y: rect.minY))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-        path.addQuadCurve(to: CGPoint(x: rect.maxX, y: rect.minY),
-                          control: CGPoint(x: rect.midX, y: rect.midY))
-        return path
-    }
-}
 #Preview {
     TabBarView()
 }
