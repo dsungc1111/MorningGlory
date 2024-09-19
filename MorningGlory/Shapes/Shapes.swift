@@ -38,11 +38,17 @@ struct FoldedCornerShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         
+        // 오른쪽 위부터 시작해서 시계 방향으로 경로를 그립니다.
         path.move(to: CGPoint(x: rect.maxX, y: rect.minY))
-        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY - 20))
+        path.addArc(center: CGPoint(x: rect.maxX - 20, y: rect.maxY - 20),
+                    radius: 20,
+                    startAngle: .degrees(0),
+                    endAngle: .degrees(90),
+                    clockwise: false)
         path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
         path.addQuadCurve(to: CGPoint(x: rect.maxX, y: rect.minY),
-                          control: CGPoint(x: rect.midX, y: rect.midY))
+                          control: CGPoint(x: rect.midX, y: rect.midY)) 
         return path
     }
 }

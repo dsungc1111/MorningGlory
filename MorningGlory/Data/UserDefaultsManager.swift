@@ -21,7 +21,6 @@ struct UserDefault<T> {
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: key)
-            UserDefaults.standard.synchronize()
         }
     }
 }
@@ -37,10 +36,5 @@ final class UserDefaultsManager {
     
     @UserDefault(key: "saying", defaultValue: "")
     static var saying
-    
-    @UserDefault(key: "weather", defaultValue: nil)
-    static var weather: Data?
-    
-    @UserDefault(key: "temperature", defaultValue: "")
-    static var temperature
+  
 }

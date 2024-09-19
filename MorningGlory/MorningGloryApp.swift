@@ -14,7 +14,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
-
+      setupRealm()
     return true
   }
 }
@@ -37,10 +37,8 @@ func setupRealm() {
     let config = Realm.Configuration(
         schemaVersion: 2,
         migrationBlock: { migration, oldSchemaVersion in
-            if oldSchemaVersion < 1 {
-               // 날짜 세분화
-            }
-            if oldSchemaVersion < 2 {
+         
+            if oldSchemaVersion < 2{
                // 미션 1,2,3에 대한 T/F 추가
             }
         }

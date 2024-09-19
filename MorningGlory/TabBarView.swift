@@ -17,14 +17,41 @@ struct TabBarView: View {
     var body: some View {
         
         ZStack {
-                  LinearGradient(
-                      gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
-                      startPoint: .topLeading,
-                      endPoint: .bottomTrailing
-                  )
-                  .edgesIgnoringSafeArea(.all)
-                  Spacer()
-                  tabbarView()
+            KeyBoardManager().frame(width: 0, height: 0)
+            LinearGradient(
+                       gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing
+                   )
+                   .edgesIgnoringSafeArea(.all)
+                   TabView(selection: $selectedTab) {
+                       
+                       ToDoView()
+                           .tabItem {
+                               Image(systemName: "checkmark.circle.fill")
+                               Text("ToDo")
+                           }
+                           .tag(1)
+                       CalendarView(currentDate: $date)
+                           .tabItem {
+                               Image(systemName: "calendar")
+                               Text("Calendar")
+                           }
+                           .tag(2)
+                       UserInfoView()
+                           .tabItem {
+                               Image(systemName: "person.crop.circle.fill")
+                               Text("User")
+                           }
+                           .tag(3)
+                       PostView()
+                           .tabItem {
+                               Image(systemName: "text.below.photo")
+                               Text("Posts")
+                           }
+                           .tag(4)
+                   }
+                   .accentColor(Color(hex: "#57a3ff"))
               }
           
       }
