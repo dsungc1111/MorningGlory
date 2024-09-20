@@ -28,6 +28,8 @@ final class CalendarVM: ViewModelType {
         let weekDays = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
         var saying = ""
         var filteredMissionList: [MissionData] = []
+        
+        var missionSuccess = false
     }
     
     var cancellables = Set<AnyCancellable>()
@@ -60,9 +62,7 @@ final class CalendarVM: ViewModelType {
         input.missionComplete
             .sink { [weak self] (data, index) in
                 guard let self else { return }
-                
                 missionComplete(missionData: data, index: index)
-                
             }
             .store(in: &cancellables)
     }
@@ -81,10 +81,14 @@ final class CalendarVM: ViewModelType {
                 default:
                     break
                 }
+                if mission.mission1Complete && mission.mission2Complete && mission.mission3Complete {
+                    mission.success = true
+                } else {
+                    mission.success = false
+                }
+                output.missionSuccess = mission.success
             }
         }
-        
-        
     }
     
     func action(_ action: Action) {

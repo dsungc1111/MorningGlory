@@ -13,8 +13,8 @@ struct CalendarView: View {
     
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
-    //    @ObservedResults(MissionData.self)
-    //    var userMissionList
+    @ObservedResults(MissionData.self)
+    var userMissionList
     
     @StateObject private var calendarVM = CalendarVM()
     
@@ -120,7 +120,14 @@ extension CalendarView {
             if value.day != -1 {
                 Text("\(value.day)")
                     .font(.title3.bold())
+                if let mission = userMissionList.first(where: { mission in
+                    calendarVM.isSameDay(date1: mission.todayDate, date2: value.date)
+                }) {
+                    Image(systemName: mission.success ? "star.fill" : "")
+                        .foregroundColor(mission.success ? .yellow : .gray)
+                }
             }
+            
         }
         .frame(height: 100, alignment: .top)
     }
