@@ -50,17 +50,6 @@ extension ToDoView {
     
     func missionList() -> some View {
         VStack {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color(hex: "#C8CAFC"))
-                    .padding(.horizontal, 20)
-                    .frame(height: 40)
-                    .shadow(radius: 5)
-                Text("05:00 기상")
-                    .font(.system(size: 24).bold())
-                    .offset(x: -100)
-                    .padding(.leading, 20)
-            }
             postItView(backGround: PostItColor.pink.background, fold: PostItColor.pink.foldColor, time: PostItColor.pink.time, textfield: $todoVM.output.mission1)
             
             postItView(backGround: PostItColor.yellow.background, fold: PostItColor.yellow.foldColor, time: PostItColor.yellow.time, textfield: $todoVM.output.mission2)
