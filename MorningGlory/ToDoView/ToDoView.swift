@@ -10,34 +10,7 @@ import Toast
 
 
 struct ToDoView: View {
-    //"#469AF6"), Color(hex: "#F3D8A3")]),
-    init() {
-          let appearance = UINavigationBarAppearance()
-          appearance.configureWithOpaqueBackground()
-          appearance.backgroundColor = UIColor(Color(hex: "#70a9e9"))
-
-          appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
-
-          let scrollEdgeAppearance = UINavigationBarAppearance()
-          scrollEdgeAppearance.configureWithTransparentBackground()
-          scrollEdgeAppearance.backgroundColor = UIColor.clear
-
-          UINavigationBar.appearance().standardAppearance = appearance
-          UINavigationBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
-          UINavigationBar.appearance().compactAppearance = scrollEdgeAppearance
-        
-        let tabbar = UITabBarAppearance()
-        tabbar.backgroundColor = UIColor(Color(hex: "#dbd0b4"))
-//
-        let scrollTabbar = UITabBarAppearance()
-        scrollTabbar.backgroundColor = UIColor.clear
-//        
-        UITabBar.appearance().scrollEdgeAppearance = tabbar
-//        UITabBar.appearance().standardAppearance = tabbar
-        UITabBar.appearance().standardAppearance = tabbar
-      }
-    
+   
     @StateObject private var todoVM = ToDoVM()
     
     var body: some View {

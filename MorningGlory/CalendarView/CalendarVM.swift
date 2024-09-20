@@ -13,12 +13,12 @@ final class CalendarVM: ViewModelType {
     
     struct Input {
         let chageDate = PassthroughSubject<Date, Never>()
+        let missionComplete = PassthroughSubject<(MissionData, Int), Never>()
     }
     
     struct Output {
         @ObservedResults(MissionData.self)
         var userMissionList
-        
         
         var currentDate: Date = Date()
         var currentMonth: Int = 0
@@ -40,6 +40,7 @@ final class CalendarVM: ViewModelType {
     
     enum Action {
         case changeDate(Date)
+        case missionComplete((MissionData, Int))
     }
     
     
@@ -55,6 +56,35 @@ final class CalendarVM: ViewModelType {
                 filteredMissions()
             }
             .store(in: &cancellables)
+        
+        input.missionComplete
+            .sink { [weak self] (data, index) in
+                guard let self else { return }
+                
+                missionComplete(missionData: data, index: index)
+                
+            }
+            .store(in: &cancellables)
+    }
+    
+    func missionComplete(missionData: MissionData, index: Int) {
+        
+        if let mission = missionData.thaw() {
+            try? mission.realm?.write {
+                switch index {
+                case 1:
+                    mission.mission1Complete.toggle()
+                case 2:
+                    mission.mission2Complete.toggle()
+                case 3:
+                    mission.mission3Complete.toggle()
+                default:
+                    break
+                }
+            }
+        }
+        
+        
     }
     
     func action(_ action: Action) {
@@ -62,6 +92,8 @@ final class CalendarVM: ViewModelType {
         switch action {
         case .changeDate(let selectedDate):
             input.chageDate.send(selectedDate)
+        case .missionComplete((let mission, let isComplete)):
+            input.missionComplete.send((mission, isComplete))
         }
     }
     
