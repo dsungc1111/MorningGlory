@@ -24,12 +24,6 @@ struct CalendarView: View {
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     @State var saying = ""
     
-    let list = [
-        "이거 할래요!",
-        "저거 할래요!",
-        "하기 싫어요!"
-    ]
-    
     var body: some View {
         mainView()
     }
@@ -44,7 +38,7 @@ struct CalendarView: View {
                             topCalendarView()
                             weekdaysView()
                             daysComponentView(colums: columns)
-                            ForEach(userMissionList, id: \.id) { item in
+                            ForEach(filteredMissions(), id: \.id) { item in
                                 MissionListView(userMissionList: item)
                             }
                         }
@@ -105,6 +99,7 @@ struct MissionListView: View {
         .padding(.horizontal, 30)
     }
 }
+
 //MARK: about View
 extension CalendarView {
     
@@ -127,6 +122,13 @@ extension CalendarView {
             }
         }
     }
+    func filteredMissions() -> [MissionData] {
+        print(#function)
+        return userMissionList.filter { mission in
+            isSameDay(date1: mission.todayDate, date2: currentDate)
+        }
+    }
+   
     
     func weekdaysView() -> some View {
         HStack {
@@ -154,7 +156,6 @@ extension CalendarView {
         })
         Text(monthLabel[1])
             .font(.custom("Menlo-Bold", size: 30))
-        //            .foregroundStyle(Color(hex: "#57a3ff"))
             .foregroundStyle(.black)
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
         Button(action: {

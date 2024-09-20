@@ -11,7 +11,33 @@ import Toast
 
 
 struct ToDoView: View {
-    
+    //"#469AF6"), Color(hex: "#F3D8A3")]),
+    init() {
+          let appearance = UINavigationBarAppearance()
+          appearance.configureWithOpaqueBackground()
+          appearance.backgroundColor = UIColor(Color(hex: "#70a9e9"))
+
+          appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+
+
+          let scrollEdgeAppearance = UINavigationBarAppearance()
+          scrollEdgeAppearance.configureWithTransparentBackground()
+          scrollEdgeAppearance.backgroundColor = UIColor.clear
+
+          UINavigationBar.appearance().standardAppearance = appearance
+          UINavigationBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
+          UINavigationBar.appearance().compactAppearance = scrollEdgeAppearance
+        
+        let tabbar = UITabBarAppearance()
+        tabbar.backgroundColor = UIColor(Color(hex: "#dbd0b4"))
+//
+        let scrollTabbar = UITabBarAppearance()
+        scrollTabbar.backgroundColor = UIColor.clear
+//        
+        UITabBar.appearance().scrollEdgeAppearance = tabbar
+//        UITabBar.appearance().standardAppearance = tabbar
+        UITabBar.appearance().standardAppearance = tabbar
+      }
     
     @StateObject private var todoVM = ToDoVM()
     
@@ -26,19 +52,17 @@ struct ToDoView: View {
             ZStack {
                 ViewBackground()
                     .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            buttonView()
-                            
-                        }
+                        ToolbarItem(placement: .topBarTrailing) { buttonView() }
                     }
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
                         sayingView()
                         missionList()
                     }
+                    .padding(.top)
                 }
             }
-            .navigationTitle("임시제목")
+//            .navigationTitle("임시제목")
             .navigationBarBackButtonHidden(true)
             Spacer()
         }
@@ -62,7 +86,7 @@ extension ToDoView {
                     .shadow(radius: 5)
                 Text("05:00 기상")
                     .font(.system(size: 24).bold())
-                    .offset(x: -120)
+                    .offset(x: -100)
                     .padding(.leading, 20)
             }
             postItView(backGround: PostItColor.pink.background, fold: PostItColor.pink.foldColor, time: PostItColor.pink.time, textfield: $todoVM.output.mission1)

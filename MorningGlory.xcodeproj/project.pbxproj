@@ -133,8 +133,8 @@
 		8B8012942C93185000E8AADD /* MorningGlory */ = {
 			isa = PBXGroup;
 			children = (
-				8B6500912C9B8F5B00D924E9 /* Shapes */,
 				8B8012952C93185000E8AADD /* MorningGloryApp.swift */,
+				8B6500912C9B8F5B00D924E9 /* Shapes */,
 				8BC463BA2C9415E700701B4B /* Wrapper */,
 				8BC463A42C93D60F00701B4B /* NetWork */,
 				8B8012B22C931F3C00E8AADD /* Data */,
