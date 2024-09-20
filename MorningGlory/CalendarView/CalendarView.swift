@@ -11,18 +11,12 @@ import RealmSwift
 
 struct CalendarView: View {
     
+    let columns = Array(repeating: GridItem(.flexible()), count: 7)
+    
     @ObservedResults(MissionData.self)
     var userMissionList
     
-    
-    @Binding var currentDate: Date
-    @State private var currentMonth: Int = 0
-    
-    private let calendar = Calendar.current
-    
-    let weekDays = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    let columns = Array(repeating: GridItem(.flexible()), count: 7)
-    @State var saying = ""
+    @StateObject private var calendarVM = CalendarVM()
     
     var body: some View {
         mainView()
@@ -33,23 +27,26 @@ struct CalendarView: View {
             ZStack {
                 ViewBackground()
                 
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(spacing: 20) {
-                            topCalendarView()
-                            weekdaysView()
-                            daysComponentView(colums: columns)
-                            ForEach(filteredMissions(), id: \.id) { item in
-                                MissionListView(userMissionList: item)
-                            }
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 20) {
+                        topCalendarView()
+                        weekdaysView()
+                        daysComponentView(colums: columns)
+                        ForEach(calendarVM.output.filteredMissionList, id: \.id) { item in
+                            MissionListView(userMissionList: item)
                         }
                     }
-                    .background(Color.clear)
-//                    Image("file")
-//                        .resizable()
-//                        .frame(width: 80, height: 80)
-//                        .shadow(color: .orange, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
-//                        .offset(x: 100, y: 200)
                 }
+                .onAppear {
+                    calendarVM.action(.changeDate(Date()))
+                }
+                .background(Color.clear)
+                //                    Image("file")
+                //                        .resizable()
+                //                        .frame(width: 80, height: 80)
+                //                        .shadow(color: .orange, radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                //                        .offset(x: 100, y: 200)
+            }
             
         }
     }
@@ -72,7 +69,7 @@ struct MissionListView: View {
                     Image(systemName: userMissionList.mission1Complete ? "checkmark.square.fill" : "checkmark.square" )
                 })
             }
-            
+           
             HStack {
                 Text(userMissionList.mission2)
                 Spacer()
@@ -113,26 +110,21 @@ extension CalendarView {
     func daysComponentView(colums: [GridItem]) -> some View {
         
         LazyVGrid(columns: colums) {
-            ForEach(getDate()) { item in
+            ForEach(calendarVM.getDate()) { item in
                 daysView(value: item)
-                    .foregroundStyle(isSameDay(date1: item.date, date2: currentDate) ? .pink : .black)
+                    .foregroundStyle(calendarVM.isSameDay(date1: item.date, date2: calendarVM.output.currentDate) ? .pink : .black)
                     .onTapGesture {
-                        currentDate = item.date
+                        calendarVM.action(.changeDate(item.date))
                     }
             }
         }
     }
-    func filteredMissions() -> [MissionData] {
-        print(#function)
-        return userMissionList.filter { mission in
-            isSameDay(date1: mission.todayDate, date2: currentDate)
-        }
-    }
-   
+  
+    
     
     func weekdaysView() -> some View {
         HStack {
-            ForEach(weekDays, id: \.self) { day in
+            ForEach(calendarVM.output.weekDays, id: \.self) { day in
                 Text(day)
                     .font(.custom("Menlo-Bold", size: 16))
                     .fontWeight(.semibold)
@@ -145,10 +137,10 @@ extension CalendarView {
     @ViewBuilder
     func dayInfo() -> some View {
         
-        let monthLabel = getDateData(for: getCurrentMonth())
+        let monthLabel = calendarVM.getDateData(for: calendarVM.getCurrentMonth())
         
         Button(action: {
-            currentMonth -= 1
+            calendarVM.output.currentMonth -= 1
         }, label: {
             Image(systemName: "chevron.left")
                 .font(.title2)
@@ -159,7 +151,7 @@ extension CalendarView {
             .foregroundStyle(.black)
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
         Button(action: {
-            currentMonth += 1
+            calendarVM.output.currentMonth += 1
         }, label: {
             Image(systemName: "chevron.right")
                 .font(.title2)
@@ -181,50 +173,6 @@ extension CalendarView {
             }
         }
         .frame(height: 100, alignment: .top)
-    }
-}
-
-//MARK: about Day components
-
-extension CalendarView {
-    
-    func isSameDay(date1: Date, date2: Date) -> Bool {
-        
-        return calendar.isDate(date1, inSameDayAs: date2)
-    }
-    
-    
-    func getDateData(for date: Date) -> [String] {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY MMMM"
-        let dateString = formatter.string(from: date)
-        return dateString.components(separatedBy: " ")
-    }
-    
-    
-    func getCurrentMonth() -> Date {
-        guard let currentMonth = calendar.date(byAdding: .month, value: currentMonth, to: Date()) else { return Date() }
-        
-        return currentMonth
-    }
-    
-    
-    func getDate() -> [DateValue] {
-        
-        guard let currentMonth = calendar.date(byAdding: .month, value: self.currentMonth, to: Date()) else { return [] }
-        
-        var days = currentMonth.getDates().compactMap { date -> DateValue in
-            let day = calendar.component(.day, from: date )
-            return DateValue(day: day, date: date)
-        }
-        
-        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
-        
-        for _ in 0..<firstWeekday - 1 {
-            days.insert(DateValue(day: -1, date: Date()), at: 0)
-        }
-        
-        return days
     }
 }
 

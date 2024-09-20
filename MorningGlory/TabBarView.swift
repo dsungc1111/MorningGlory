@@ -12,7 +12,6 @@ import SwiftUI
 
 struct TabBarView: View {
     @State private var selectedTab: Int = 2
-    @State private var date = Date()
     
     var body: some View {
         
@@ -32,7 +31,7 @@ struct TabBarView: View {
                                Text("ToDo")
                            }
                            .tag(1)
-                       CalendarView(currentDate: $date)
+                       CalendarView()
                            .tabItem {
                                Image(systemName: "calendar")
                                Text("Calendar")
@@ -63,13 +62,13 @@ struct TabBarView: View {
                   case 1:
                       ToDoView()
                   case 2:
-                      CalendarView(currentDate: $date)
+                      CalendarView()
                   case 3:
                       UserInfoView()
                   case 4:
                       PostView()
                   default:
-                      CalendarView(currentDate: $date)
+                      CalendarView()
                   }
               }
               .frame(maxWidth: .infinity, maxHeight: .infinity)

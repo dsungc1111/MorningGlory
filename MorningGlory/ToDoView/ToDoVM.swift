@@ -9,21 +9,6 @@ import Foundation
 import Combine
 import RealmSwift
 
-protocol ViewModelType: AnyObject, ObservableObject {
-    
-    
-    associatedtype Input
-    associatedtype Output
-    
-    var cancellables: Set<AnyCancellable> { get set }
-    
-    var input: Input { get set }
-    var output: Output { get set }
-    
-   
-    func transform()
-}
-
 
 final class ToDoVM: ViewModelType {
     
@@ -33,7 +18,6 @@ final class ToDoVM: ViewModelType {
     struct Input {
         let getWeather = PassthroughSubject<Void, Never>()
         let saveMission = PassthroughSubject<Void, Never>()
-        
     }
     
     struct Output {
@@ -41,13 +25,14 @@ final class ToDoVM: ViewModelType {
         var mission2 = ""
         var mission3 = ""
         var toast: Toast? = nil
-        
         var weatherIcon: String = ""
         var temperature: Double = 0.0
         
+        @ObservedResults(MissionData.self)
+        var userMissionList
     }
-    @ObservedResults(MissionData.self)
-    var userMissionList
+    
+    
     
     var areAllMissionsFilled: Bool {
         return !output.mission1.isEmpty && !output.mission2.isEmpty && !output.mission3.isEmpty
@@ -165,7 +150,7 @@ extension ToDoVM {
         let todayDate = Date.todayDate(from: date)
         let wakeuptime = Date.getWakeUpTime(from: date)
         
-        if let existingMission = userMissionList.first(where: { $0.todayDate == todayDate }) {
+        if let existingMission = output.userMissionList.first(where: { $0.todayDate == todayDate }) {
             
             if let editMission = existingMission.thaw() {
                 try? editMission.realm?.write {
@@ -176,12 +161,12 @@ extension ToDoVM {
                     print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
                 }
             }
-            print("🔫🔫🔫🔫데이터 수정 완료: ", userMissionList)
+            print("🔫🔫🔫🔫데이터 수정 완료: ", output.userMissionList)
             output.toast = Toast(type: .edit, title: "수정완료 🌞🌞", message: "미션을 수정했어요!", duration: 3.0)
         } else {
             
             let newMission = MissionData(todayDate: todayDate, wakeUpTime: wakeuptime, mission1:output.mission1, mission2: output.mission2, mission3: output.mission3)
-            $userMissionList.append(newMission)
+            output.$userMissionList.append(newMission)
             print("🔫🔫🔫🔫새 데이터 추가 완료: ", newMission)
             output.toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
         }

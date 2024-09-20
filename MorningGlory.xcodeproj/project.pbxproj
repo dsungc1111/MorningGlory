@@ -30,6 +30,8 @@
 		8B9353DF2C9BF83400B61053 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B9353DE2C9BF83400B61053 /* GoogleService-Info.plist */; };
 		8B9353E22C9BF93000B61053 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353E12C9BF93000B61053 /* RealmSwift */; };
 		8B9353E42C9C0C8C00B61053 /* ToDoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353E32C9C0C8C00B61053 /* ToDoVM.swift */; };
+		8B9632052C9D06BB005DF6FB /* CalendarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9632042C9D06BB005DF6FB /* CalendarVM.swift */; };
+		8B9632082C9D06FC005DF6FB /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9632072C9D06FC005DF6FB /* ViewModelType.swift */; };
 		8BC463A62C93D67100701B4B /* RandomFamousSaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */; };
 		8BC463A92C93D6F200701B4B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC463A82C93D6F200701B4B /* Alamofire */; };
 		8BC463AE2C93D80900701B4B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8BC463AD2C93D80900701B4B /* .gitignore */; };
@@ -77,6 +79,8 @@
 		8B9353CF2C9BCB0C00B61053 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		8B9353DE2C9BF83400B61053 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8B9353E32C9C0C8C00B61053 /* ToDoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoVM.swift; sourceTree = "<group>"; };
+		8B9632042C9D06BB005DF6FB /* CalendarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVM.swift; sourceTree = "<group>"; };
+		8B9632072C9D06FC005DF6FB /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFamousSaying.swift; sourceTree = "<group>"; };
 		8BC463AD2C93D80900701B4B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -134,11 +138,12 @@
 			isa = PBXGroup;
 			children = (
 				8B8012952C93185000E8AADD /* MorningGloryApp.swift */,
+				8B8012A32C9318A900E8AADD /* Extension */,
+				8B9632062C9D06E9005DF6FB /* Protocol */,
 				8B6500912C9B8F5B00D924E9 /* Shapes */,
 				8BC463BA2C9415E700701B4B /* Wrapper */,
 				8BC463A42C93D60F00701B4B /* NetWork */,
 				8B8012B22C931F3C00E8AADD /* Data */,
-				8B8012A32C9318A900E8AADD /* Extension */,
 				8B8012972C93185000E8AADD /* TabBarView.swift */,
 				8B8012A62C93199F00E8AADD /* CalendarView */,
 				8B8012AB2C931C0600E8AADD /* ToDoView */,
@@ -174,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				8B8012A72C9319BA00E8AADD /* CalendarView.swift */,
+				8B9632042C9D06BB005DF6FB /* CalendarVM.swift */,
 			);
 			path = CalendarView;
 			sourceTree = "<group>";
@@ -223,6 +229,14 @@
 				8B9353CD2C9BBF8000B61053 /* ToastComponents.swift */,
 			);
 			path = Toast;
+			sourceTree = "<group>";
+		};
+		8B9632062C9D06E9005DF6FB /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				8B9632072C9D06FC005DF6FB /* ViewModelType.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		8BC463A42C93D60F00701B4B /* NetWork */ = {
@@ -341,8 +355,10 @@
 				8BC463C72C959F4800701B4B /* WeatherModel.swift in Sources */,
 				8BC463BC2C9415FE00701B4B /* TimeCircleWrapper.swift in Sources */,
 				8B9353E42C9C0C8C00B61053 /* ToDoVM.swift in Sources */,
+				8B9632052C9D06BB005DF6FB /* CalendarVM.swift in Sources */,
 				8B9353CB2C9BBD5400B61053 /* ToastMessageWrapper.swift in Sources */,
 				8B6500932C9B8F7000D924E9 /* Shapes.swift in Sources */,
+				8B9632082C9D06FC005DF6FB /* ViewModelType.swift in Sources */,
 				8BC463C52C959F0900701B4B /* GetWeather.swift in Sources */,
 				8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */,
 				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,
