@@ -7,9 +7,9 @@
 import SwiftUI
 
 enum PostItColor {
-    static let pink = PostItItem(background: Color.pink.opacity(0.2), time: "05:30")
-    static let yellow = PostItItem(background: Color.yellow.opacity(0.2), time: "06:30")
-    static let orange = PostItItem(background: Color.orange.opacity(0.2), time: "07:30")
+    static let pink = PostItItem(background: Color(hex: "#b782c4").opacity(0.7), time: "05:30")
+    static let yellow = PostItItem(background: Color(hex: "#f7cf76").opacity(0.7), time: "06:30")
+    static let green = PostItItem(background: Color(hex: "#52db9b").opacity(0.7), time: "07:30")
 }
 
 struct PostItItem {

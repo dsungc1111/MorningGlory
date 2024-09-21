@@ -27,7 +27,7 @@ struct MissionListView: View {
     private func mission1View() -> some View  {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color(hex: "#b782c4"))
+                .fill(PostItColor.pink.background)
                 .frame(height: 70)
                 .padding(.horizontal, 10)
             HStack {
@@ -57,7 +57,7 @@ struct MissionListView: View {
     private func mission2View() -> some View  {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color(hex: "#f7cf76"))
+                .fill(PostItColor.yellow.background)
                 .frame(height: 70)
                 .padding(.horizontal, 10)
             HStack {
@@ -87,7 +87,7 @@ struct MissionListView: View {
     private func mission3View() -> some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color(hex: "#52db9b"))
+                .fill(PostItColor.green.background)
                 .frame(height: 70)
                 .padding(.horizontal, 10)
             HStack {

@@ -1,6 +1,24 @@
 
 import SwiftUI
 
+
+struct SpeechBubble: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+
+        // 말풍선 본체 (Rounded Rectangle)
+        path.addRoundedRect(in: CGRect(x: 0, y: 0, width: rect.width, height: rect.height * 0.8), cornerSize: CGSize(width: 20, height: 20))
+
+        // 말풍선 꼬리
+        path.move(to: CGPoint(x: rect.width * 0.2, y: rect.height * 0.8))
+        path.addLine(to: CGPoint(x: rect.width * 0.3, y: rect.height))
+        path.addLine(to: CGPoint(x: rect.width * 0.4, y: rect.height * 0.8))
+        path.closeSubpath()
+
+        return path
+    }
+}
+
 struct PostView: View {
     
     
@@ -11,6 +29,7 @@ struct PostView: View {
             ZStack {
                 setNavigation()
                 userReviewView()
+                SpeechBubble()
             }
         }
     }

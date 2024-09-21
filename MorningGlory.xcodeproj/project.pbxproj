@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B26CD0A2C9EF180009C8840 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353E12C9BF93000B61053 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8B65008E2C986CFE00D924E9 /* PostItData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65008D2C986CFE00D924E9 /* PostItData.swift */; };
 		8B6500902C9AAC8F00D924E9 /* MissionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65008F2C9AAC8F00D924E9 /* MissionData.swift */; };
 		8B6500932C9B8F7000D924E9 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6500922C9B8F7000D924E9 /* Shapes.swift */; };
@@ -53,6 +54,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8B26CD0A2C9EF180009C8840 /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;

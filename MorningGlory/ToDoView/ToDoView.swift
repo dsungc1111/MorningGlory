@@ -25,7 +25,7 @@ struct ToDoView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
                         sayingView()
-                        
+                            .padding(.bottom, 30)
                         missionList()
                         
                     }
@@ -34,6 +34,7 @@ struct ToDoView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) { buttonView() }
                 }
+                .background(Color(hex: "#d7eff9"))
             }
             .navigationTitle("Mission")
             .navigationBarTitleDisplayMode(.inline)
@@ -51,8 +52,11 @@ extension ToDoView {
         VStack {
             
             MissionCards(time: PostItColor.pink.time, mission: $todoVM.output.mission1, backgroundColor: PostItColor.pink.background)
+                .padding(.bottom, 10)
             MissionCards(time: PostItColor.yellow.time, mission: $todoVM.output.mission2, backgroundColor: PostItColor.yellow.background)
-            MissionCards(time: PostItColor.orange.time, mission: $todoVM.output.mission3, backgroundColor: PostItColor.orange.background)
+                .padding(.bottom, 10)
+            MissionCards(time: PostItColor.green.time, mission: $todoVM.output.mission3, backgroundColor: PostItColor.green.background)
+                .padding(.bottom, 10)
             Spacer()
         }
     }
@@ -88,12 +92,8 @@ extension ToDoView {
             
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
-                    .fill(LinearGradient(
-                        gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.white]),
-                        startPoint: .top,
-                        endPoint: .bottom)
-                    )
-                    .frame(height: 200)
+                    .fill(Color(hex: "#B2D3E3"))
+                    .frame(height: 250)
                     .shadow(radius: 5)
                 VStack {
                     HStack {
@@ -131,6 +131,17 @@ extension ToDoView {
                         }
                         .padding(.trailing, 35)
                     }
+                    .padding(.bottom, 15)
+                    
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color(hex: "fef0ea"))
+                            .frame(width: 80, height: 30)
+                        Text("Today")
+                            .bold()
+//                            .foregroundStyle(Color(hex: "#f38654"))
+                    }
+                    .padding(.bottom, 15)
                     
                     
                     Text(UserDefaultsManager.saying)
@@ -178,12 +189,11 @@ struct MissionCards: View {
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.black)
-
-                    Spacer()
+                        .padding(.trailing, 15)
 
                     TextField("미션을 입력하세요", text: $mission)
-                        .font(.body)
-                        .foregroundColor(.gray)
+                        .font(.title)
+                        .foregroundColor(.black)
                 }
                     .padding(.horizontal, 40)
             )
