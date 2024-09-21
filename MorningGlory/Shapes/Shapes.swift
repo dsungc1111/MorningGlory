@@ -24,7 +24,7 @@ struct ViewBackground: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
+                gradient: Gradient(colors: [Color(hex: "#82bbf8"), Color(hex: "#F3D8A3")]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )

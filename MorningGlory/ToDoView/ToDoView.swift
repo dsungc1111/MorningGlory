@@ -10,7 +10,7 @@ import Toast
 
 
 struct ToDoView: View {
-   
+    
     @StateObject private var todoVM = ToDoVM()
     
     var body: some View {
@@ -22,25 +22,24 @@ struct ToDoView: View {
     func mainView() -> some View {
         NavigationView {
             ZStack {
-                ViewBackground()
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) { buttonView() }
-                    }
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
                         sayingView()
+                        
                         missionList()
+                        
                     }
                     .padding(.top)
                 }
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) { buttonView() }
+                }
             }
-//            .navigationTitle("임시제목")
+            .navigationTitle("Mission")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
             Spacer()
         }
-        //        .onAppear {
-        //            print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
-        //        }
     }
     
 }
@@ -50,16 +49,15 @@ extension ToDoView {
     
     func missionList() -> some View {
         VStack {
-            postItView(backGround: PostItColor.pink.background, fold: PostItColor.pink.foldColor, time: PostItColor.pink.time, textfield: $todoVM.output.mission1)
             
-            postItView(backGround: PostItColor.yellow.background, fold: PostItColor.yellow.foldColor, time: PostItColor.yellow.time, textfield: $todoVM.output.mission2)
-            
-            postItView(backGround: PostItColor.orange.background, fold: PostItColor.orange.foldColor, time: PostItColor.orange.time, textfield: $todoVM.output.mission3)
+            MissionCards(time: PostItColor.pink.time, mission: $todoVM.output.mission1, backgroundColor: PostItColor.pink.background)
+            MissionCards(time: PostItColor.yellow.time, mission: $todoVM.output.mission2, backgroundColor: PostItColor.yellow.background)
+            MissionCards(time: PostItColor.orange.time, mission: $todoVM.output.mission3, backgroundColor: PostItColor.orange.background)
             Spacer()
         }
     }
     
-    func postItView(backGround: String, fold: String, time: String, textfield: Binding<String>) -> some View {
+    func postItView(backGround: String, time: String, textfield: Binding<String>) -> some View {
         
         ZStack(alignment: .bottomTrailing) {
             
@@ -80,51 +78,74 @@ extension ToDoView {
             }
             .padding(.top, 10)
             .padding(.horizontal, 20)
-            FoldedCornerShape()
-                .fill(Color(hex: fold))
-                .frame(width: 50, height: 50)
-                .padding(.trailing, 20)
         }
         
     }
     
     func sayingView() -> some View {
-        HStack {
-            VStack {
-                if let iconURL = URL(string: "https://openweathermap.org/img/wn/\(todoVM.output.weatherIcon)@2x.png") {
-                    AsyncImage(url: iconURL) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            image.resizable()
-                                .frame(width: 70, height: 70)
-                        case .failure:
-                            Image(systemName: "sun.max.circle")
-                                .resizable()
-                                .frame(width: 70, height: 70)
-                        @unknown default:
-                            Image(systemName: "exclamationmark.triangle")
-                                .resizable()
-                                .frame(width: 70, height: 70)
+        
+        ZStack {
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 25)
+                    .fill(LinearGradient(
+                        gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.white]),
+                        startPoint: .top,
+                        endPoint: .bottom)
+                    )
+                    .frame(height: 200)
+                    .shadow(radius: 5)
+                VStack {
+                    HStack {
+                        if let iconURL = URL(string: "https://openweathermap.org/img/wn/\(todoVM.output.weatherIcon)@2x.png") {
+                            AsyncImage(url: iconURL) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image.resizable()
+                                        .frame(width: 70, height: 70)
+                                case .failure:
+                                    Image(systemName: "sun.max.circle")
+                                        .resizable()
+                                        .frame(width: 70, height: 70)
+                                @unknown default:
+                                    Image(systemName: "exclamationmark.triangle")
+                                        .resizable()
+                                        .frame(width: 70, height: 70)
+                                }
+                            }
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.yellow)
+                            .padding(.leading, 35)
                         }
+                        
+                        
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            Text( String(format: "%.1f", todoVM.output.temperature)  + "℃")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                        }
+                        .padding(.trailing, 35)
                     }
-                    .frame(width: 70, height: 70)
+                    
+                    
+                    Text(UserDefaultsManager.saying)
+                        .font(.body)
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 30)
+                        .padding(.bottom, 20)
                 }
-                Text( String(format: "%.1f", todoVM.output.temperature)  + "℃")
             }
-            Text(UserDefaultsManager.saying)
-                .foregroundColor(.black)
-                .font(.system(size: 18))
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        .padding(20)
-        .task {
-            todoVM.action(.weather)
+            .padding()
+            .task {
+                todoVM.action(.weather)
+            }
         }
     }
-    
     func buttonView() -> some View {
         Button {
             todoVM.action(.mission)
@@ -137,6 +158,35 @@ extension ToDoView {
                 .foregroundStyle(todoVM.areAllMissionsFilled ? .blue : .gray)
         }
         .disabled(!todoVM.areAllMissionsFilled)
+    }
+}
+
+struct MissionCards: View {
+    var time: String
+    @Binding var mission: String
+    var backgroundColor: Color
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: 15)
+            .fill(backgroundColor)
+            .frame(height: 100)
+            .padding(.horizontal, 20)
+            .padding(.bottom, 10)
+            .overlay(
+                HStack {
+                    Text(time)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+
+                    Spacer()
+
+                    TextField("미션을 입력하세요", text: $mission)
+                        .font(.body)
+                        .foregroundColor(.gray)
+                }
+                    .padding(.horizontal, 40)
+            )
     }
 }
 

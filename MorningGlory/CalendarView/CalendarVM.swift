@@ -48,6 +48,7 @@ final class CalendarVM: ViewModelType {
     
     init() {
         transform()
+        print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
     }
     
     func transform() {
@@ -125,7 +126,6 @@ final class CalendarVM: ViewModelType {
         
         return currentMonth
     }
-    
     
     func getDate() -> [DateValue] {
         

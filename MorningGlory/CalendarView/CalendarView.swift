@@ -127,7 +127,6 @@ extension CalendarView {
                         .foregroundColor(mission.success ? .yellow : .gray)
                 }
             }
-            
         }
         .frame(height: 100, alignment: .top)
     }
