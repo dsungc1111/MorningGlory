@@ -18,6 +18,7 @@ final class ToDoVM: ViewModelType {
     struct Input {
         let getWeather = PassthroughSubject<Void, Never>()
         let saveMission = PassthroughSubject<Void, Never>()
+        let saveWakeUpTime = PassthroughSubject<Date, Never>()
     }
     
     struct Output {
@@ -28,6 +29,7 @@ final class ToDoVM: ViewModelType {
         var weatherIcon: String = ""
         var weatherText = ""
         var temperature: Double = 0.0
+        var wakeupTime = Date()
         
         @ObservedResults(MissionData.self)
         var userMissionList
@@ -56,6 +58,7 @@ extension ToDoVM {
     enum Action {
         case weather
         case mission
+        case wakeUpTime(Date)
     }
     
     
@@ -67,6 +70,8 @@ extension ToDoVM {
             input.getWeather.send(())
         case .mission:
             input.saveMission.send(())
+        case .wakeUpTime(let date):
+            input.saveWakeUpTime.send(date)
         }
     }
     
@@ -83,6 +88,12 @@ extension ToDoVM {
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.saveMission()
+            }
+            .store(in: &cancellables)
+        input.saveWakeUpTime
+            .sink { [weak self] time in
+                guard let self else { return }
+                self.saveWakeUpTime(time: time)
             }
             .store(in: &cancellables)
     }
@@ -152,23 +163,32 @@ extension ToDoVM {
         let todayDate = Date.todayDate(from: date)
         
         if let existingMission = output.userMissionList.first(where: { $0.todayDate == todayDate }) {
-            
+            print("기상 시간", output.wakeupTime)
             if let editMission = existingMission.thaw() {
                 try? editMission.realm?.write {
                     editMission.mission1 = output.mission1
                     editMission.mission2 = output.mission2
                     editMission.mission3 = output.mission3
+                    editMission.wakeUpTime = output.wakeupTime
                     print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
                 }
             }
             print("🔫🔫🔫🔫데이터 수정 완료: ", output.userMissionList)
             output.toast = Toast(type: .edit, title: "수정완료 🌞🌞", message: "미션을 수정했어요!", duration: 3.0)
         } else {
-            
-            let newMission = MissionData(todayDate: todayDate, wakeUpTime: nil, mission1:output.mission1, mission2: output.mission2, mission3: output.mission3)
+            print("===============기상 시간", output.wakeupTime, "==========")
+            let newMission = MissionData(todayDate: todayDate, wakeUpTime: output.wakeupTime, mission1:output.mission1, mission2: output.mission2, mission3: output.mission3)
             output.$userMissionList.append(newMission)
             print("🔫🔫🔫🔫새 데이터 추가 완료: ", newMission)
             output.toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
         }
     }
+    
+    
+    func saveWakeUpTime(time: Date) {
+        
+        output.wakeupTime = Date.getWakeUpTime(from: time)
+        print("기상 시간 저장", output.wakeupTime)
+    }
+    
 }

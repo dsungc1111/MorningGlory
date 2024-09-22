@@ -24,6 +24,10 @@ struct ToDoView: View {
     var body: some View {
         mainView()
             .toastView(toast: $todoVM.output.toast)
+            .onAppear() {
+                wakeUp = userMissionList.first?.wakeUpTime == nil ? false : true
+                print("불값", wakeUp)
+            }
     }
     
     
@@ -34,7 +38,7 @@ struct ToDoView: View {
                     VStack {
                         sayingView()
                             .padding(.bottom, 10)
-                        
+                       
                         HStack {
                             Image(wakeUp ? "file" : "sleep")
                                 .resizable()
@@ -45,11 +49,11 @@ struct ToDoView: View {
                                     .fill( PostItColor.yellow.background)
                                     .frame(width: 150, height: 40)
                                 Button(action: {
-                                    if let mission = userMissionList.first {
-                                        let date = Date()
-                                        calendarVM.action(.saveWakeUptime((mission, date)))
-                                    }
+                                    let date = Date()
+                                    print("토글 전 : ", wakeUp)
                                     wakeUp.toggle()
+                                    print("토글 후 : ", wakeUp)
+                                    todoVM.action(.wakeUpTime(date))
                                 }, label: {
                                     Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
                                     Text(wakeUp ? "기상완료" : "기상하셨나요?")

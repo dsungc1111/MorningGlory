@@ -14,7 +14,6 @@ final class CalendarVM: ViewModelType {
     struct Input {
         let changeDate = PassthroughSubject<Date, Never>()
         let missionComplete = PassthroughSubject<(MissionData, Int), Never>()
-        let saveWakeUpTime = PassthroughSubject<(MissionData, Date), Never>()
     }
     
     struct Output {
@@ -44,7 +43,6 @@ final class CalendarVM: ViewModelType {
     enum Action {
         case changeDate(Date)
         case missionComplete((MissionData, Int))
-        case saveWakeUptime((MissionData, Date))
     }
     
     
@@ -68,24 +66,8 @@ final class CalendarVM: ViewModelType {
                 missionComplete(missionData: data, index: index)
             }
             .store(in: &cancellables)
-        input.saveWakeUpTime
-            .sink { [weak self] (data, wakeUpTime) in
-                guard let self else { return }
-                saveWakeUpTime(missionData: data, time: wakeUpTime)
-            }
-            .store(in: &cancellables)
     }
-    
-    func saveWakeUpTime(missionData: MissionData, time: Date) {
-        
-        if let mission = missionData.thaw() {
-            try? mission.realm?.write {
-                mission.wakeUpTime = Date.getWakeUpTime(from: time)
-                print(mission.wakeUpTime)
-            }
-        }
-    }
-    
+
     func missionComplete(missionData: MissionData, index: Int) {
         
         if let mission = missionData.thaw() {
@@ -118,8 +100,6 @@ final class CalendarVM: ViewModelType {
             input.changeDate.send(selectedDate)
         case .missionComplete((let mission, let isComplete)):
             input.missionComplete.send((mission, isComplete))
-        case .saveWakeUptime((let mission, let time)):
-            input.saveWakeUpTime.send((mission , time))
         }
     }
     
