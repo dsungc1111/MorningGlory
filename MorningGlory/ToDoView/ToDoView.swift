@@ -7,11 +7,19 @@
 
 import SwiftUI
 import Toast
+import RealmSwift
 
 
 struct ToDoView: View {
     
     @StateObject private var todoVM = ToDoVM()
+    
+    @StateObject private var calendarVM = CalendarVM()
+    
+    @State private var wakeUp = false
+    
+    @ObservedResults(MissionData.self)
+    var userMissionList
     
     var body: some View {
         mainView()
@@ -25,7 +33,33 @@ struct ToDoView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
                         sayingView()
-                            .padding(.bottom, 30)
+                            .padding(.bottom, 10)
+                        
+                        HStack {
+                            Image(wakeUp ? "file" : "sleep")
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                                .padding(.leading, 10)
+                            ZStack(alignment: .leading) {
+                                RoundedCorner(radius: 15, corners: [.bottomLeft, .bottomRight, .topRight])
+                                    .fill( PostItColor.yellow.background)
+                                    .frame(width: 150, height: 40)
+                                Button(action: {
+                                    if let mission = userMissionList.first {
+                                        let date = Date()
+                                        calendarVM.action(.saveWakeUptime((mission, date)))
+                                    }
+                                    wakeUp.toggle()
+                                }, label: {
+                                    Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
+                                    Text(wakeUp ? "기상완료" : "기상하셨나요?")
+                                        .foregroundStyle(.black)
+                                })
+                                .padding(.leading, 10)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom, 10)
                         missionList()
                         
                     }
@@ -89,13 +123,21 @@ extension ToDoView {
     func sayingView() -> some View {
         
         ZStack {
-            
-            ZStack {
+            ZStack(alignment: .top) {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(Color(hex: "#B2D3E3"))
-                    .frame(height: 250)
                     .shadow(radius: 5)
+                    
                 VStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color(hex: "fef0ea"))
+                            .frame(width: 80, height: 30)
+                        Text("Today")
+                            .bold()
+                    }
+                    .padding(.vertical, 10)
+
                     HStack {
                         if let iconURL = URL(string: "https://openweathermap.org/img/wn/\(todoVM.output.weatherIcon)@2x.png") {
                             AsyncImage(url: iconURL) { phase in
@@ -106,13 +148,9 @@ extension ToDoView {
                                     image.resizable()
                                         .frame(width: 70, height: 70)
                                 case .failure:
-                                    Image(systemName: "sun.max.circle")
-                                        .resizable()
-                                        .frame(width: 70, height: 70)
+                                    ProgressView()
                                 @unknown default:
-                                    Image(systemName: "exclamationmark.triangle")
-                                        .resizable()
-                                        .frame(width: 70, height: 70)
+                                    ProgressView()
                                 }
                             }
                             .scaledToFit()
@@ -120,7 +158,8 @@ extension ToDoView {
                             .foregroundColor(.yellow)
                             .padding(.leading, 35)
                         }
-                        
+                        Text(todoVM.output.weatherText)
+                            .bold()
                         
                         Spacer()
                         VStack(alignment: .trailing) {
@@ -132,17 +171,6 @@ extension ToDoView {
                         .padding(.trailing, 35)
                     }
                     .padding(.bottom, 15)
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Color(hex: "fef0ea"))
-                            .frame(width: 80, height: 30)
-                        Text("Today")
-                            .bold()
-//                            .foregroundStyle(Color(hex: "#f38654"))
-                    }
-                    .padding(.bottom, 15)
-                    
                     
                     Text(UserDefaultsManager.saying)
                         .font(.body)

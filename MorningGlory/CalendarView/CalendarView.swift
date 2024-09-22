@@ -18,19 +18,18 @@ struct CalendarView: View {
     
     @StateObject private var calendarVM = CalendarVM()
     
+    
     var body: some View {
         mainView()
     }
     
     func mainView() -> some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                Image("sleep")
-                    .resizable()
-                    .frame(width: 80, height: 80)
                 ZStack {
                     ScrollView(.vertical, showsIndicators: false) {
-                        VStack(spacing: 20) {
+                        VStack(alignment: .leading, spacing: 20) {
+                           
+                            
                             topCalendarView()
                             weekdaysView()
                             daysComponentView(colums: columns)
@@ -42,10 +41,28 @@ struct CalendarView: View {
                     .onAppear {
                         calendarVM.action(.changeDate(Date()))
                     }
-                }
+                
             }
+            .navigationTitle("Calendar")
+            .navigationBarTitleDisplayMode(.inline)
             .background(Color(hex: "#d7eff9"))
         }
+    }
+}
+
+struct SpeechBubble: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        
+        path.addRoundedRect(in: CGRect(x: rect.minX + 10, y: rect.minY, width: rect.width - 10, height: rect.height - 20), cornerSize: CGSize(width: 16, height: 16))
+        
+        
+        path.move(to: CGPoint(x: rect.minX + 10, y: rect.midY - 10))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.minX + 10, y: rect.midY + 10))
+        
+        return path
     }
 }
 //MARK: about View

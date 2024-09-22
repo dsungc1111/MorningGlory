@@ -12,8 +12,9 @@ import RealmSwift
 final class CalendarVM: ViewModelType {
     
     struct Input {
-        let chageDate = PassthroughSubject<Date, Never>()
+        let changeDate = PassthroughSubject<Date, Never>()
         let missionComplete = PassthroughSubject<(MissionData, Int), Never>()
+        let saveWakeUpTime = PassthroughSubject<(MissionData, Date), Never>()
     }
     
     struct Output {
@@ -43,6 +44,7 @@ final class CalendarVM: ViewModelType {
     enum Action {
         case changeDate(Date)
         case missionComplete((MissionData, Int))
+        case saveWakeUptime((MissionData, Date))
     }
     
     
@@ -52,7 +54,7 @@ final class CalendarVM: ViewModelType {
     }
     
     func transform() {
-        input.chageDate
+        input.changeDate
             .sink { [weak self] date in
                 guard let self else { return }
                 output.currentDate = date
@@ -66,6 +68,22 @@ final class CalendarVM: ViewModelType {
                 missionComplete(missionData: data, index: index)
             }
             .store(in: &cancellables)
+        input.saveWakeUpTime
+            .sink { [weak self] (data, wakeUpTime) in
+                guard let self else { return }
+                saveWakeUpTime(missionData: data, time: wakeUpTime)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func saveWakeUpTime(missionData: MissionData, time: Date) {
+        
+        if let mission = missionData.thaw() {
+            try? mission.realm?.write {
+                mission.wakeUpTime = Date.getWakeUpTime(from: time)
+                print(mission.wakeUpTime)
+            }
+        }
     }
     
     func missionComplete(missionData: MissionData, index: Int) {
@@ -92,13 +110,16 @@ final class CalendarVM: ViewModelType {
         }
     }
     
+    
     func action(_ action: Action) {
         
         switch action {
         case .changeDate(let selectedDate):
-            input.chageDate.send(selectedDate)
+            input.changeDate.send(selectedDate)
         case .missionComplete((let mission, let isComplete)):
             input.missionComplete.send((mission, isComplete))
+        case .saveWakeUptime((let mission, let time)):
+            input.saveWakeUpTime.send((mission , time))
         }
     }
     
@@ -115,7 +136,7 @@ final class CalendarVM: ViewModelType {
     
     func getDateData(for date: Date) -> [String] {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY MMMM"
+        formatter.dateFormat = "yyyy MMMM"
         let dateString = formatter.string(from: date)
         return dateString.components(separatedBy: " ")
     }

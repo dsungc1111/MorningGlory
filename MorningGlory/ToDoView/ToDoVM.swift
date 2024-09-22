@@ -26,6 +26,7 @@ final class ToDoVM: ViewModelType {
         var mission3 = ""
         var toast: Toast? = nil
         var weatherIcon: String = ""
+        var weatherText = ""
         var temperature: Double = 0.0
         
         @ObservedResults(MissionData.self)
@@ -117,6 +118,7 @@ extension ToDoVM {
                 guard let self else { return }
                 output.weatherIcon = result.weather.first?.icon ?? "아이콘"
                 output.temperature = result.main.temp
+                output.weatherText = result.weather.first?.main ?? ""
             }
             
         }
@@ -148,13 +150,11 @@ extension ToDoVM {
         let date = Date()
         
         let todayDate = Date.todayDate(from: date)
-        let wakeuptime = Date.getWakeUpTime(from: date)
         
         if let existingMission = output.userMissionList.first(where: { $0.todayDate == todayDate }) {
             
             if let editMission = existingMission.thaw() {
                 try? editMission.realm?.write {
-                    editMission.wakeUpTime = wakeuptime
                     editMission.mission1 = output.mission1
                     editMission.mission2 = output.mission2
                     editMission.mission3 = output.mission3
@@ -165,7 +165,7 @@ extension ToDoVM {
             output.toast = Toast(type: .edit, title: "수정완료 🌞🌞", message: "미션을 수정했어요!", duration: 3.0)
         } else {
             
-            let newMission = MissionData(todayDate: todayDate, wakeUpTime: wakeuptime, mission1:output.mission1, mission2: output.mission2, mission3: output.mission3)
+            let newMission = MissionData(todayDate: todayDate, wakeUpTime: nil, mission1:output.mission1, mission2: output.mission2, mission3: output.mission3)
             output.$userMissionList.append(newMission)
             print("🔫🔫🔫🔫새 데이터 추가 완료: ", newMission)
             output.toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
