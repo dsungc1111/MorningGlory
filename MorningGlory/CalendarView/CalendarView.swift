@@ -11,6 +11,7 @@ import RealmSwift
 
 struct CalendarView: View {
     
+    
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
     @ObservedResults(MissionData.self)
@@ -28,8 +29,6 @@ struct CalendarView: View {
                 ZStack {
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(alignment: .leading, spacing: 20) {
-                           
-                            
                             topCalendarView()
                             weekdaysView()
                             daysComponentView(colums: columns)
@@ -41,28 +40,9 @@ struct CalendarView: View {
                     .onAppear {
                         calendarVM.action(.changeDate(Date()))
                     }
-                
             }
-            .navigationTitle("Calendar")
-            .navigationBarTitleDisplayMode(.inline)
             .background(Color(hex: "#d7eff9"))
         }
-    }
-}
-
-struct SpeechBubble: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        
-        path.addRoundedRect(in: CGRect(x: rect.minX + 10, y: rect.minY, width: rect.width - 10, height: rect.height - 20), cornerSize: CGSize(width: 16, height: 16))
-        
-        
-        path.move(to: CGPoint(x: rect.minX + 10, y: rect.midY - 10))
-        path.addLine(to: CGPoint(x: rect.minX, y: rect.midY))
-        path.addLine(to: CGPoint(x: rect.minX + 10, y: rect.midY + 10))
-        
-        return path
     }
 }
 //MARK: about View
@@ -89,7 +69,6 @@ extension CalendarView {
     }
     
     
-    
     func weekdaysView() -> some View {
         HStack {
             ForEach(calendarVM.output.weekDays, id: \.self) { day in
@@ -97,7 +76,7 @@ extension CalendarView {
                     .font(.custom("Menlo-Bold", size: 16))
                     .fontWeight(.semibold)
                     .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                    .foregroundStyle(day == "Sun" ? .red : .black)
+                    .foregroundStyle(.black)
             }
         }
     }

@@ -17,16 +17,10 @@ struct TabBarView: View {
           appearance.configureWithOpaqueBackground()
           appearance.backgroundColor = UIColor(Color(hex: "#d7eff9"))
 
-          appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-
-
-          let scrollEdgeAppearance = UINavigationBarAppearance()
-          scrollEdgeAppearance.configureWithTransparentBackground()
-          scrollEdgeAppearance.backgroundColor = UIColor.clear
 
           UINavigationBar.appearance().standardAppearance = appearance
-          UINavigationBar.appearance().scrollEdgeAppearance = scrollEdgeAppearance
-          UINavigationBar.appearance().compactAppearance = scrollEdgeAppearance
+          UINavigationBar.appearance().scrollEdgeAppearance = appearance
+          UINavigationBar.appearance().compactAppearance = appearance
         
         let tabbar = UITabBarAppearance()
         tabbar.backgroundColor = UIColor(Color(hex: "#d7eff9"))
@@ -80,8 +74,6 @@ struct TabBarView: View {
                    }
                    .accentColor(Color(hex: "#57a3ff"))
               }
-        
-          
       }
 }
 
