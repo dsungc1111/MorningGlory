@@ -8,11 +8,7 @@
 import Foundation
 import RealmSwift
 
-struct MissionList {
-    let mission1: String
-    let mission2: String
-    let mission3: String
-}
+
 
 final class MissionData: Object, ObjectKeyIdentifiable {
     

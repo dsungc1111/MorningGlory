@@ -4,17 +4,20 @@ import SwiftUI
 struct PostView: View {
     
     
+    @State private var showPageSheet = false
+
+    
     
     var body: some View {
         
         NavigationView {
             userReviewView()
                 .background(Color(hex: "#d7eff9"))
-                
-                
         }
+        
     }
-  
+    
+    
     private func userReviewView() -> some View {
         ScrollView(.vertical) {
             ForEach(0..<2) { _ in
@@ -28,7 +31,7 @@ struct PostView: View {
                             .frame(width: 180, height: 200)
                             .clipShape(RoundedCorner(radius: 20, corners: [.topLeft, .bottomLeft]))
                             .padding(.leading, 20)
-                            
+                        
                         VStack(alignment: .leading, spacing: 20) {
                             Text("2024-04-04")
                                 .bold()
@@ -44,29 +47,33 @@ struct PostView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        print("츄가버튼l")
+                        showPageSheet = true
                     }, label: {
                         HStack {
-                            Image("file")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .shadow(color: Color.orange, radius: 10, x: 0, y: 0)
                             Text("글 추가")
                                 .foregroundStyle(.black)
                         }
                     })
+                    .sheet(isPresented: $showPageSheet) {
+                        UploadView()
+                    }
                 }
+                
             }
             
         }
         
     }
-    
 }
+
 
 
 #Preview {
-    TabBarView()
+    PostView()
 }
 
 
+//                            Image("file")
+//                                .resizable()
+//                                .frame(width: 40, height: 40)
+//                                .shadow(color: Color.orange, radius: 10, x: 0, y: 0)

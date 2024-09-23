@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8B26CD0A2C9EF180009C8840 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353E12C9BF93000B61053 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		8B3F7C5A2CA0E5A200716E29 /* PHPickerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C592CA0E5A200716E29 /* PHPickerWrapper.swift */; };
+		8B3F7C5E2CA0EDB100716E29 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C5D2CA0EDB100716E29 /* UploadView.swift */; };
+		8B3F7C602CA0EE4900716E29 /* PageSheetWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C5F2CA0EE4900716E29 /* PageSheetWrapper.swift */; };
+		8B3F7C632CA138C400716E29 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C622CA138C400716E29 /* RealmRepository.swift */; };
 		8B65008E2C986CFE00D924E9 /* PostItData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65008D2C986CFE00D924E9 /* PostItData.swift */; };
 		8B6500902C9AAC8F00D924E9 /* MissionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B65008F2C9AAC8F00D924E9 /* MissionData.swift */; };
 		8B6500932C9B8F7000D924E9 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6500922C9B8F7000D924E9 /* Shapes.swift */; };
@@ -22,6 +26,8 @@
 		8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012AD2C931C3700E8AADD /* UserInfoView.swift */; };
 		8B8012B12C931CFB00E8AADD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012B02C931CFB00E8AADD /* PostView.swift */; };
 		8B8012B42C931F4700E8AADD /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8012B32C931F4700E8AADD /* DateValue.swift */; };
+		8B81DBB92CA18EA600274D28 /* TextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBB82CA18EA600274D28 /* TextViewWrapper.swift */; };
+		8B81DBBB2CA195B400274D28 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBBA2CA195B400274D28 /* PostData.swift */; };
 		8B9353C92C9BBA1900B61053 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353C82C9BBA1900B61053 /* Toast */; };
 		8B9353CB2C9BBD5400B61053 /* ToastMessageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CA2C9BBD5400B61053 /* ToastMessageWrapper.swift */; };
 		8B9353CE2C9BBF8000B61053 /* ToastComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CD2C9BBF8000B61053 /* ToastComponents.swift */; };
@@ -62,6 +68,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B3F7C592CA0E5A200716E29 /* PHPickerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerWrapper.swift; sourceTree = "<group>"; };
+		8B3F7C5D2CA0EDB100716E29 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
+		8B3F7C5F2CA0EE4900716E29 /* PageSheetWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSheetWrapper.swift; sourceTree = "<group>"; };
+		8B3F7C622CA138C400716E29 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		8B65008D2C986CFE00D924E9 /* PostItData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItData.swift; sourceTree = "<group>"; };
 		8B65008F2C9AAC8F00D924E9 /* MissionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionData.swift; sourceTree = "<group>"; };
 		8B6500922C9B8F7000D924E9 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
@@ -77,6 +87,8 @@
 		8B8012AD2C931C3700E8AADD /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		8B8012B02C931CFB00E8AADD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		8B8012B32C931F4700E8AADD /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
+		8B81DBB82CA18EA600274D28 /* TextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWrapper.swift; sourceTree = "<group>"; };
+		8B81DBBA2CA195B400274D28 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		8B9353CA2C9BBD5400B61053 /* ToastMessageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageWrapper.swift; sourceTree = "<group>"; };
 		8B9353CD2C9BBF8000B61053 /* ToastComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastComponents.swift; sourceTree = "<group>"; };
 		8B9353CF2C9BCB0C00B61053 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
@@ -113,6 +125,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B3F7C612CA138AE00716E29 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				8B65008F2C9AAC8F00D924E9 /* MissionData.swift */,
+				8B81DBBA2CA195B400274D28 /* PostData.swift */,
+				8B3F7C622CA138C400716E29 /* RealmRepository.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		8B6500912C9B8F5B00D924E9 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				8B8012B02C931CFB00E8AADD /* PostView.swift */,
+				8B3F7C5D2CA0EDB100716E29 /* UploadView.swift */,
 			);
 			path = PostView;
 			sourceTree = "<group>";
@@ -217,12 +240,12 @@
 		8B8012B22C931F3C00E8AADD /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				8B3F7C612CA138AE00716E29 /* Realm */,
 				8BC463CA2C95A86700701B4B /* LocationManager.swift */,
 				8B8012B32C931F4700E8AADD /* DateValue.swift */,
 				8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */,
 				8BC463C62C959F4800701B4B /* WeatherModel.swift */,
 				8B65008D2C986CFE00D924E9 /* PostItData.swift */,
-				8B65008F2C9AAC8F00D924E9 /* MissionData.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -259,6 +282,9 @@
 				8B9353CC2C9BBD6A00B61053 /* Toast */,
 				8BC463BB2C9415FE00701B4B /* TimeCircleWrapper.swift */,
 				8BC463C22C95335300701B4B /* KeyBoardManager.swift */,
+				8B3F7C592CA0E5A200716E29 /* PHPickerWrapper.swift */,
+				8B3F7C5F2CA0EE4900716E29 /* PageSheetWrapper.swift */,
+				8B81DBB82CA18EA600274D28 /* TextViewWrapper.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -355,6 +381,8 @@
 				8B7B13EB2C93CC0D00AFE31F /* Date+.swift in Sources */,
 				8BC463CB2C95A86700701B4B /* LocationManager.swift in Sources */,
 				8B8012B12C931CFB00E8AADD /* PostView.swift in Sources */,
+				8B3F7C602CA0EE4900716E29 /* PageSheetWrapper.swift in Sources */,
+				8B3F7C5E2CA0EDB100716E29 /* UploadView.swift in Sources */,
 				8B8012982C93185000E8AADD /* TabBarView.swift in Sources */,
 				8B8012A52C9318B400E8AADD /* Color+.swift in Sources */,
 				8BC463C72C959F4800701B4B /* WeatherModel.swift in Sources */,
@@ -366,8 +394,11 @@
 				8B9632082C9D06FC005DF6FB /* ViewModelType.swift in Sources */,
 				8BC463C52C959F0900701B4B /* GetWeather.swift in Sources */,
 				8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */,
+				8B81DBB92CA18EA600274D28 /* TextViewWrapper.swift in Sources */,
+				8B3F7C5A2CA0E5A200716E29 /* PHPickerWrapper.swift in Sources */,
 				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,
 				8B65008E2C986CFE00D924E9 /* PostItData.swift in Sources */,
+				8B3F7C632CA138C400716E29 /* RealmRepository.swift in Sources */,
 				8B96320A2C9D4D93005DF6FB /* MissionListView.swift in Sources */,
 				8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */,
 				8BC463C92C959F5A00701B4B /* APIKey.swift in Sources */,
@@ -377,6 +408,7 @@
 				8BC463C32C95335300701B4B /* KeyBoardManager.swift in Sources */,
 				8BC463A62C93D67100701B4B /* RandomFamousSaying.swift in Sources */,
 				8B6500902C9AAC8F00D924E9 /* MissionData.swift in Sources */,
+				8B81DBBB2CA195B400274D28 /* PostData.swift in Sources */,
 				8B8012AA2C931C0100E8AADD /* ToDoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -520,8 +552,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -555,8 +587,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
