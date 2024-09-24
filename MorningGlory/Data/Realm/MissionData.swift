@@ -14,7 +14,7 @@ final class MissionData: Object, ObjectKeyIdentifiable {
     
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var todayDate: Date
-    @Persisted var wakeUpTime: Date
+    @Persisted var wakeUpTime: Date?
     @Persisted var mission1: String
     @Persisted var mission2: String
     @Persisted var mission3: String

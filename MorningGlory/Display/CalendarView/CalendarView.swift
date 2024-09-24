@@ -6,17 +6,11 @@
 //
 
 import SwiftUI
-import RealmSwift
-
 
 struct CalendarView: View {
     
-    
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
-    
-    @ObservedResults(MissionData.self)
-    var userMissionList
-    
+   
     @StateObject private var calendarVM = CalendarVM()
     
     
@@ -26,20 +20,21 @@ struct CalendarView: View {
     
     func mainView() -> some View {
         NavigationView {
-                ZStack {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: 20) {
-                            topCalendarView()
-                            weekdaysView()
-                            daysComponentView(colums: columns)
-                            ForEach(calendarVM.output.filteredMissionList, id: \.id) { item in
-                                MissionListView(userMissionList: item)
-                            }
+            ZStack {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        topCalendarView()
+                        weekdaysView()
+                        daysComponentView(colums: columns)
+                        ForEach(calendarVM.output.filteredMissionList, id: \.id) { item in
+                            MissionListView(userMissionList: item)
                         }
                     }
-                    .onAppear {
-                        calendarVM.action(.changeDate(Date()))
-                    }
+                }
+                .onAppear {
+                    calendarVM.action(.changeDate(Date()))
+                    
+                }
             }
             .background(Color(hex: "#d7eff9"))
         }
@@ -114,13 +109,17 @@ extension CalendarView {
                 Text("\(value.day)")
                     .font(.title3.bold())
                     .padding(.bottom, 10)
-                if let mission = userMissionList.first(where: { mission in
+                if let mission = calendarVM.output.allMissionList.first(where: { mission in
                     calendarVM.isSameDay(date1: mission.todayDate, date2: value.date)
                 }) {
-                    Image(systemName: mission.success ? "star.fill" : "")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(mission.success ? Color(hex: "#b69a51") : .gray)
+                    if mission.todayDate == value.date {
+                        
+                        Image(systemName: mission.success ? "star.fill" : "")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(mission.success ? Color(hex: "#b69a51") : .gray)
+                    }
+                    
                 }
             }
         }

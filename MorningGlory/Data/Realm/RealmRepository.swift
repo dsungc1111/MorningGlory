@@ -15,7 +15,7 @@ struct RealmRepository {
     private let calendar = Calendar.current
     
     func fetchURL() {
-        print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
+        print("urlurlrulrurlulrur",Realm.Configuration.defaultConfiguration.fileURL ?? "")
     }
     
     func savePost(_ postData: PostData) {
@@ -29,18 +29,33 @@ struct RealmRepository {
         }
     }
     
-    func getMissionList(todayDate: Date) -> [MissionData] {
+    func saveMission(_ missionData: MissionData) {
+        do {
+            try realm.write {
+                realm.add(missionData)
+            }
+        } catch {
+            print("저장 실패")
+        }
+    }
+    
+    func getFetchedMissionList(todayDate: Date) -> [MissionData] {
         
         let startOfDay = calendar.startOfDay(for: todayDate)
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
        
-        let list = realm.objects(MissionData.self).filter("todayDate >= %@ AND todayDate < %@", startOfDay, endOfDay)
+        let objects = realm.objects(MissionData.self).filter("todayDate >= %@ AND todayDate < %@", startOfDay, endOfDay)
 
         
-        return Array(list)
+        return Array(objects)
     }
     
-    
+    func getAllMissionList() -> [MissionData] {
+        
+        let objects = realm.objects(MissionData.self)
+        
+        return Array(objects)
+    }
     
     
     

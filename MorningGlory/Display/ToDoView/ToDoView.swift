@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Toast
-import RealmSwift
+//import RealmSwift
 
 
 struct ToDoView: View {
@@ -18,14 +18,17 @@ struct ToDoView: View {
     
     @State private var wakeUp = false
     
-    @ObservedResults(MissionData.self)
-    var userMissionList
+//    @ObservedResults(MissionData.self)
+//    var userMissionList
     
     var body: some View {
         mainView()
             .toastView(toast: $todoVM.output.toast)
             .onAppear() {
-                wakeUp = userMissionList.first?.wakeUpTime == nil ? false : true
+                if let list = todoVM.output.filteredMissionList.first {
+                    wakeUp = list.wakeUpTime == nil ? false : true
+                }
+                RealmRepository().fetchURL()
                 print("불값", wakeUp)
             }
     }

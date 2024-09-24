@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-//import RealmSwift
 
 final class CalendarVM: ViewModelType {
     
@@ -17,8 +16,6 @@ final class CalendarVM: ViewModelType {
     }
     
     struct Output {
-//        @ObservedResults(MissionData.self)
-//        var userMissionList
         
         var currentDate: Date = Date()
         var currentMonth: Int = 0
@@ -28,7 +25,7 @@ final class CalendarVM: ViewModelType {
         let weekDays = ["Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
         var saying = ""
         var filteredMissionList: [MissionData] = []
-        
+        var allMissionList: [MissionData] = []
         var missionSuccess = false
     }
     
@@ -50,6 +47,7 @@ final class CalendarVM: ViewModelType {
     
     init() {
         transform()
+        output.allMissionList = realmRepo.getAllMissionList()
     }
     
     func transform() {
@@ -105,12 +103,8 @@ final class CalendarVM: ViewModelType {
     }
     
     func filteredMissions() {
-        
-        output.filteredMissionList = realmRepo.getMissionList(todayDate: output.currentDate)
-        
-//        output.userMissionList.filter { mission in
-//            isSameDay(date1: mission.todayDate, date2: output.currentDate)
-//        }
+        output.filteredMissionList = realmRepo.getFetchedMissionList(todayDate: output.currentDate)
+        print("🔫🔫🔫🔫🔫🔫리스트 필터됨",output.filteredMissionList)
     }
     
     func isSameDay(date1: Date, date2: Date) -> Bool {
