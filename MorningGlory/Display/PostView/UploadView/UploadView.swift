@@ -47,7 +47,7 @@ struct UploadView: View {
                 dismiss()
             } label: {
                 Text("저장")
-                    .customFontBold(size: 16)
+                    .customFontRegular(size: 16)
                     .foregroundStyle(.black)
                     
             }
@@ -59,14 +59,13 @@ struct UploadView: View {
             HStack {
                 Image(systemName: "person.circle")
                 Text("닉네임아스파라거스")
-                    .customFontBold(size: 20)
+                    .customFontRegular(size: 20)
                 
             }
             .padding(.leading, 20)
             
             TextWritingView(text: $uploadVM.output.text)
                 .padding(.horizontal, 10)
-            
         }
     }
     
