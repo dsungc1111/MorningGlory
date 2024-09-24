@@ -8,17 +8,56 @@
 import SwiftUI
 import RealmSwift
 
+
 struct RealmRepository {
     
-    func saveImageToDocument(image: UIImage, filename: String) {
+    private let realm = try! Realm()
+    private let calendar = Calendar.current
+    
+    func fetchURL() {
+        print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
+    }
+    
+    func savePost(_ postData: PostData) {
+        
+        do {
+            try realm.write {
+                realm.add(postData)
+            }
+        } catch {
+            print("저장 실패")
+        }
+    }
+    
+    func getMissionList(todayDate: Date) -> [MissionData] {
+        
+        let startOfDay = calendar.startOfDay(for: todayDate)
+        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+       
+        let list = realm.objects(MissionData.self).filter("todayDate >= %@ AND todayDate < %@", startOfDay, endOfDay)
+
+        
+        return Array(list)
+    }
+    
+    
+    
+    
+    
+}
+
+//MARK: About Image
+extension RealmRepository {
+    
+    func saveImageToDocument(image: Data, filename: String) {
         
         guard let documentDirectory = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask).first else { return }
         
         let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
-        
-        guard let data = image.jpegData(compressionQuality: 0.5) else { return }
+        guard let newimage = UIImage(data: image) else { return }
+        guard let data = newimage.jpegData(compressionQuality: 0.5) else { return }
         
         do {
             try data.write(to: fileURL)

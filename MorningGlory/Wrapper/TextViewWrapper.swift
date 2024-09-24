@@ -14,7 +14,7 @@ struct CustomTextView: UIViewRepresentable {
     var maxHeight: CGFloat
     var textFont: UIFont
     var textColor: UIColor = .black
-    var textLimit: Int = 400
+    var textLimit: Int = 299
     var cornerRadius: CGFloat? = nil
     var borderWidth: CGFloat? = nil
     var borderColor: CGColor? = nil
@@ -27,6 +27,7 @@ struct CustomTextView: UIViewRepresentable {
     var placeholderColor: UIColor = .gray
     
     func makeUIView(context: Context) -> UITextView {
+        
         let textView = UITextView()
         
         if let cornerRadius = cornerRadius {

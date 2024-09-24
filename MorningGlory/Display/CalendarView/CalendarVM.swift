@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import RealmSwift
+//import RealmSwift
 
 final class CalendarVM: ViewModelType {
     
@@ -17,8 +17,8 @@ final class CalendarVM: ViewModelType {
     }
     
     struct Output {
-        @ObservedResults(MissionData.self)
-        var userMissionList
+//        @ObservedResults(MissionData.self)
+//        var userMissionList
         
         var currentDate: Date = Date()
         var currentMonth: Int = 0
@@ -31,6 +31,8 @@ final class CalendarVM: ViewModelType {
         
         var missionSuccess = false
     }
+    
+    private let realmRepo = RealmRepository()
     
     var cancellables = Set<AnyCancellable>()
     
@@ -48,7 +50,6 @@ final class CalendarVM: ViewModelType {
     
     init() {
         transform()
-        print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
     }
     
     func transform() {
@@ -104,9 +105,12 @@ final class CalendarVM: ViewModelType {
     }
     
     func filteredMissions() {
-        output.filteredMissionList = output.userMissionList.filter { mission in
-            isSameDay(date1: mission.todayDate, date2: output.currentDate)
-        }
+        
+        output.filteredMissionList = realmRepo.getMissionList(todayDate: output.currentDate)
+        
+//        output.userMissionList.filter { mission in
+//            isSameDay(date1: mission.todayDate, date2: output.currentDate)
+//        }
     }
     
     func isSameDay(date1: Date, date2: Date) -> Bool {
