@@ -12,7 +12,6 @@ struct CustomTextView: UIViewRepresentable {
     @Binding var text: String
     @Binding var height: CGFloat
     var maxHeight: CGFloat
-    var textFont: UIFont
     var textColor: UIColor = .black
     var textLimit: Int = 299
     var cornerRadius: CGFloat? = nil
@@ -47,7 +46,7 @@ struct CustomTextView: UIViewRepresentable {
             textView.textColor = textColor
         }
         
-        textView.font = textFont
+        textView.font = UIFont(name: "HakgyoansimDunggeunmisoOTF-R", size: 16)
         textView.isScrollEnabled = isScrollEnabled
         textView.isEditable = isEditable
         textView.isUserInteractionEnabled = isUserInteractionEnabled

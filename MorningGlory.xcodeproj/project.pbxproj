@@ -30,6 +30,9 @@
 		8B81DBBB2CA195B400274D28 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBBA2CA195B400274D28 /* PostData.swift */; };
 		8B81DBBD2CA223C500274D28 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBBC2CA223C500274D28 /* TextFieldView.swift */; };
 		8B81DBC02CA22A1300274D28 /* UploadVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBBF2CA22A1300274D28 /* UploadVM.swift */; };
+		8B81DBC32CA2CEF100274D28 /* Hakgyoansim Dunggeunmiso OTF R.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B81DBC22CA2CEF100274D28 /* Hakgyoansim Dunggeunmiso OTF R.otf */; };
+		8B81DBC62CA2D13300274D28 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBC52CA2D13300274D28 /* Text+.swift */; };
+		8B81DBC82CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B81DBC72CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf */; };
 		8B9353C92C9BBA1900B61053 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353C82C9BBA1900B61053 /* Toast */; };
 		8B9353CB2C9BBD5400B61053 /* ToastMessageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CA2C9BBD5400B61053 /* ToastMessageWrapper.swift */; };
 		8B9353CE2C9BBF8000B61053 /* ToastComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CD2C9BBF8000B61053 /* ToastComponents.swift */; };
@@ -93,6 +96,10 @@
 		8B81DBBA2CA195B400274D28 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 		8B81DBBC2CA223C500274D28 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		8B81DBBF2CA22A1300274D28 /* UploadVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadVM.swift; sourceTree = "<group>"; };
+		8B81DBC22CA2CEF100274D28 /* Hakgyoansim Dunggeunmiso OTF R.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hakgyoansim Dunggeunmiso OTF R.otf"; sourceTree = "<group>"; };
+		8B81DBC42CA2CF3D00274D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8B81DBC52CA2D13300274D28 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
+		8B81DBC72CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hakgyoansim Dunggeunmiso OTF B.otf"; sourceTree = "<group>"; };
 		8B9353CA2C9BBD5400B61053 /* ToastMessageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageWrapper.swift; sourceTree = "<group>"; };
 		8B9353CD2C9BBF8000B61053 /* ToastComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastComponents.swift; sourceTree = "<group>"; };
 		8B9353CF2C9BCB0C00B61053 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
@@ -167,6 +174,7 @@
 		8B8012942C93185000E8AADD /* MorningGlory */ = {
 			isa = PBXGroup;
 			children = (
+				8B81DBC42CA2CF3D00274D28 /* Info.plist */,
 				8B8012952C93185000E8AADD /* MorningGloryApp.swift */,
 				8B8012A32C9318A900E8AADD /* Extension */,
 				8B9632062C9D06E9005DF6FB /* Protocol */,
@@ -179,6 +187,8 @@
 				8B80129B2C93185200E8AADD /* Preview Content */,
 				8BC463C82C959F5A00701B4B /* APIKey.swift */,
 				8B9353DE2C9BF83400B61053 /* GoogleService-Info.plist */,
+				8B81DBC22CA2CEF100274D28 /* Hakgyoansim Dunggeunmiso OTF R.otf */,
+				8B81DBC72CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf */,
 			);
 			path = MorningGlory;
 			sourceTree = "<group>";
@@ -197,6 +207,7 @@
 				8B8012A42C9318B400E8AADD /* Color+.swift */,
 				8B7B13EA2C93CC0D00AFE31F /* Date+.swift */,
 				8B9353CF2C9BCB0C00B61053 /* Image+.swift */,
+				8B81DBC52CA2D13300274D28 /* Text+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -389,6 +400,8 @@
 				8B9353DF2C9BF83400B61053 /* GoogleService-Info.plist in Resources */,
 				8BC463AE2C93D80900701B4B /* .gitignore in Resources */,
 				8B80129A2C93185200E8AADD /* Assets.xcassets in Resources */,
+				8B81DBC82CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf in Resources */,
+				8B81DBC32CA2CEF100274D28 /* Hakgyoansim Dunggeunmiso OTF R.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +438,7 @@
 				8B96320A2C9D4D93005DF6FB /* MissionListView.swift in Sources */,
 				8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */,
 				8BC463C92C959F5A00701B4B /* APIKey.swift in Sources */,
+				8B81DBC62CA2D13300274D28 /* Text+.swift in Sources */,
 				8B9353CE2C9BBF8000B61053 /* ToastComponents.swift in Sources */,
 				8B8012B42C931F4700E8AADD /* DateValue.swift in Sources */,
 				8B8012962C93185000E8AADD /* MorningGloryApp.swift in Sources */,
@@ -572,6 +586,8 @@
 				DEVELOPMENT_TEAM = 83K785968Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MorningGlory/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -607,6 +623,8 @@
 				DEVELOPMENT_TEAM = 83K785968Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MorningGlory/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

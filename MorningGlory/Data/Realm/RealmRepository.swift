@@ -14,37 +14,57 @@ struct RealmRepository {
     private let realm = try! Realm()
     private let calendar = Calendar.current
     
+    @ObservedResults(MissionData.self)
+    var missiondata
+    
+    @ObservedResults(PostData.self)
+    var postdata
+    
     func fetchURL() {
         print("urlurlrulrurlulrur",Realm.Configuration.defaultConfiguration.fileURL ?? "")
     }
     
     func savePost(_ postData: PostData) {
         
-        do {
-            try realm.write {
-                realm.add(postData)
-            }
-        } catch {
-            print("저장 실패")
-        }
+        $postdata.append(postData)
+        
     }
     
     func saveMission(_ missionData: MissionData) {
-        do {
-            try realm.write {
-                realm.add(missionData)
-            }
-        } catch {
-            print("저장 실패")
-        }
+        
+        $missiondata.append(missionData)
+        
     }
+    
+    func isMissionComplete(index: Int) -> Bool {
+        
+        
+        switch index {
+        case 1:
+            missiondata[index].mission1Complete.toggle()
+        case 2:
+            missiondata[index].mission2Complete.toggle()
+        case 3:
+            missiondata[index].mission3Complete.toggle()
+        default:
+            break
+        }
+        if missiondata[index].mission1Complete && missiondata[index].mission2Complete && missiondata[index].mission3Complete {
+            missiondata[index].success = true
+        } else {
+            missiondata[index].success = false
+        }
+        
+        return missiondata[index].success
+    }
+    
     
     func getFetchedMissionList(todayDate: Date) -> [MissionData] {
         
         let startOfDay = calendar.startOfDay(for: todayDate)
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
        
-        let objects = realm.objects(MissionData.self).filter("todayDate >= %@ AND todayDate < %@", startOfDay, endOfDay)
+        let objects = missiondata.filter("todayDate >= %@ AND todayDate < %@", startOfDay, endOfDay)
 
         
         return Array(objects)

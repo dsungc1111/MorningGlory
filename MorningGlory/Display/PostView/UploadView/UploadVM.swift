@@ -67,7 +67,7 @@ final class UploadVM: ViewModelType {
         realmRepo.savePost(postData)
 
         if let image = output.imageData {
-            realmRepo.saveImageToDocument(image: image, filename: "\( postData.id)")
+            realmRepo.saveImageToDocument(image: image, filename: "\(postData.id)")
         }
     }
     

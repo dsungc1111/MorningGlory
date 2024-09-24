@@ -47,7 +47,9 @@ struct UploadView: View {
                 dismiss()
             } label: {
                 Text("저장")
+                    .customFontBold(size: 16)
                     .foregroundStyle(.black)
+                    
             }
         }
     }
@@ -57,7 +59,8 @@ struct UploadView: View {
             HStack {
                 Image(systemName: "person.circle")
                 Text("닉네임아스파라거스")
-                    .font(.system(size: 15).bold())
+                    .customFontBold(size: 20)
+                
             }
             .padding(.leading, 20)
             
@@ -93,6 +96,7 @@ struct UploadView: View {
                         }
                     })
                 )
+                .ignoresSafeArea(.all, edges: .bottom)
             })
             .navigationTitle("New Post")
             

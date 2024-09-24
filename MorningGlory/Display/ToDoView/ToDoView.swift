@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Toast
-//import RealmSwift
 
 
 struct ToDoView: View {
@@ -18,9 +17,6 @@ struct ToDoView: View {
     
     @State private var wakeUp = false
     
-//    @ObservedResults(MissionData.self)
-//    var userMissionList
-    
     var body: some View {
         mainView()
             .toastView(toast: $todoVM.output.toast)
@@ -28,8 +24,6 @@ struct ToDoView: View {
                 if let list = todoVM.output.filteredMissionList.first {
                     wakeUp = list.wakeUpTime == nil ? false : true
                 }
-                RealmRepository().fetchURL()
-                print("불값", wakeUp)
             }
     }
     
@@ -41,7 +35,7 @@ struct ToDoView: View {
                     VStack {
                         sayingView()
                             .padding(.bottom, 10)
-                       
+                        
                         HStack {
                             Image(wakeUp ? "file" : "sleep")
                                 .resizable()
@@ -50,17 +44,19 @@ struct ToDoView: View {
                             ZStack(alignment: .leading) {
                                 RoundedCorner(radius: 15, corners: [.bottomLeft, .bottomRight, .topRight])
                                     .fill( PostItColor.yellow.background)
-                                    .frame(width: 150, height: 40)
+                                    .frame(width: 160, height: 40)
                                 Button(action: {
                                     let date = Date()
-                                    print("토글 전 : ", wakeUp)
                                     wakeUp.toggle()
-                                    print("토글 후 : ", wakeUp)
                                     todoVM.action(.wakeUpTime(date))
                                 }, label: {
                                     Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
-                                    Text(wakeUp ? "기상완료" : "기상하셨나요?")
                                         .foregroundStyle(.black)
+                                    
+                                    Text(wakeUp ? "기상완료 " : "기상하셨나요?")
+                                        .customFontBold(size: 17)
+                                        .foregroundStyle(.black)
+                                          
                                 })
                                 .padding(.leading, 10)
                             }
@@ -113,11 +109,14 @@ extension ToDoView {
                     .shadow(radius: 5)
                 
                 VStack(alignment: .leading, spacing: 20) {
-                    Text(time)
-                        .font(.system(size: 24).bold())
-                        .padding(.top, 10)
-                    TextField("미션을 입력하세요", text: textfield)
-                        .font(.title2)
+                    Spacer()
+                    HStack {
+                        Text(time)
+                            .customFontRegular(size: 24)
+                        TextField("미션을 입력하세요", text: textfield)
+                            .font(.custom("Chalkduster", size: 16))
+                    }
+                    Spacer()
                 }
                 .padding(.leading, 10)
             }
@@ -134,17 +133,17 @@ extension ToDoView {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(Color(hex: "#B2D3E3"))
                     .shadow(radius: 5)
-                    
+                
                 VStack {
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color(hex: "fef0ea"))
                             .frame(width: 80, height: 30)
                         Text("Today")
-                            .bold()
+                            .customFontRegular(size: 20)
                     }
                     .padding(.vertical, 10)
-
+                    
                     HStack {
                         if let iconURL = URL(string: "https://openweathermap.org/img/wn/\(todoVM.output.weatherIcon)@2x.png") {
                             AsyncImage(url: iconURL) { phase in
@@ -166,13 +165,12 @@ extension ToDoView {
                             .padding(.leading, 35)
                         }
                         Text(todoVM.output.weatherText)
-                            .bold()
+                            .customFontBold(size: 20)
                         
                         Spacer()
                         VStack(alignment: .trailing) {
                             Text( String(format: "%.1f", todoVM.output.temperature)  + "℃")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .customFontBold(size: 24)
                                 .foregroundColor(.black)
                         }
                         .padding(.trailing, 35)
@@ -180,7 +178,7 @@ extension ToDoView {
                     .padding(.bottom, 15)
                     
                     Text(UserDefaultsManager.saying)
-                        .font(.body)
+                        .customFontRegular(size: 20).customFontRegular(size: 20)
                         .foregroundColor(.black)
                         .padding(.horizontal, 30)
                         .padding(.bottom, 20)
@@ -211,7 +209,7 @@ struct MissionCards: View {
     var time: String
     @Binding var mission: String
     var backgroundColor: Color
-
+    
     var body: some View {
         RoundedRectangle(cornerRadius: 15)
             .fill(backgroundColor)
@@ -225,7 +223,7 @@ struct MissionCards: View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                         .padding(.trailing, 15)
-
+                    
                     TextField("미션을 입력하세요", text: $mission)
                         .font(.title)
                         .foregroundColor(.black)

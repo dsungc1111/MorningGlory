@@ -20,7 +20,6 @@ struct TextWritingView: View {
                 text: $text,
                 height: $height,
                 maxHeight: 220,
-                textFont: .boldSystemFont(ofSize: 14),
                 cornerRadius: 5,
                 borderWidth: 1,
                 borderColor: CGColor.init(red: 255, green: 255, blue: 255, alpha: 1),
