@@ -242,9 +242,9 @@
 		8B8012AF2C931C4300E8AADD /* PostView */ = {
 			isa = PBXGroup;
 			children = (
-				8B81DBBE2CA22A0000274D28 /* UploadView */,
 				8B8012B02C931CFB00E8AADD /* PostView.swift */,
 				8B81DBBC2CA223C500274D28 /* TextFieldView.swift */,
+				8B81DBBE2CA22A0000274D28 /* UploadView */,
 			);
 			path = PostView;
 			sourceTree = "<group>";

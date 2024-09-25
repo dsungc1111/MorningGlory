@@ -18,23 +18,6 @@ struct RoundedCorner: Shape {
     }
 }
 
-//MARK: 배경색
-struct ViewBackground: View {
-    
-    var body: some View {
-        ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [Color(hex: "#82bbf8"), Color(hex: "#F3D8A3")]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .edgesIgnoringSafeArea(.all)
-        }
-    }
-    
-    
-}
-
 //MARK: 포스트잇 접힌 부분
 struct FoldedCornerShape: Shape {
     func path(in rect: CGRect) -> Path {

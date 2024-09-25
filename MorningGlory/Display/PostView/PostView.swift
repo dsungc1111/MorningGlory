@@ -63,6 +63,7 @@ struct PostView: View {
                             VStack(alignment: .leading, spacing: 15) {
                                 Text(Date.messageTime(writeDate: list.uploadDate, currentDate: Date()))
                                     .customFontRegular(size: 14)
+                                    .foregroundStyle(.gray)
                                     .padding(.top, 5)
                                 
                                 
