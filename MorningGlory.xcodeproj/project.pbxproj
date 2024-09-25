@@ -33,6 +33,8 @@
 		8B81DBC32CA2CEF100274D28 /* Hakgyoansim Dunggeunmiso OTF R.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B81DBC22CA2CEF100274D28 /* Hakgyoansim Dunggeunmiso OTF R.otf */; };
 		8B81DBC62CA2D13300274D28 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBC52CA2D13300274D28 /* Text+.swift */; };
 		8B81DBC82CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B81DBC72CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf */; };
+		8B81DBCA2CA3F93B00274D28 /* FullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBC92CA3F93B00274D28 /* FullView.swift */; };
+		8B81DBCC2CA3F9DB00274D28 /* ShortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBCB2CA3F9DB00274D28 /* ShortView.swift */; };
 		8B9353C92C9BBA1900B61053 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353C82C9BBA1900B61053 /* Toast */; };
 		8B9353CB2C9BBD5400B61053 /* ToastMessageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CA2C9BBD5400B61053 /* ToastMessageWrapper.swift */; };
 		8B9353CE2C9BBF8000B61053 /* ToastComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CD2C9BBF8000B61053 /* ToastComponents.swift */; };
@@ -100,6 +102,8 @@
 		8B81DBC42CA2CF3D00274D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8B81DBC52CA2D13300274D28 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
 		8B81DBC72CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hakgyoansim Dunggeunmiso OTF B.otf"; sourceTree = "<group>"; };
+		8B81DBC92CA3F93B00274D28 /* FullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullView.swift; sourceTree = "<group>"; };
+		8B81DBCB2CA3F9DB00274D28 /* ShortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortView.swift; sourceTree = "<group>"; };
 		8B9353CA2C9BBD5400B61053 /* ToastMessageWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageWrapper.swift; sourceTree = "<group>"; };
 		8B9353CD2C9BBF8000B61053 /* ToastComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastComponents.swift; sourceTree = "<group>"; };
 		8B9353CF2C9BCB0C00B61053 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
@@ -183,7 +187,6 @@
 				8BC463A42C93D60F00701B4B /* NetWork */,
 				8B8012B22C931F3C00E8AADD /* Data */,
 				8B81DBC12CA22AA100274D28 /* Display */,
-				8B8012992C93185200E8AADD /* Assets.xcassets */,
 				8B80129B2C93185200E8AADD /* Preview Content */,
 				8BC463C82C959F5A00701B4B /* APIKey.swift */,
 				8B9353DE2C9BF83400B61053 /* GoogleService-Info.plist */,
@@ -243,8 +246,8 @@
 			isa = PBXGroup;
 			children = (
 				8B8012B02C931CFB00E8AADD /* PostView.swift */,
-				8B81DBBC2CA223C500274D28 /* TextFieldView.swift */,
-				8B81DBBE2CA22A0000274D28 /* UploadView */,
+				8B81DBC92CA3F93B00274D28 /* FullView.swift */,
+				8B81DBCB2CA3F9DB00274D28 /* ShortView.swift */,
 			);
 			path = PostView;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			children = (
 				8B3F7C5D2CA0EDB100716E29 /* UploadView.swift */,
 				8B81DBBF2CA22A1300274D28 /* UploadVM.swift */,
+				8B81DBBC2CA223C500274D28 /* TextFieldView.swift */,
 			);
 			path = UploadView;
 			sourceTree = "<group>";
@@ -279,6 +283,8 @@
 				8B8012AB2C931C0600E8AADD /* ToDoView */,
 				8B8012AC2C931C2900E8AADD /* UserInfo */,
 				8B8012AF2C931C4300E8AADD /* PostView */,
+				8B81DBBE2CA22A0000274D28 /* UploadView */,
+				8B8012992C93185200E8AADD /* Assets.xcassets */,
 			);
 			path = Display;
 			sourceTree = "<group>";
@@ -425,11 +431,13 @@
 				8BC463BC2C9415FE00701B4B /* TimeCircleWrapper.swift in Sources */,
 				8B9353E42C9C0C8C00B61053 /* ToDoVM.swift in Sources */,
 				8B9632052C9D06BB005DF6FB /* CalendarVM.swift in Sources */,
+				8B81DBCC2CA3F9DB00274D28 /* ShortView.swift in Sources */,
 				8B9353CB2C9BBD5400B61053 /* ToastMessageWrapper.swift in Sources */,
 				8B6500932C9B8F7000D924E9 /* Shapes.swift in Sources */,
 				8B9632082C9D06FC005DF6FB /* ViewModelType.swift in Sources */,
 				8BC463C52C959F0900701B4B /* GetWeather.swift in Sources */,
 				8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */,
+				8B81DBCA2CA3F93B00274D28 /* FullView.swift in Sources */,
 				8B81DBB92CA18EA600274D28 /* TextViewWrapper.swift in Sources */,
 				8B3F7C5A2CA0E5A200716E29 /* PHPickerWrapper.swift in Sources */,
 				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,

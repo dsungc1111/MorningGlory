@@ -76,7 +76,7 @@ struct UploadView: View {
             Button(action: {
                 uploadVM.output.PHPickerOn = true
             }, label: {
-                Image(systemName: "photo.badge.plus")
+                Image(systemName: "photo")
                     .font(.headline)
                     .foregroundStyle(Color(uiColor: .lightGray))
             })

@@ -24,6 +24,8 @@ struct CalendarView: View {
         
     }
     
+    
+    
     func mainView() -> some View {
         NavigationView {
             ZStack {
@@ -64,12 +66,10 @@ extension CalendarView {
                     .foregroundStyle(calendarVM.isSameDay(date1: item.date, date2: calendarVM.output.currentDate) ? .pink : .black)
                     .onTapGesture {
                         calendarVM.action(.changeDate(item.date))
-                        
                     }
             }
         }
     }
-    
     
     func weekdaysView() -> some View {
         HStack {

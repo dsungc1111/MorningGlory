@@ -71,7 +71,9 @@ struct CameraView: UIViewControllerRepresentable {
             picker.dismiss(animated: true)
             
             if let image = info[.originalImage] as? UIImage {
-                parent.selectedImage = image
+                let fixedImage = fixOrientation(image: image)
+                parent.selectedImage = fixedImage
+                
             }
         }
         
@@ -92,4 +94,20 @@ struct CameraView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    
+   
+}
+
+func fixOrientation(image: UIImage) -> UIImage {
+    if image.imageOrientation == .up {
+        return image
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+    image.draw(in: CGRect(origin: .zero, size: image.size))
+    
+    let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+    UIGraphicsEndImageContext()
+    
+    return normalizedImage
 }

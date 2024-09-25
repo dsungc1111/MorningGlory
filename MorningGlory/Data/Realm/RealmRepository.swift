@@ -77,6 +77,11 @@ struct RealmRepository {
         return Array(objects)
     }
     
+    func getAllPostList() -> [PostData] {
+        let objects = realm.objects(PostData.self)
+        
+        return Array(objects)
+    }
     
     
 }
