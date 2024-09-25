@@ -36,6 +36,7 @@ struct FullView: View {
                                     .frame(height: 250)
                                     .clipShape(RoundedCorner(radius: 20, corners: [.topLeft, .topRight]))
                                     .padding(.horizontal, 20)
+                                    .scaledToFill()
                             }
                             
                             VStack(alignment: .leading, spacing: 15) {

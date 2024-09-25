@@ -89,9 +89,16 @@ struct UploadView: View {
                         return nil
                     },
                     set: { newImage in
-                        if let newImage = newImage,
-                           let data = newImage.pngData() {
-                            uploadVM.output.imageData = data
+                        if let newImage = newImage {
+                            if newImage.size.height > 180 {
+                                if let resizedImage = newImage.resize(toHeight: 180),
+                                   let data = resizedImage.pngData() {
+                                    print("리사이즈 성공")
+                                    uploadVM.output.imageData = data
+                                }
+                            } else if let data = newImage.pngData() {
+                                uploadVM.output.imageData = data
+                            }
                         }
                     })
                 )
@@ -114,9 +121,16 @@ struct UploadView: View {
                     }
                     return nil
                 }, set: { newImage in
-                    if let newImage = newImage,
-                       let data = newImage.pngData() {
-                        uploadVM.output.imageData = data
+                    if let newImage = newImage {
+                        if newImage.size.height > 180 {
+                            if let resizedImage = newImage.resize(toHeight: 180),
+                               let data = resizedImage.pngData() {
+                                print("리사이즈 성공")
+                                uploadVM.output.imageData = data
+                            }
+                        } else if let data = newImage.pngData() {
+                            uploadVM.output.imageData = data
+                        }
                     }
                 })
                 )

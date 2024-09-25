@@ -44,40 +44,53 @@ struct UserInfoView: View {
             Spacer()
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 25)
-                    .fill(.white.opacity(0.5))
+                    .fill(Color(hex: "#5873f5").opacity(0.5))
                     .frame(height: 180)
-                VStack {
+                VStack(alignment: .leading) {
+                    
                     Text("성공")
-                        .customFontRegular(size: 20)
-                        .padding(.vertical, 20)
-                        .padding(.leading, 10)
+                        .customFontBold(size: 24)
+                        .padding(.leading, 20)
+                        .padding(.top, 10)
                     
                     HStack {
-                        Text("00")
-                            .customFontBold(size: 40)
+                        Spacer()
+                        Text("\(Int(value))")
+                            .customFontBold(size: 80)
+                            .foregroundStyle(.white)
+                            .padding(.leading, 10)
                         Text("회")
+                            .customFontBold(size: 20)
+                        Spacer()
                     }
-                    .padding(.leading, 40)
+                    .padding(.top, 10)
+                    
                 }
-                
             }
             Spacer()
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 25)
-                    .fill(.white.opacity(0.5))
+                    .fill(Color(hex: "#5873f5").opacity(0.5))
                     .frame(height: 180)
-                VStack {
+                VStack(alignment: .leading) {
+                    
                     Text("실패")
-                        .customFontRegular(size: 20)
-                        .padding(.vertical, 20)
-                        .padding(.leading, 10)
+                        .customFontBold(size: 24)
+                        .padding(.leading, 20)
+                        .padding(.top, 10)
                     
                     HStack {
-                        Text("00")
-                            .customFontBold(size: 40)
+                        Spacer()
+                        Text("0")
+                            .customFontBold(size: 80)
+                            .foregroundStyle(.white)
+                            .padding(.leading, 10)
                         Text("회")
+                            .customFontBold(size: 20)
+                        Spacer()
                     }
-                    .padding(.leading, 40)
+                    .padding(.top, 10)
+                    
                     
                 }
                 
