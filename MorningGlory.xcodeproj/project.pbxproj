@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B26CD0A2C9EF180009C8840 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353E12C9BF93000B61053 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8B3F7C5A2CA0E5A200716E29 /* PHPickerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C592CA0E5A200716E29 /* PHPickerWrapper.swift */; };
 		8B3F7C5E2CA0EDB100716E29 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C5D2CA0EDB100716E29 /* UploadView.swift */; };
 		8B3F7C602CA0EE4900716E29 /* PageSheetWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C5F2CA0EE4900716E29 /* PageSheetWrapper.swift */; };
@@ -35,24 +34,25 @@
 		8B81DBC82CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B81DBC72CA2DE9D00274D28 /* Hakgyoansim Dunggeunmiso OTF B.otf */; };
 		8B81DBCA2CA3F93B00274D28 /* FullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBC92CA3F93B00274D28 /* FullView.swift */; };
 		8B81DBCC2CA3F9DB00274D28 /* ShortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B81DBCB2CA3F9DB00274D28 /* ShortView.swift */; };
-		8B9353C92C9BBA1900B61053 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353C82C9BBA1900B61053 /* Toast */; };
 		8B9353CB2C9BBD5400B61053 /* ToastMessageWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CA2C9BBD5400B61053 /* ToastMessageWrapper.swift */; };
 		8B9353CE2C9BBF8000B61053 /* ToastComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CD2C9BBF8000B61053 /* ToastComponents.swift */; };
 		8B9353D02C9BCB0C00B61053 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353CF2C9BCB0C00B61053 /* Image+.swift */; };
-		8B9353D92C9BF4EC00B61053 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353D82C9BF4EC00B61053 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		8B9353DB2C9BF4EC00B61053 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353DA2C9BF4EC00B61053 /* FirebaseCrashlytics */; };
 		8B9353DF2C9BF83400B61053 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B9353DE2C9BF83400B61053 /* GoogleService-Info.plist */; };
-		8B9353E22C9BF93000B61053 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8B9353E12C9BF93000B61053 /* RealmSwift */; };
 		8B9353E42C9C0C8C00B61053 /* ToDoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9353E32C9C0C8C00B61053 /* ToDoVM.swift */; };
 		8B9632052C9D06BB005DF6FB /* CalendarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9632042C9D06BB005DF6FB /* CalendarVM.swift */; };
 		8B9632082C9D06FC005DF6FB /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9632072C9D06FC005DF6FB /* ViewModelType.swift */; };
 		8B96320A2C9D4D93005DF6FB /* MissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9632092C9D4D93005DF6FB /* MissionListView.swift */; };
+		8BA3D8422CA55B580020D5B1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D8412CA55B580020D5B1 /* RealmSwift */; };
+		8BA3D8452CA55B710020D5B1 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D8442CA55B710020D5B1 /* Toast */; };
+		8BA3D8482CA55B810020D5B1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D8472CA55B810020D5B1 /* Alamofire */; };
+		8BA3D84B2CA55B8B0020D5B1 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D84A2CA55B8B0020D5B1 /* IQKeyboardManagerSwift */; };
+		8BA3D84E2CA55BB50020D5B1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D84D2CA55BB50020D5B1 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		8BA3D8502CA55BB50020D5B1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D84F2CA55BB50020D5B1 /* FirebaseCrashlytics */; };
+		8BA3D8532CA55C910020D5B1 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D8522CA55C910020D5B1 /* PopupView */; };
 		8BC463A62C93D67100701B4B /* RandomFamousSaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */; };
-		8BC463A92C93D6F200701B4B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC463A82C93D6F200701B4B /* Alamofire */; };
 		8BC463AE2C93D80900701B4B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8BC463AD2C93D80900701B4B /* .gitignore */; };
 		8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */; };
 		8BC463BC2C9415FE00701B4B /* TimeCircleWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463BB2C9415FE00701B4B /* TimeCircleWrapper.swift */; };
-		8BC463C12C95311F00701B4B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8BC463C02C95311F00701B4B /* IQKeyboardManagerSwift */; };
 		8BC463C32C95335300701B4B /* KeyBoardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463C22C95335300701B4B /* KeyBoardManager.swift */; };
 		8BC463C52C959F0900701B4B /* GetWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463C42C959F0900701B4B /* GetWeather.swift */; };
 		8BC463C72C959F4800701B4B /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463C62C959F4800701B4B /* WeatherModel.swift */; };
@@ -67,7 +67,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8B26CD0A2C9EF180009C8840 /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,12 +127,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9353E22C9BF93000B61053 /* RealmSwift in Frameworks */,
-				8B9353D92C9BF4EC00B61053 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				8BC463A92C93D6F200701B4B /* Alamofire in Frameworks */,
-				8B9353DB2C9BF4EC00B61053 /* FirebaseCrashlytics in Frameworks */,
-				8B9353C92C9BBA1900B61053 /* Toast in Frameworks */,
-				8BC463C12C95311F00701B4B /* IQKeyboardManagerSwift in Frameworks */,
+				8BA3D8482CA55B810020D5B1 /* Alamofire in Frameworks */,
+				8BA3D8532CA55C910020D5B1 /* PopupView in Frameworks */,
+				8BA3D84E2CA55BB50020D5B1 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				8BA3D84B2CA55B8B0020D5B1 /* IQKeyboardManagerSwift in Frameworks */,
+				8BA3D8502CA55BB50020D5B1 /* FirebaseCrashlytics in Frameworks */,
+				8BA3D8452CA55B710020D5B1 /* Toast in Frameworks */,
+				8BA3D8422CA55B580020D5B1 /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,12 +346,13 @@
 			);
 			name = MorningGlory;
 			packageProductDependencies = (
-				8BC463A82C93D6F200701B4B /* Alamofire */,
-				8BC463C02C95311F00701B4B /* IQKeyboardManagerSwift */,
-				8B9353C82C9BBA1900B61053 /* Toast */,
-				8B9353D82C9BF4EC00B61053 /* FirebaseAnalyticsWithoutAdIdSupport */,
-				8B9353DA2C9BF4EC00B61053 /* FirebaseCrashlytics */,
-				8B9353E12C9BF93000B61053 /* RealmSwift */,
+				8BA3D8412CA55B580020D5B1 /* RealmSwift */,
+				8BA3D8442CA55B710020D5B1 /* Toast */,
+				8BA3D8472CA55B810020D5B1 /* Alamofire */,
+				8BA3D84A2CA55B8B0020D5B1 /* IQKeyboardManagerSwift */,
+				8BA3D84D2CA55BB50020D5B1 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				8BA3D84F2CA55BB50020D5B1 /* FirebaseCrashlytics */,
+				8BA3D8522CA55C910020D5B1 /* PopupView */,
 			);
 			productName = MorningGlory;
 			productReference = 8B8012922C93185000E8AADD /* MorningGlory.app */;
@@ -382,11 +383,12 @@
 			);
 			mainGroup = 8B8012892C93185000E8AADD;
 			packageReferences = (
-				8BC463A72C93D6F200701B4B /* XCRemoteSwiftPackageReference "Alamofire" */,
-				8BC463BF2C95311F00701B4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				8B9353C72C9BBA1800B61053 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-				8B9353D72C9BF4EC00B61053 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				8B9353E02C9BF93000B61053 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				8BA3D8402CA55B580020D5B1 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				8BA3D8432CA55B710020D5B1 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				8BA3D8462CA55B810020D5B1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8BA3D8492CA55B8B0020D5B1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				8BA3D84C2CA55BB50020D5B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				8BA3D8512CA55C910020D5B1 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 8B8012932C93185000E8AADD /* Products */;
 			projectDirPath = "";
@@ -595,20 +597,23 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MorningGlory/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "모닝글로리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근에 허용하시겠습니까?";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 접근에 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Swift.DS.MorningGlory;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DS.MorningGlory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -632,20 +637,23 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MorningGlory/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "모닝글로리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근에 허용하시겠습니까?";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 접근에 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Swift.DS.MorningGlory;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DS.MorningGlory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -681,7 +689,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B9353C72C9BBA1800B61053 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+		8BA3D8402CA55B580020D5B1 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.52.0;
+			};
+		};
+		8BA3D8432CA55B710020D5B1 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
 			requirement = {
@@ -689,23 +705,7 @@
 				minimumVersion = 5.1.1;
 			};
 		};
-		8B9353D72C9BF4EC00B61053 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 11.2.0;
-			};
-		};
-		8B9353E02C9BF93000B61053 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		8BC463A72C93D6F200701B4B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		8BA3D8462CA55B810020D5B1 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -713,7 +713,7 @@
 				minimumVersion = 5.9.1;
 			};
 		};
-		8BC463BF2C95311F00701B4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		8BA3D8492CA55B8B0020D5B1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -721,38 +721,59 @@
 				minimumVersion = 7.1.1;
 			};
 		};
+		8BA3D84C2CA55BB50020D5B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.2.0;
+			};
+		};
+		8BA3D8512CA55C910020D5B1 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8B9353C82C9BBA1900B61053 /* Toast */ = {
+		8BA3D8412CA55B580020D5B1 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8B9353C72C9BBA1800B61053 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
-			productName = Toast;
-		};
-		8B9353D82C9BF4EC00B61053 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B9353D72C9BF4EC00B61053 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		8B9353DA2C9BF4EC00B61053 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B9353D72C9BF4EC00B61053 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		8B9353E12C9BF93000B61053 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8B9353E02C9BF93000B61053 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 8BA3D8402CA55B580020D5B1 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
-		8BC463A82C93D6F200701B4B /* Alamofire */ = {
+		8BA3D8442CA55B710020D5B1 /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8BC463A72C93D6F200701B4B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 8BA3D8432CA55B710020D5B1 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+		8BA3D8472CA55B810020D5B1 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BA3D8462CA55B810020D5B1 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		8BC463C02C95311F00701B4B /* IQKeyboardManagerSwift */ = {
+		8BA3D84A2CA55B8B0020D5B1 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8BC463BF2C95311F00701B4B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = 8BA3D8492CA55B8B0020D5B1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		8BA3D84D2CA55BB50020D5B1 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BA3D84C2CA55BB50020D5B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		8BA3D84F2CA55BB50020D5B1 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BA3D84C2CA55BB50020D5B1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		8BA3D8522CA55C910020D5B1 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BA3D8512CA55C910020D5B1 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

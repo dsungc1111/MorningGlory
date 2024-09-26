@@ -11,7 +11,6 @@ import RealmSwift
 
 struct RealmRepository {
     
-    private let realm = try! Realm()
     private let calendar = Calendar.current
     
     @ObservedResults(MissionData.self)
@@ -63,27 +62,89 @@ struct RealmRepository {
         
         let startOfDay = calendar.startOfDay(for: todayDate)
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
-       
+        
         let objects = missiondata.filter("todayDate >= %@ AND todayDate < %@", startOfDay, endOfDay)
-
         
         return Array(objects)
     }
     
     func getAllMissionList() -> [MissionData] {
         
-        let objects = realm.objects(MissionData.self)
         
-        return Array(objects)
+        return Array(missiondata)
     }
     
     func getAllPostList() -> [PostData] {
-        let objects = realm.objects(PostData.self)
         
-        return Array(objects)
+        
+        return Array(postdata)
     }
     
     
+    func countSuccess() -> Int {
+        
+        
+        var count = 0
+        
+        for item in missiondata {
+            
+            if item.success {
+                count += 1
+            }
+            
+        }
+        return count
+    }
+    
+    
+    func countFail() -> Int {
+        
+        let date = Date()
+        
+        let startOfDay = calendar.startOfDay(for: date)
+        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+        
+        
+        guard let oldestDate = missiondata.sorted(byKeyPath: "todayDate", ascending: true).first?.todayDate else {
+            return 0
+        }
+        print("👉👉👉👉👉startOfDay👈👈👈👈👈👈", startOfDay)
+        print("👉👉👉👉👉endOfDay👈👈👈👈👈👈", endOfDay)
+        print("👉👉👉👉👉저장된 가장 오래된 날짜👈👈👈👈👈👈", oldestDate)
+        
+        
+        let objects = missiondata.filter("todayDate < %@", endOfDay)
+        
+        
+        
+        let recordedDates = Set(objects.map { calendar.startOfDay(for: $0.todayDate) })
+        
+        var count = 0
+        
+        var currentDate = calendar.startOfDay(for: oldestDate)
+        
+        
+        while currentDate < startOfDay {
+            print("🔫🔫🔫🔫🔫currentDate🔫🔫🔫🔫🔫", currentDate)
+            if !recordedDates.contains(currentDate) {
+                count += 1
+            } else {
+                if let mission = objects.first(where: { calendar.isDate($0.todayDate, inSameDayAs: currentDate) }) {
+                    if mission.success == false {
+                        count += 1
+                    }
+                }
+            }
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+        
+        return count
+    }
+    
+    
+    func removePost(postData: PostData) {
+        $postdata.remove(postData)
+    }
 }
 
 //MARK: About Image

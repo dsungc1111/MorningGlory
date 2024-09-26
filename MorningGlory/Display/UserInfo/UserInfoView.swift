@@ -12,14 +12,18 @@ struct UserInfoView: View {
     
     let totalDays = 30
     
-    @State private var value = 0.0
+    @State private var successCount = 0
+    @State private var failCount = 0
     @State private var percentage = 0.0
+    @State private var fail = 0
+    
+    private let realmRepo = RealmRepository()
     
     let totalDuration: Double = 60
     
-    
-    @ObservedResults(MissionData.self)
-    var missionList
+//    
+//    @ObservedResults(MissionData.self)
+//    var missionList
     
     var body: some View {
         
@@ -55,7 +59,7 @@ struct UserInfoView: View {
                     
                     HStack {
                         Spacer()
-                        Text("\(Int(value))")
+                        Text("\(successCount)")
                             .customFontBold(size: 80)
                             .foregroundStyle(.white)
                             .padding(.leading, 10)
@@ -81,7 +85,7 @@ struct UserInfoView: View {
                     
                     HStack {
                         Spacer()
-                        Text("0")
+                        Text("\(failCount)")
                             .customFontBold(size: 80)
                             .foregroundStyle(.white)
                             .padding(.leading, 10)
@@ -117,7 +121,7 @@ struct UserInfoView: View {
     func graphView() -> some View {
         VStack {
             
-            Text("*\(Int(value))일째 진행 중")
+            Text("*\(successCount)일째 진행 중")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 40)
                 .customFontRegular(size: 20)
@@ -164,18 +168,15 @@ struct UserInfoView: View {
     }
     
     private func checkSuccess() {
-        value = 0.0
-        for item in missionList {
-            if item.success {
-                print(item.success)
-                value += 1
-            }
-        }
-        value = value >= 30 ? 30 : value
-        percentage = value / Double(totalDays)
-        print("value 값", value)
+       
+        successCount = realmRepo.countSuccess()
+        successCount = successCount >= 30 ? 30 : successCount
+        percentage = Double(successCount) / Double(totalDays)
+        failCount = realmRepo.countFail()
+        
+        
+        print("value 값", successCount, failCount)
     }
-    
 }
 
 #Preview {

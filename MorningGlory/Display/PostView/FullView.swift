@@ -14,6 +14,8 @@ struct FullView: View {
     @ObservedResults(PostData.self)
     var postList
     
+    private let realmRepo = RealmRepository()
+    
     var body: some View {
         userReviewView()
     }
@@ -36,16 +38,28 @@ struct FullView: View {
                                     .frame(height: 250)
                                     .clipShape(RoundedCorner(radius: 20, corners: [.topLeft, .topRight]))
                                     .padding(.horizontal, 20)
-                                    .scaledToFill()
+                                    .scaledToFit()
                             }
-                            
                             VStack(alignment: .leading, spacing: 15) {
-                                Text(Date.messageTime(writeDate: list.uploadDate, currentDate: Date()))
-                                    .customFontRegular(size: 14)
+                                HStack {
+                                    Text(Date.messageTime(writeDate: list.uploadDate, currentDate: Date()))
+                                        .customFontRegular(size: 14)
+                                        .foregroundStyle(.gray)
+                                        
+                                    Spacer()
+                                    Menu("", systemImage: "ellipsis.circle", content: {
+                                        Button(action: {
+                                            realmRepo.removeImageFromDocument(filename: "\(list.id)")
+                                            realmRepo.removePost(postData: list)
+                                        }, label: {
+                                            Text("삭제")
+                                            Image(systemName: "trash")
+                                        })
+                                        .frame(width: 80)
+                                    })
                                     .foregroundStyle(.gray)
-                                    .padding(.top, 5)
-                                
-                                
+                                    .padding(.top, 15)
+                                }
                                 
                                 Text(list.feeling)
                                     .customFontRegular(size: 18)
@@ -55,11 +69,11 @@ struct FullView: View {
                             
                         }
                     }
-                }.padding(.bottom, 20)
+                }
+                .padding(.bottom, 20)
             }
-            
-        
-        
     }
+    
+ 
 }
 
