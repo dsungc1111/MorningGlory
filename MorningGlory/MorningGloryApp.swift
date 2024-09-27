@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
-//import FirebaseCore
+import FirebaseCore
 import RealmSwift
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//    FirebaseApp.configure()
+    FirebaseApp.configure()
       setupRealm()
     return true
   }
@@ -27,6 +27,7 @@ struct YourApp: SwiftUI.App {
     
     var body: some Scene {
         WindowGroup {
+            
             ZStack {
                 if UserDefaultsManager.nickname == "" {
                     UserSettingView()
@@ -34,6 +35,9 @@ struct YourApp: SwiftUI.App {
                     TabBarView()
                 }
                 KeyBoardManager().frame(width: 0, height: 0)
+            }
+            .onAppear() {
+                UserDefaultsManager.nickname = ""
             }
         }
     }

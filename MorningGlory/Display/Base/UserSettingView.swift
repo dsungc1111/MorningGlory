@@ -20,7 +20,9 @@ struct UserSettingView: View {
     private let realmRepo = RealmRepository()
     
     var body: some View {
-        NavigationView {
+        if isNextPage {
+            TabBarView()
+        } else {
             mainView()
         }
     }
@@ -29,6 +31,7 @@ struct UserSettingView: View {
         
         VStack(alignment: .center) {
             Spacer()
+            
             Button(action: {
                 saveUserInfo()
                 isNextPage.toggle()
@@ -40,11 +43,25 @@ struct UserSettingView: View {
                 }
             })
             .padding(.bottom, 20)
+            .onAppear() {
+                if imageData == nil {
+                    if let realImage = UIImage(named: "Real"),
+                       let imageData = realImage.pngData() {
+                        self.imageData = imageData
+                    }
+                }
+            }
+            
+         
             profileImageButton()
             textFieldView()
             Spacer()
+            
+
+
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+       
     }
     
     func saveUserInfo() {
@@ -58,7 +75,6 @@ struct UserSettingView: View {
     func profileImageButton() -> some View {
         Button {
             showCamera.toggle()
-            print("클릭")
         } label: {
             
             if let imageData = imageData,
@@ -69,8 +85,7 @@ struct UserSettingView: View {
                     .frame(width: 200, height: 200)
                     .padding(.bottom, 20)
             } else {
-                
-                Image("file")
+                Image("Real")
                     .resizable()
                     .frame(width: 200, height: 200)
                     .padding(.bottom, 20)

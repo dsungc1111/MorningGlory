@@ -193,12 +193,24 @@ struct UserInfoView: View {
                 print("클릭")
             } label: {
                 HStack {
-                    RoundedRectangle(cornerRadius: 35)
-                        .frame(width: 70, height: 70)
-                        .padding(.trailing, 20)
-                    Text("닉네임 Zone")
+                    if let imageData = realmRepo.loadImageToDocument(filename: UserDefaultsManager.nickname) {
+                        Image(uiImage: imageData)
+                            .resizable()
+                            .frame(width: 70, height: 70)
+                            .clipShape(RoundedRectangle(cornerRadius: 35))
+                            .padding(.trailing, 20)
+                            
+                          
+                    }
+//                    
+//                    RoundedRectangle(cornerRadius: 35)
+//                        .frame(width: 70, height: 70)
+//                        .padding(.trailing, 20)
+                    Text(UserDefaultsManager.nickname)
                         .customFontRegular(size: 24)
+                    Spacer()
                     Image(systemName: "chevron.right")
+                        .padding(.trailing, 50)
                     
                 }
                 .padding(.leading, 50)
