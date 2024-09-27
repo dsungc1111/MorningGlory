@@ -48,6 +48,12 @@ extension Date {
         return stringToDate
     }
     
+    static func dateToString(from date: Date) -> String {
+        Date.dateFormatter.dateFormat = "yyyy-MM-dd"
+        let timeString = Date.dateFormatter.string(from: date)
+        return timeString
+    }
+    
     static func messageTime(writeDate: Date, currentDate: Date) -> String {
         
         let targetDate = writeDate

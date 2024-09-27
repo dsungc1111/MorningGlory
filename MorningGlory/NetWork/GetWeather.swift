@@ -23,6 +23,7 @@ final class GetWeather {
             "units" : "metric",
             "lang" : "kr"
         ]
+        
         AF.request(url, parameters: param, encoding: URLEncoding.default).responseDecodable(of: Weather.self) { response in
             switch response.result {
             case .success(let value):

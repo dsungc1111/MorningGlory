@@ -122,14 +122,9 @@ struct UploadView: View {
                     return nil
                 }, set: { newImage in
                     if let newImage = newImage {
-                        if newImage.size.height > 250 {
-                            if let resizedImage = newImage.resize(toHeight: 250),
-                               let data = resizedImage.pngData() {
-                                print("리사이즈 성공")
-                                uploadVM.output.imageData = data
-                            }
-                        } else if let data = newImage.pngData() {
+                        if let data = newImage.pngData() {
                             uploadVM.output.imageData = data
+                            
                         }
                     }
                 })

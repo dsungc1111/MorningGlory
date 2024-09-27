@@ -25,10 +25,8 @@ struct CalendarView: View {
     }
     
     
-    
     func mainView() -> some View {
         NavigationView {
-            ZStack {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
                         topCalendarView()
@@ -39,13 +37,13 @@ struct CalendarView: View {
                         }
                     }
                 }
+                .padding(.top, 10)
                 .onAppear {
                     calendarVM.action(.changeDate(Date()))
                     print("필터된 놈들", calendarVM.output.filteredMissionList)
                 }
-            }
             .background(Color(hex: "#d7eff9"))
-        }
+        }.navigationBarTitleDisplayMode(.inline)
     }
 }
 //MARK: about View

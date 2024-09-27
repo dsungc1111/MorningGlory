@@ -1,12 +1,14 @@
 
 import SwiftUI
 import RealmSwift
+import PopupView
 
 struct PostView: View {
     
     @State private var selection = 0
     @State private var showPageSheet = false
-    
+    @State var selectedPost: PostData
+    @State var isPresented: Bool = false
     
     @ObservedResults(PostData.self)
     var postList
@@ -14,14 +16,40 @@ struct PostView: View {
     var body: some View {
         
         NavigationView {
-            VStack(alignment: .leading) {
-                userView()
-                    .padding(.bottom, 10)
-                    .padding(.top, 10)
-                
-                segementedControlView()
-                
+            
+            segementedControlView()
+                .navigationTitle("Post")
+                .navigationBarTitleDisplayMode(.inline)
+                .padding(.top, 20)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            showPageSheet = true
+                        }, label: {
+                            HStack {
+                                Text("글 추가")
+                                    .customFontRegular(size: 16)
+                                    .foregroundStyle(.black)
+                            }
+                        })
+                        .sheet(isPresented: $showPageSheet) {
+                            UploadView()
+                        }
+                    }
+                }
+            
+                .popup(isPresented: $isPresented) {
+                    DetailView(postData: $selectedPost)
+                        .padding(.top, 200)
+                    
+            } customize: {
+                $0
+                    .type(.toast)
+                    .position(.top)
+                    .animation(.spring())
+                    .closeOnTapOutside(true)
             }
+
             .background(Color(hex: "#d7eff9"))
         }
     }
@@ -47,45 +75,11 @@ struct PostView: View {
                     FullView()
                     
                 } else {
-                    ShortView()
+                    ShortView(isPresented: $isPresented, selectedPost: $selectedPost)
                 }
                 
             }
         }
     }
     
-    private func userView() -> some View {
-        ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.white.opacity(0.6))
-                .padding(.horizontal, 25)
-                .frame(height: 100)
-                .navigationTitle("인증샷")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            showPageSheet = true
-                        }, label: {
-                            HStack {
-                                Text("글 추가")
-                                    .customFontRegular(size: 16)
-                                    .foregroundStyle(.black)
-                            }
-                        })
-                        .sheet(isPresented: $showPageSheet) {
-                            UploadView()
-                        }
-                    }
-                }
-            HStack {
-                RoundedRectangle(cornerRadius: 35)
-                    .frame(width: 70, height: 70)
-                    .padding(.trailing, 20)
-                Text("닉네임 Zone")
-                    .customFontRegular(size: 24)
-            }
-            .padding(.leading, 50)
-        }
-    }
 }

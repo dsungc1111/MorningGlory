@@ -35,8 +35,6 @@ final class ToDoVM: ViewModelType {
         
         var filteredMissionList: [MissionData] = []
         var allMissionList: [MissionData] = []
-//        @ObservedResults(MissionData.self)
-//        var userMissionList
     }
     
     var areAllMissionsFilled: Bool {
@@ -68,9 +66,8 @@ extension ToDoVM {
     }
     
     
-    
     func action(_ action: Action) {
-        print(#function)
+        
         switch action {
         case .weather:
             input.getWeather.send(())
@@ -82,7 +79,7 @@ extension ToDoVM {
     }
     
     func transform() {
-        print(#function)
+        
         input.getWeather
             .sink { [weak self] _ in
                 guard let self else { return }
@@ -126,7 +123,6 @@ extension ToDoVM {
     
     func fetchWeather() {
         
-        print(#function)
         if shouldFetchNewSaying() {
             saveInfo()
         }
@@ -137,7 +133,6 @@ extension ToDoVM {
                 output.temperature = result.main.temp
                 output.weatherText = result.weather.first?.main ?? ""
             }
-            
         }
     }
     

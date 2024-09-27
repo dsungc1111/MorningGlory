@@ -36,5 +36,9 @@ final class UserDefaultsManager {
     
     @UserDefault(key: "saying", defaultValue: "")
     static var saying
+    
+    @UserDefault(key: "usernickname", defaultValue: "")
+    static var nickname
+    
   
 }

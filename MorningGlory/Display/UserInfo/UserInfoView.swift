@@ -21,16 +21,17 @@ struct UserInfoView: View {
     
     let totalDuration: Double = 60
     
-//    
-//    @ObservedResults(MissionData.self)
-//    var missionList
     
     var body: some View {
         
         
         NavigationView {
-            mainView()
-                .background(Color(hex: "#d7eff9"))
+            VStack {
+                userView()
+                mainView()
+                    
+            }
+            .background(Color(hex: "#d7eff9"))
         }
     }
     
@@ -53,7 +54,7 @@ struct UserInfoView: View {
                 VStack(alignment: .leading) {
                     
                     Text("성공")
-                        .customFontBold(size: 24)
+                        .customFontBold(size: 20)
                         .padding(.leading, 20)
                         .padding(.top, 10)
                     
@@ -79,7 +80,7 @@ struct UserInfoView: View {
                 VStack(alignment: .leading) {
                     
                     Text("실패")
-                        .customFontBold(size: 24)
+                        .customFontBold(size: 20)
                         .padding(.leading, 20)
                         .padding(.top, 10)
                     
@@ -108,8 +109,8 @@ struct UserInfoView: View {
     func statisticsView() -> some View {
         
         VStack {
-            Text("30일 챌린지")
-                .customFontBold(size: 40)
+            Text("Statistics")
+                .customFontBold(size: 30)
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                 .padding(.leading, 30)
             graphView()
@@ -119,14 +120,14 @@ struct UserInfoView: View {
     
     
     func graphView() -> some View {
+        
         VStack {
             
-            Text("*\(successCount)일째 진행 중")
+            Text("* \(successCount) 번 성공")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 40)
                 .customFontRegular(size: 20)
                 .foregroundStyle(.blue)
-            
             
             circleGrapth()
                 .padding(.top, 30)
@@ -167,7 +168,7 @@ struct UserInfoView: View {
         }
     }
     
-    private func checkSuccess() {
+    func checkSuccess() {
        
         successCount = realmRepo.countSuccess()
         successCount = successCount >= 30 ? 30 : successCount
@@ -176,6 +177,37 @@ struct UserInfoView: View {
         
         
         print("value 값", successCount, failCount)
+    }
+    
+    
+    func userView() -> some View {
+        
+        ZStack(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.white.opacity(0.5))
+                .padding(.horizontal, 25)
+                .frame(height: 100)
+                .navigationBarTitleDisplayMode(.inline)
+              
+            Button {
+                print("클릭")
+            } label: {
+                HStack {
+                    RoundedRectangle(cornerRadius: 35)
+                        .frame(width: 70, height: 70)
+                        .padding(.trailing, 20)
+                    Text("닉네임 Zone")
+                        .customFontRegular(size: 24)
+                    Image(systemName: "chevron.right")
+                    
+                }
+                .padding(.leading, 50)
+            }
+            
+
+        }
+        .padding(.top, 10)
+        .padding(.horizontal, 20)
     }
 }
 

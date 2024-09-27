@@ -27,9 +27,14 @@ struct YourApp: SwiftUI.App {
     
     var body: some Scene {
         WindowGroup {
-            
-            TabBarView()
-            
+            ZStack {
+                if UserDefaultsManager.nickname == "" {
+                    UserSettingView()
+                } else {
+                    TabBarView()
+                }
+                KeyBoardManager().frame(width: 0, height: 0)
+            }
         }
     }
 }

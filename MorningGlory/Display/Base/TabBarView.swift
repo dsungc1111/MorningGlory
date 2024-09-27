@@ -38,7 +38,7 @@ struct TabBarView: View {
     var body: some View {
         
         ZStack {
-            KeyBoardManager().frame(width: 0, height: 0)
+//            KeyBoardManager().frame(width: 0, height: 0)
             LinearGradient(
                        gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
                        startPoint: .topLeading,
@@ -50,7 +50,7 @@ struct TabBarView: View {
                        ToDoView()
                            .tabItem {
                                Image(systemName: "checkmark.circle.fill")
-                               Text("ToDo")
+                               Text("Mission")
                            }
                            .tag(1)
                        CalendarView()
@@ -65,7 +65,7 @@ struct TabBarView: View {
                                Text("User")
                            }
                            .tag(3)
-                       PostView()
+                       PostView(selectedPost: PostData())
                            .tabItem {
                                Image(systemName: "text.below.photo")
                                Text("Posts")
