@@ -27,7 +27,7 @@ struct UserInfoView: View {
         
         NavigationView {
             VStack {
-                userView()
+                
                 mainView()
                     
             }
@@ -36,7 +36,8 @@ struct UserInfoView: View {
     }
     
     func mainView() -> some View {
-        ScrollView {
+        ScrollView(.vertical, showsIndicators: false) {
+            userView()
             statisticsView()
                 .padding(.bottom, 50)
             countView()
@@ -189,6 +190,8 @@ struct UserInfoView: View {
                 .frame(height: 100)
                 .navigationBarTitleDisplayMode(.inline)
               
+            
+            
             Button {
                 print("클릭")
             } label: {
@@ -199,26 +202,23 @@ struct UserInfoView: View {
                             .frame(width: 70, height: 70)
                             .clipShape(RoundedRectangle(cornerRadius: 35))
                             .padding(.trailing, 20)
-                            
+                            .scaledToFill()
                           
                     }
-//                    
-//                    RoundedRectangle(cornerRadius: 35)
-//                        .frame(width: 70, height: 70)
-//                        .padding(.trailing, 20)
                     Text(UserDefaultsManager.nickname)
                         .customFontRegular(size: 24)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .padding(.trailing, 50)
+//                    Spacer()
+//                    Image(systemName: "chevron.right")
+//                        .padding(.trailing, 50)
                     
                 }
                 .padding(.leading, 50)
             }
+            .disabled(true)
             
 
         }
-        .padding(.top, 10)
+        .padding(.top, 20)
         .padding(.horizontal, 20)
     }
 }

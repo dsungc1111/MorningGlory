@@ -43,9 +43,9 @@ struct ToDoView: View {
     // Wake Up View
     func wakeUpView() -> some View {
         HStack {
-            Image(wakeUp ? "Real" : "sleep")
+            Image(wakeUp ? "smilesmilesmile" : "sadsadsadsad")
                 .resizable()
-                .frame(width: 60, height: 60)
+                .frame(width: 80, height: 80)
                 .padding(.leading, 10)
             
             ZStack(alignment: .leading) {
@@ -156,7 +156,7 @@ struct ToDoView: View {
             todoVM.action(.mission)
         } label: {
             HStack {
-                Image(todoVM.areAllMissionsFilled ? "Real" : "")
+                Image(todoVM.areAllMissionsFilled ? "smilesmilesmile" : "")
                     .resizable()
                     .frame(width: 40, height: 40)
                 

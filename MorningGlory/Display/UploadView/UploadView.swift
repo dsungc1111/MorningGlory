@@ -14,6 +14,7 @@ struct UploadView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var uploadVM = UploadVM()
     
+    private let realmRepo = RealmRepository()
     
     var body: some View {
         
@@ -57,9 +58,16 @@ struct UploadView: View {
     private func userView() -> some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: "person.circle")
-                Text("닉네임아스파라거스")
-                    .customFontRegular(size: 20)
+                if let imageData = realmRepo.loadImageToDocument(filename: UserDefaultsManager.nickname) {
+                    Image(uiImage: imageData)
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .clipShape(RoundedRectangle(cornerRadius: 35))
+                        .scaledToFill()
+                      
+                }
+                Text(UserDefaultsManager.nickname)
+                    .customFontRegular(size: 16)
                 
             }
             .padding(.leading, 20)

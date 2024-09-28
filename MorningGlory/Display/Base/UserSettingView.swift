@@ -45,7 +45,7 @@ struct UserSettingView: View {
             .padding(.bottom, 20)
             .onAppear() {
                 if imageData == nil {
-                    if let realImage = UIImage(named: "Real"),
+                    if let realImage = UIImage(named: "smilesmilesmile"),
                        let imageData = realImage.pngData() {
                         self.imageData = imageData
                     }
@@ -56,9 +56,6 @@ struct UserSettingView: View {
             profileImageButton()
             textFieldView()
             Spacer()
-            
-
-
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
        
@@ -85,7 +82,7 @@ struct UserSettingView: View {
                     .frame(width: 200, height: 200)
                     .padding(.bottom, 20)
             } else {
-                Image("Real")
+                Image("smilesmilesmile")
                     .resizable()
                     .frame(width: 200, height: 200)
                     .padding(.bottom, 20)

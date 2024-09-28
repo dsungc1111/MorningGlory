@@ -36,9 +36,9 @@ struct YourApp: SwiftUI.App {
                 }
                 KeyBoardManager().frame(width: 0, height: 0)
             }
-            .onAppear() {
-                UserDefaultsManager.nickname = ""
-            }
+//            .onAppear() {
+//                UserDefaultsManager.nickname = ""
+//            }
         }
     }
 }
