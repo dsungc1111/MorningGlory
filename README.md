@@ -57,12 +57,11 @@
 
 # 👿 트러블슈팅 😈
 
-## @ObservedRealmObject VS @ObservedResults
-
 
 ## 두 개 이상의 구조체에서 하나의 ViewModel을 공유하려면?
 
 
+## 데이터 전달 오류
 
 
 
