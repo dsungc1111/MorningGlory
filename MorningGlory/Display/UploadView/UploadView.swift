@@ -49,9 +49,10 @@ struct UploadView: View {
             } label: {
                 Text("저장")
                     .customFontRegular(size: 16)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(uploadVM.output.text.isEmpty ? .gray : .black)
                     
             }
+            .disabled(uploadVM.output.text.isEmpty) 
         }
     }
     

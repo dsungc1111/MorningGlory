@@ -13,29 +13,32 @@ struct ToDoView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 10) {
-                sayingView()
-                    .frame(height: 180)
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 10) {
+                    sayingView()
+//                        .frame(height: 180)
+                    
+                    wakeUpView()
+                    
+                    missionListView()
+                    Spacer()
+                }
+                .padding(.top)
                 
-                wakeUpView()
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) { buttonView() }
+                }
+                .navigationTitle("Mission")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackButtonHidden(true)
+                .onAppear {
+                    if let list = todoVM.output.filteredMissionList.first {
+                        wakeUp = list.wakeUpTime != nil
+                    }
+                }
                 
-                missionListView()
-                Spacer()
-            }
-            .padding(.top)
-            
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) { buttonView() }
             }
             .background(Color(hex: "#d7eff9"))
-            .navigationTitle("Mission")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
-            .onAppear {
-                if let list = todoVM.output.filteredMissionList.first {
-                    wakeUp = list.wakeUpTime != nil
-                }
-            }
         }
         .toastView(toast: $todoVM.output.toast)
     }
@@ -103,11 +106,11 @@ struct ToDoView: View {
                 Text(UserDefaultsManager.saying)
                     .customFontRegular(size: 20)
                     .foregroundColor(.black)
-                    .padding(.horizontal, 20)
-                //                    .padding(.bottom, 40)
+                    .padding(.horizontal, 30)
+                    .padding(.bottom, 40)
             }
         }
-        .frame(minHeight: 180, maxHeight: .infinity)
+//        .frame(minHeight: 180, maxHeight: .infinity)
         .task {
             todoVM.action(.weather)
         }
@@ -161,7 +164,7 @@ struct ToDoView: View {
                     .frame(width: 40, height: 40)
                 
                 Text("저장")
-                    .font(.system(size: 24).bold())
+                    .customFontRegular(size: 16)
                     .foregroundStyle(todoVM.areAllMissionsFilled ? .blue : .gray)
             }
         }
