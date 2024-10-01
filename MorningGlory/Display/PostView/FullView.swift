@@ -36,7 +36,7 @@ struct FullView: View {
                                 .frame(height: 250)
                                 .clipShape(RoundedCorner(radius: 20, corners: [.topLeft, .topRight]))
                                 .padding(.horizontal, 20)
-                                .scaledToFill()
+                                
                         }
                         
                         VStack(alignment: .leading, spacing: 15) {
@@ -45,7 +45,7 @@ struct FullView: View {
                                     .customFontRegular(size: 14)
                                     .foregroundStyle(.gray)
                                 
-                                Spacer() // 텍스트와 메뉴 사이 간격 설정
+                                Spacer()
                                 
                                 Menu(content: {
                                     Button(action: {

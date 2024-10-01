@@ -111,14 +111,12 @@ final class CalendarVM: ViewModelType {
         return output.calendar.isDate(date1, inSameDayAs: date2)
     }
     
-    
     func getDateData(for date: Date) -> [String] {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MMMM"
         let dateString = formatter.string(from: date)
         return dateString.components(separatedBy: " ")
     }
-    
     
     func getCurrentMonth() -> Date {
         guard let currentMonth = output.calendar.date(byAdding: .month, value: output.currentMonth, to: Date()) else { return Date() }

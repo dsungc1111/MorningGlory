@@ -613,9 +613,9 @@
 				INFOPLIST_FILE = MorningGlory/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "모닝글로리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근에 허용하시겠습니까?";
+				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라에 대한 접근을 허용해주세요.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 접근에 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 사진에 대한 접근을 허용해주세요";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -653,9 +653,9 @@
 				INFOPLIST_FILE = MorningGlory/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "모닝글로리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근에 허용하시겠습니까?";
+				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라에 대한 접근을 허용해주세요.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 접근에 허용하시겠습니까?";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 사진에 대한 접근을 허용해주세요";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -98,13 +98,19 @@ struct UploadView: View {
                     },
                     set: { newImage in
                         if let newImage = newImage {
-                            if newImage.size.height > 180 {
-                                if let resizedImage = newImage.resize(toHeight: 180),
+                            
+                            let deviceWidth = UIScreen.main.bounds.width - 40
+                            let targetHeight: CGFloat = 250
+                            
+                            
+                            if newImage.size.height > targetHeight {
+                                if let resizedImage = newImage.resize(toWidth: deviceWidth, toHeight: targetHeight),
                                    let data = resizedImage.pngData() {
                                     print("리사이즈 성공")
                                     uploadVM.output.imageData = data
                                 }
-                            } else if let data = newImage.pngData() {
+                            } else if let resizedImage = newImage.resize(toWidth: deviceWidth, toHeight: newImage.size.height),
+                                      let data = resizedImage.pngData() {
                                 uploadVM.output.imageData = data
                             }
                         }
