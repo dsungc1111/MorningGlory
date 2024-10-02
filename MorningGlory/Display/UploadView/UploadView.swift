@@ -12,7 +12,7 @@ import PhotosUI
 struct UploadView: View {
     
     @Environment(\.dismiss) var dismiss
-    @StateObject private var uploadVM = UploadVM()
+    @StateObject private var uploadVM = UploadVM(postRepo: RealmRepository())
     
     private let realmRepo = RealmRepository()
     

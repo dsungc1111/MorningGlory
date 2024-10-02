@@ -47,7 +47,7 @@ struct ShortView: View {
                                 .contextMenu {
                                     Button(action: {
                                         realmRepo.removeImageFromDocument(filename: "\(post.id)")
-                                        realmRepo.removePost(postData: post)
+                                        realmRepo.removeData(data: post)
                                     }) {
                                         Text("삭제")
                                         Image(systemName: "trash")

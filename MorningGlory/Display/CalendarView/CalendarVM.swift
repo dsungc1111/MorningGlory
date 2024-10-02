@@ -10,6 +10,7 @@ import Combine
 
 final class CalendarVM: ViewModelType {
     
+    
     struct Input {
         let changeDate = PassthroughSubject<Date, Never>()
         let missionComplete = PassthroughSubject<(MissionData, Int), Never>()
@@ -29,12 +30,11 @@ final class CalendarVM: ViewModelType {
         var missionSuccess = false
     }
     
-    private let realmRepo = RealmRepository()
+    private let missionRepo: DatabaseRepository
     
     var cancellables = Set<AnyCancellable>()
     
     var input = Input()
-    
     
     @Published
     var output = Output()
@@ -45,10 +45,12 @@ final class CalendarVM: ViewModelType {
     }
     
     
-    init() {
+    init(missionRepo: DatabaseRepository) {
+        self.missionRepo = missionRepo
         transform()
-        output.allMissionList = realmRepo.getAllMissionList()
+        output.allMissionList = missionRepo.fetchData(of: MissionData.self) ?? []
     }
+   
     
     func transform() {
         input.changeDate
@@ -103,7 +105,7 @@ final class CalendarVM: ViewModelType {
     }
     
     func filteredMissions() {
-        output.filteredMissionList = realmRepo.getFetchedMissionList(todayDate: output.currentDate)
+        output.filteredMissionList = missionRepo.getFetchedMissionList(todayDate: output.currentDate)
         print("🔫🔫🔫🔫🔫🔫리스트 필터됨",output.filteredMissionList)
     }
     

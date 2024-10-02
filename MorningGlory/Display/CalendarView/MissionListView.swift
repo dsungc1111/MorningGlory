@@ -13,7 +13,7 @@ struct MissionListView: View {
     @ObservedRealmObject
     var userMissionList: MissionData
     
-    @StateObject private var calendarVM = CalendarVM()
+    @StateObject private var calendarVM = CalendarVM(missionRepo: RealmRepository())
     
     var body: some View {
         VStack {

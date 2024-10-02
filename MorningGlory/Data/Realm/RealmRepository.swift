@@ -9,34 +9,156 @@ import SwiftUI
 import RealmSwift
 
 
-struct RealmRepository {
+protocol DatabaseRepository {
     
+    
+    func getFetchedMissionList(todayDate: Date) -> [MissionData]
+    func isMissionComplete(index: Int) -> Bool
+    
+    func fetchData<T: Object>(of type: T.Type) -> [T]?
+    func removeData<T: Object>(data: T)
+    func saveData<T: Object>(data: T)
+    
+    func saveImageToDocument(image: Data, filename: String)
+    func loadImageToDocument(filename: String) -> UIImage?
+    func removeImageFromDocument(filename: String)
+    func saveOrUpdateMission(todayDate: Date, missionData: MissionData)
+    
+    var successCount: Int { get }
+    var failCount: Int { get }
+    
+    
+    
+}
+
+
+class RealmRepository: DatabaseRepository {
+    
+    
+
     private let calendar = Calendar.current
     
-    @ObservedResults(MissionData.self)
-    var missiondata
-    
-    @ObservedResults(PostData.self)
-    var postdata
-    
-    func fetchURL() {
-        print("urlurlrulrurlulrur",Realm.Configuration.defaultConfiguration.fileURL ?? "")
+    private var missiondata: Results<MissionData> {
+        let realm = try! Realm()
+        return realm.objects(MissionData.self)
+    }
+    private var postdata: Results<PostData> {
+        let realm = try! Realm()
+        return realm.objects(PostData.self)
+    }
+
+   
+    func fetchData<T: Object>(of type: T.Type) -> [T]? {
+        do {
+            let realm = try Realm()
+            return Array( realm.objects(T.self))
+        } catch {
+            print("에러: \(error)")
+            return nil
+        }
+    }
+
+    func removeData<T: Object>(data: T) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.delete(data)
+            }
+        } catch {
+            print("데이터 삭제 에러: \(error)")
+        }
+    }
+
+    func saveData<T: Object>(data: T) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(data)
+            }
+        } catch {
+            print("데이터 저장 에러: \(error)")
+        }
     }
     
-    func savePost(_ postData: PostData) {
+  
         
-        $postdata.append(postData)
-        
+//        if let editMission = existingMission.thaw() {
+//            try? editMission.realm?.write {
+//                editMission.mission1 = output.mission1
+//                editMission.mission2 = output.mission2
+//                editMission.mission3 = output.mission3
+//                editMission.wakeUpTime = output.wakeupTime
+//                print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
+//            }
+//        }
+    func saveOrUpdateMission(todayDate: Date, missionData: MissionData) {
+            // 오늘 날짜에 해당하는 미션이 있는지 확인
+            if let existingMission = missiondata.filter("todayDate == %@", todayDate).first {
+                // 미션이 존재할 경우 수정
+                if let editMission = existingMission.thaw() {
+                    try? editMission.realm?.write {
+                        editMission.mission1 = missionData.mission1
+                        editMission.mission2 = missionData.mission2
+                        editMission.mission3 = missionData.mission3
+                        editMission.wakeUpTime = missionData.wakeUpTime
+                        editMission.mission1Complete = missionData.mission1Complete
+                        editMission.mission2Complete = missionData.mission2Complete
+                        editMission.mission3Complete = missionData.mission3Complete
+                        editMission.success = missionData.success
+                    }
+                    print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
+                }
+            } else {
+                // 미션이 없을 경우 새로 추가
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                        realm.add(missionData)
+                    }
+                    print("🔫🔫🔫🔫새 데이터 추가 완료: ", missionData)
+                } catch {
+                    print("데이터 저장 에러: \(error)")
+                }
+            }
+        }
+
+    var successCount: Int {
+        missiondata.filter("success == true").count
     }
     
-    func saveMission(_ missionData: MissionData) {
+    
+
+    var failCount: Int {
+        let date = Date()
+        let startOfDay = calendar.startOfDay(for: date)
+        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
         
-        $missiondata.append(missionData)
+        let oldestDate = missiondata.sorted(byKeyPath: "todayDate", ascending: true).first?.todayDate ?? startOfDay
+        let objects = missiondata.filter("todayDate < %@", endOfDay)
         
+        let recordedDates = Set( objects.map { [weak self] object in
+            self?.calendar.startOfDay(for: object.todayDate)
+        })
+        var count = 0
+        var currentDate = calendar.startOfDay(for: oldestDate)
+
+        while currentDate < startOfDay {
+            if !recordedDates.contains(currentDate) {
+                count += 1
+            } else {
+                if let mission = objects.first(where: { calendar.isDate($0.todayDate, inSameDayAs: currentDate) }) {
+                    if mission.success == false {
+                        count += 1
+                    }
+                }
+            }
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+        
+        return count
     }
     
     func isMissionComplete(index: Int) -> Bool {
-        
         
         switch index {
         case 1:
@@ -56,96 +178,35 @@ struct RealmRepository {
         
         return missiondata[index].success
     }
-    
-    
     func getFetchedMissionList(todayDate: Date) -> [MissionData] {
-        
         let startOfDay = calendar.startOfDay(for: todayDate)
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
-        
         let objects = missiondata.filter("todayDate >= %@ AND todayDate < %@", startOfDay, endOfDay)
-        
         return Array(objects)
     }
-    
-    func getAllMissionList() -> [MissionData] {
-        
-        
-        return Array(missiondata)
-    }
-    
-    func getAllPostList() -> [PostData] {
-        
-        
-        return Array(postdata)
-    }
-    
-    
-    func countSuccess() -> Int {
-        
-        
-        var count = 0
-        
-        for item in missiondata {
-            
-            if item.success {
-                count += 1
-            }
-            
-        }
-        return count
-    }
-    
-    
-    func countFail() -> Int {
-        
-        let date = Date()
-        
-        let startOfDay = calendar.startOfDay(for: date)
-        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
-        
-        
-        guard let oldestDate = missiondata.sorted(byKeyPath: "todayDate", ascending: true).first?.todayDate else {
-            return 0
-        }
-        print("👉👉👉👉👉startOfDay👈👈👈👈👈👈", startOfDay)
-        print("👉👉👉👉👉endOfDay👈👈👈👈👈👈", endOfDay)
-        print("👉👉👉👉👉저장된 가장 오래된 날짜👈👈👈👈👈👈", oldestDate)
-        
-        
-        let objects = missiondata.filter("todayDate < %@", endOfDay)
-        
-        
-        
-        let recordedDates = Set(objects.map { calendar.startOfDay(for: $0.todayDate) })
-        
-        var count = 0
-        
-        var currentDate = calendar.startOfDay(for: oldestDate)
-        
-        
-        while currentDate < startOfDay {
-            print("🔫🔫🔫🔫🔫currentDate🔫🔫🔫🔫🔫", currentDate)
-            if !recordedDates.contains(currentDate) {
-                count += 1
-            } else {
-                if let mission = objects.first(where: { calendar.isDate($0.todayDate, inSameDayAs: currentDate) }) {
-                    if mission.success == false {
-                        count += 1
-                    }
-                }
-            }
-            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
-        }
-        
-        return count
-    }
-    
-    
-    func removePost(postData: PostData) {
-        $postdata.remove(postData)
-    }
 }
+//MARK: About PostData
+
+//extension RealmRepository {
+//    
+//    
+//    func savePost(_ postData: PostData) {
+//        
+//        $postdata.append(postData)
+//        
+//    }
+//    
+//    func getAllPostList() -> [PostData] {
+//        return Array(postdata)
+//    }
+//    
+//    func removePost(postData: PostData) {
+//        $postdata.remove(postData)
+//    }
+//}
+
+
+
 
 //MARK: About Image
 extension RealmRepository {

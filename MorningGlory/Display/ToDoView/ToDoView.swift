@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct ToDoView: View {
-    @StateObject private var todoVM = ToDoVM()
-    @StateObject private var calendarVM = CalendarVM()
+    @StateObject private var todoVM = ToDoVM(missionRepo: RealmRepository())
+    @StateObject private var calendarVM = CalendarVM(missionRepo: RealmRepository())
     @State private var wakeUp = false
     
     var body: some View {

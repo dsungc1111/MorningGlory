@@ -7,15 +7,16 @@
 
 import Foundation
 import Combine
-//import RealmSwift
 
 
 final class ToDoVM: ViewModelType {
     
     var cancellables = Set<AnyCancellable>()
-    private var locationManager = LocationManager()
-    private let realmRepo = RealmRepository()
     
+    private var locationManager = LocationManager()
+    
+    private var missionRepo: DatabaseRepository
+    //    private let realmRepo = RealmRepository()
     
     struct Input {
         let getWeather = PassthroughSubject<Void, Never>()
@@ -46,12 +47,13 @@ final class ToDoVM: ViewModelType {
     @Published
     var output = Output()
     
-    init() {
+    init(missionRepo: DatabaseRepository) {
+        self.missionRepo = missionRepo
         transform()
         let date = Date()
-        output.filteredMissionList = realmRepo.getFetchedMissionList(todayDate: date)
-        output.allMissionList = realmRepo.getAllMissionList()
-        realmRepo.fetchURL()
+        output.filteredMissionList = missionRepo.getFetchedMissionList(todayDate: date)
+        output.allMissionList = missionRepo.fetchData(of: MissionData.self) ?? []
+        //        missionRepo.fetchURL()
     }
     
 }
@@ -76,6 +78,7 @@ extension ToDoVM {
         case .wakeUpTime(let date):
             input.saveWakeUpTime.send(date)
         }
+        
     }
     
     func transform() {
@@ -158,34 +161,28 @@ extension ToDoVM {
     
     
     func saveMission() {
-        // saveMission
+        
         let date = Date()
         
         let todayDate = Date.todayDate(from: date)
         
-        if let existingMission = output.allMissionList.first(where: { $0.todayDate == todayDate }) {
-            print("기상 시간", output.wakeupTime)
-            if let editMission = existingMission.thaw() {
-                try? editMission.realm?.write {
-                    editMission.mission1 = output.mission1
-                    editMission.mission2 = output.mission2
-                    editMission.mission3 = output.mission3
-                    editMission.wakeUpTime = output.wakeupTime
-                    print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
-                }
-            }
-            print("🔫🔫🔫🔫데이터 수정 완료: ", output.allMissionList)
-            // 전체리스트
+        
+        let newMission = MissionData(
+            todayDate: todayDate,
+            wakeUpTime: output.wakeupTime,
+            mission1: output.mission1,
+            mission2: output.mission2,
+            mission3: output.mission3
+        )
+        missionRepo.saveOrUpdateMission(todayDate: todayDate, missionData: newMission)
+        
+        // 전체 리스트 업데이트
+        output.allMissionList = missionRepo.fetchData(of: MissionData.self) ?? []
+        
+        // 사용자 피드백
+        if output.allMissionList.contains(where: { $0.todayDate == todayDate }) {
             output.toast = Toast(type: .edit, title: "수정완료 🌞🌞", message: "미션을 수정했어요!", duration: 3.0)
         } else {
-            print("===============기상 시간", output.wakeupTime, "==========")
-            let newMission = MissionData(todayDate: todayDate, wakeUpTime: output.wakeupTime, mission1:output.mission1, mission2: output.mission2, mission3: output.mission3)
-            output.allMissionList.append(newMission)
-            // 전체 리스트
-            print("🔫🔫🔫🔫새 데이터 추가 완료: ", newMission)
-            
-            realmRepo.saveMission(newMission)
-            
             output.toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
         }
     }
@@ -196,5 +193,7 @@ extension ToDoVM {
         output.wakeupTime = Date.getWakeUpTime(from: time)
         print("기상 시간 저장", output.wakeupTime)
     }
+    
+    
     
 }

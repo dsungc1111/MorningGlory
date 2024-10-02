@@ -23,7 +23,7 @@ final class UploadVM: ViewModelType {
         var imageData: Data?
     }
     
-    private var realmRepo = RealmRepository()
+    private var postRepo: DatabaseRepository
     
     enum Action {
         case savePost
@@ -37,7 +37,8 @@ final class UploadVM: ViewModelType {
     var cancellables = Set<AnyCancellable>()
     
     
-    init() {
+    init(postRepo: DatabaseRepository) {
+        self.postRepo = postRepo
         transform()
     }
     
@@ -64,10 +65,11 @@ final class UploadVM: ViewModelType {
         let date = Date()
         let postData = PostData(uploadDate: date, feeling: output.text)
         
-        realmRepo.savePost(postData)
+//        realmRepo.savePost(postData)
+        postRepo.saveData(data: postData)
 
         if let image = output.imageData {
-            realmRepo.saveImageToDocument(image: image, filename: "\(postData.id)")
+            postRepo.saveImageToDocument(image: image, filename: "\(postData.id)")
         }
     }
     

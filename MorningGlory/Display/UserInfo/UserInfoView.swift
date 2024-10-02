@@ -171,10 +171,10 @@ struct UserInfoView: View {
     
     func checkSuccess() {
        
-        successCount = realmRepo.countSuccess()
+        successCount = realmRepo.successCount
         successCount = successCount >= 30 ? 30 : successCount
         percentage = Double(successCount) / Double(totalDays)
-        failCount = realmRepo.countFail()
+        failCount = realmRepo.failCount
         
         
         print("value 값", successCount, failCount)

@@ -9,7 +9,6 @@ import Foundation
 import RealmSwift
 
 
-
 final class MissionData: Object, ObjectKeyIdentifiable {
     
     @Persisted(primaryKey: true) var id: ObjectId

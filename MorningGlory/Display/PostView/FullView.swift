@@ -50,7 +50,7 @@ struct FullView: View {
                                 Menu(content: {
                                     Button(action: {
                                         realmRepo.removeImageFromDocument(filename: "\(list.id)")
-                                        realmRepo.removePost(postData: list)
+                                        realmRepo.removeData(data: list)
                                     }, label: {
                                         Text("삭제")
                                         Image(systemName: "trash")

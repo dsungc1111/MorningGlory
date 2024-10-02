@@ -16,7 +16,9 @@ struct CalendarView: View {
     @ObservedResults(MissionData.self)
     var userMissionList
     
-    @StateObject private var calendarVM = CalendarVM()
+    
+    
+    @StateObject private var calendarVM = CalendarVM(missionRepo: RealmRepository())
     
     
     var body: some View {
@@ -41,6 +43,7 @@ struct CalendarView: View {
                 .onAppear {
                     calendarVM.action(.changeDate(Date()))
                     print("필터된 놈들", calendarVM.output.filteredMissionList)
+                    print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
                 }
             .background(Color(hex: "#d7eff9"))
         }.navigationBarTitleDisplayMode(.inline)
