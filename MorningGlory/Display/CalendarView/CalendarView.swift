@@ -16,16 +16,11 @@ struct CalendarView: View {
     @ObservedResults(MissionData.self)
     var userMissionList
     
-    
-    
     @StateObject private var calendarVM = CalendarVM(missionRepo: RealmRepository())
-    
     
     var body: some View {
         mainView()
-        
     }
-    
     
     func mainView() -> some View {
         NavigationView {

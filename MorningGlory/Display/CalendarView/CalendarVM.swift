@@ -48,7 +48,7 @@ final class CalendarVM: ViewModelType {
     init(missionRepo: DatabaseRepository) {
         self.missionRepo = missionRepo
         transform()
-        output.allMissionList = missionRepo.fetchData(of: MissionData.self) ?? []
+        output.allMissionList = missionRepo.fetchData(of: MissionData.self)
     }
    
     
