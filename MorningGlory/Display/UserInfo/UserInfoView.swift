@@ -16,6 +16,8 @@ struct UserInfoView: View {
     @State private var failCount = 0
     @State private var percentage = 0.0
     @State private var fail = 0
+    @State private var showPageSheet = false
+    @State private var usernickname = UserDefaultsManager.nickname
     
     private let realmRepo = RealmRepository()
     
@@ -42,6 +44,9 @@ struct UserInfoView: View {
                 .padding(.bottom, 50)
             countView()
         }
+        .sheet(isPresented: $showPageSheet, content: {
+            EditView(usernickname: $usernickname)
+        })
     }
     
     
@@ -184,19 +189,18 @@ struct UserInfoView: View {
     func userView() -> some View {
         
         ZStack(alignment: .leading) {
+            
             RoundedRectangle(cornerRadius: 20)
                 .fill(.white.opacity(0.5))
                 .padding(.horizontal, 25)
                 .frame(height: 100)
                 .navigationBarTitleDisplayMode(.inline)
-              
-            
             
             Button {
-                print("클릭")
+                showPageSheet.toggle()
             } label: {
                 HStack {
-                    if let imageData = realmRepo.loadImageToDocument(filename: UserDefaultsManager.nickname) {
+                    if let imageData = realmRepo.loadImageToDocument(filename: usernickname) {
                         Image(uiImage: imageData)
                             .resizable()
                             .frame(width: 70, height: 70)
@@ -205,16 +209,16 @@ struct UserInfoView: View {
                             .scaledToFill()
                           
                     }
-                    Text(UserDefaultsManager.nickname)
+                    Text(usernickname)
                         .customFontRegular(size: 24)
-//                    Spacer()
-//                    Image(systemName: "chevron.right")
-//                        .padding(.trailing, 50)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .padding(.trailing, 50)
                     
                 }
                 .padding(.leading, 50)
             }
-            .disabled(true)
+//            .disabled(true)
             
 
         }

@@ -85,6 +85,7 @@ struct DetailView: View {
                         .resizable()
                         .clipShape(RoundedRectangle(cornerRadius: 25))
                         .padding(.horizontal, 5)
+                        .frame(height: 250)
                 }
                 
                 Text("\(postData.feeling)")

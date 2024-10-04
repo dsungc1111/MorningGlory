@@ -33,7 +33,8 @@ struct UploadView: View {
                 Image(uiImage: image)
                     .resizable()
                     .clipShape(RoundedRectangle(cornerRadius: 25))
-                    .frame(width: 200, height: 250)
+                    .frame(height: 250)
+                    .padding(.horizontal, 20)
             }
             Spacer()
         }

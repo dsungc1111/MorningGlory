@@ -51,6 +51,7 @@
 		8BA3D8532CA55C910020D5B1 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D8522CA55C910020D5B1 /* PopupView */; };
 		8BA3D8542CA672D80020D5B1 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D8412CA55B580020D5B1 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8BA3D8572CA691F60020D5B1 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3D8562CA691F60020D5B1 /* UserSettingView.swift */; };
+		8BA3D8592CAFA55E0020D5B1 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3D8582CAFA55E0020D5B1 /* EditView.swift */; };
 		8BC463A62C93D67100701B4B /* RandomFamousSaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */; };
 		8BC463AE2C93D80900701B4B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8BC463AD2C93D80900701B4B /* .gitignore */; };
 		8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */; };
@@ -115,6 +116,7 @@
 		8B9632072C9D06FC005DF6FB /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		8B9632092C9D4D93005DF6FB /* MissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionListView.swift; sourceTree = "<group>"; };
 		8BA3D8562CA691F60020D5B1 /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
+		8BA3D8582CAFA55E0020D5B1 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFamousSaying.swift; sourceTree = "<group>"; };
 		8BC463AD2C93D80900701B4B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				8B8012AD2C931C3700E8AADD /* UserInfoView.swift */,
+				8BA3D8582CAFA55E0020D5B1 /* EditView.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,
 				8B65008E2C986CFE00D924E9 /* PostItData.swift in Sources */,
 				8B3F7C632CA138C400716E29 /* RealmRepository.swift in Sources */,
+				8BA3D8592CAFA55E0020D5B1 /* EditView.swift in Sources */,
 				8B96320A2C9D4D93005DF6FB /* MissionListView.swift in Sources */,
 				8B8012AE2C931C3700E8AADD /* UserInfoView.swift in Sources */,
 				8BC463C92C959F5A00701B4B /* APIKey.swift in Sources */,

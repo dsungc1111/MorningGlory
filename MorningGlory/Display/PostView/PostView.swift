@@ -37,7 +37,6 @@ struct PostView: View {
                         }
                     }
                 }
-            
                 .popup(isPresented: $isPresented) {
                     DetailView(postData: $selectedPost)
                         .padding(.top, 200)
