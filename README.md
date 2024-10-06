@@ -70,6 +70,13 @@
 - 이미지 삭제 시, 파일이 존재하는지 확인 후, 해당파일 삭제   
   - 이미지 먼저 삭제 후, Realm 데이터 삭제 순서에 유의
 
+### - 사용자 위치 관리
+- requestWhenInUseAuthorization()을 통해 사용자로부터 위치 추적에 대한 권한 상태 설정
+- didChangeAuthorization 델리게이트 메서드를 통해 사용자의 위치 권한 변경에 대응
+- 사용자에게 해당 위치에 대한 날씨 제공을 위해 CoreLocation을 활용하여 사용자 위치 정보 처리
+- CLLocationManager를 활용하여 사용자의 위치 지속적으로 업데이트
+
+
 <br> <br> 
 # 👿 트러블슈팅 😈
 
