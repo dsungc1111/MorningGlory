@@ -56,7 +56,7 @@
 - 데이터관리를 위한 RealmRepository를 여러 ViewModel에서 사용하고, 테스트 용이성과 코드 구현에 있어 유연성 향상을 위해 DIP를 적용 
 - ViewModel이 RealmRepository의 구체적인 구현에 의존하지 않고, DataBaseRepository라는 프로토콜을 사용해 추상화에 의존하도록 구현
 
-![poster](./model.png)
+![poster](./model.png)
 
 ### - 데이터 상태 변화 관리
   - 데이터의 상태 변화를 Combine의 PassthroughSubject를 통해  제어
