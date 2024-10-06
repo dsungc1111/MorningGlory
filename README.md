@@ -32,21 +32,45 @@
     - MVVM (Model-View-ViewModel)
     - MVI (Model-View-Intent)
     - Realm
+    - Combine
+    - Repository Pattern 
 
 - 네트워킹 및 데이터 처리
     - Alamofire
     - Kingfisher
 - UI 구성 및 사용자 인터페이스
     - SwiftUI
-    - TextFieldEffects
     - Charts
     - WidgetKit
 - 앱 모니터링 및 분석
     - Firebase Crashlytics
     - Firebase Analytics
+
+
 <br> <br> 
+# 👉  상세 기능 구현 설명
+
+### - Realm 데이터 관리 및 UI업데이트 설계
+
+- Realm의 데이터 변경 사항을 자동으로 UI에 반영할 수 있도록 ObservedRealmObject와 ObservedObject를 활용하여 구현.  
+- 데이터관리를 위한 RealmRepository를 여러 ViewModel에서 사용하고, 테스트 용이성과 코드 구현에 있어 유연성 향상을 위해 DIP를 적용 
+- ViewModel이 RealmRepository의 구체적인 구현에 의존하지 않고, DataBaseRepository라는 프로토콜을 사용해 추상화에 의존하도록 구현
+
+(사진)
+
+### - 데이터 상태 변화 관리
+  - 데이터의 상태 변화를 Combine의 PassthroughSubject를 통해  제어
+  - Input: 사용자로부터의 날짜 변경 또는 미션 완료와 같은 이벤트를 PassthroughSubject로 처리 
+- Output: 현재 날짜와 필터링된 미션 리스트 등, View에서 표시할 데이터를 포함, @Published를 사용하여 View에 바인딩할 수 있도록 상태 변화를 관리
 
 
+### - 이미지 파일 관리
+- 이미지 저장 시, 파일 크기를 줄이기 위해 압축된 JPEG 형식으로 Document Directory에 저장
+- 이미지 로드 시, 파일이 존재하면 UIImage 객체를 생성해 반환, nil일 경우 대체 이미지 반환
+- 이미지 삭제 시, 파일이 존재하는지 확인 후, 해당파일 삭제   
+  - 이미지 먼저 삭제 후, Realm 데이터 삭제 순서에 유의
+
+<br> <br> 
 # 👿 트러블슈팅 😈
 
 
