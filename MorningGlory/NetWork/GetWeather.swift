@@ -6,33 +6,36 @@
 //
 
 import Foundation
-import Alamofire
 
 final class GetWeather {
     
     static let shared = GetWeather()
     
     private init() {}
-    
-    func callWeather(lat: Double, lon: Double, completionHandler: @escaping (Weather) -> Void) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?"
-        let param: Parameters = [
-            "APIKey" : APIKey.key,
-            "lat" : "\(lat)",
-            "lon" : "\(lon)",
-            "units" : "metric",
-            "lang" : "kr"
-        ]
+
+    func getWeather(lat: Double, lon: Double) async throws -> Weather {
         
-        AF.request(url, parameters: param, encoding: URLEncoding.default).responseDecodable(of: Weather.self) { response in
-            switch response.result {
-            case .success(let value):
-                completionHandler(value)
-            case .failure(let error):
-                print(error)
-            }
+        let url = "https://api.openweathermap.org/data/2.5/weather?"
+        
+        var components = URLComponents(string: url)
+        
+        components?.queryItems = [
+        URLQueryItem(name: "APIKey", value: APIKey.key),
+        URLQueryItem(name: "lat", value: "\(lat)"),
+        URLQueryItem(name: "lon", value: "\(lon)"),
+        URLQueryItem(name: "units", value: "metric"),
+        URLQueryItem(name: "lang", value: "kr")
+        ]
+     
+        guard let url = components?.url else {
+            throw URLError(.badURL)
         }
+        
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        let decodeData = try JSONDecoder().decode(Weather.self, from: data)
+        
+        return decodeData
+        
     }
-    
-    
 }

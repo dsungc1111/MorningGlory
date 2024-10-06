@@ -52,8 +52,7 @@ final class ToDoVM: ViewModelType {
         transform()
         let date = Date()
         output.filteredMissionList = missionRepo.getFetchedMissionList(todayDate: date)
-        output.allMissionList = missionRepo.fetchData(of: MissionData.self) ?? []
-        //        missionRepo.fetchURL()
+        output.allMissionList = missionRepo.fetchData(of: MissionData.self)
     }
     
 }
@@ -130,20 +129,31 @@ extension ToDoVM {
             saveInfo()
         }
         if let location = locationManager.location {
-            GetWeather.shared.callWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude) { [weak self] result in
-                guard let self else { return }
-                output.weatherIcon = result.weather.first?.icon ?? "아이콘"
-                output.temperature = result.main.temp
-                output.weatherText = result.weather.first?.main ?? ""
+//            GetWeather.shared.callWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude) { [weak self] result in
+//                guard let self else { return }
+//                output.weatherIcon = result.weather.first?.icon ?? "아이콘"
+//                output.temperature = result.main.temp
+//                output.weatherText = result.weather.first?.main ?? ""
+//            }
+            
+            Task {
+                let result = try await GetWeather.shared.getWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { return }
+                    output.weatherIcon = result.weather.first?.icon ?? ""
+                    output.temperature = result.main.temp
+                    output.weatherText = result.weather.first?.main ?? ""
+                }
+                
             }
         }
     }
     
     
     func shouldFetchNewSaying() -> Bool {
-        print(#function)
         let lastFetchDate = UserDefaultsManager.dayDate
         let calendar = Calendar.current
+        
         if let daysBetween = calendar.dateComponents([.day], from: lastFetchDate, to: Date()).day, daysBetween >= 1 {
             return true
         } else if UserDefaultsManager.saying == "" {
@@ -177,7 +187,7 @@ extension ToDoVM {
         missionRepo.saveOrUpdateMission(todayDate: todayDate, missionData: newMission)
         
         // 전체 리스트 업데이트
-        output.allMissionList = missionRepo.fetchData(of: MissionData.self) ?? []
+        output.allMissionList = missionRepo.fetchData(of: MissionData.self)
         
         // 사용자 피드백
         if output.allMissionList.contains(where: { $0.todayDate == todayDate }) {
@@ -193,7 +203,5 @@ extension ToDoVM {
         output.wakeupTime = Date.getWakeUpTime(from: time)
         print("기상 시간 저장", output.wakeupTime)
     }
-    
-    
     
 }
