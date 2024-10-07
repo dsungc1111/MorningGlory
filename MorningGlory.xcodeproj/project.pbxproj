@@ -286,8 +286,8 @@
 			isa = PBXGroup;
 			children = (
 				8BA3D8552CA691E20020D5B1 /* Base */,
-				8B8012A62C93199F00E8AADD /* CalendarView */,
 				8B8012AB2C931C0600E8AADD /* ToDoView */,
+				8B8012A62C93199F00E8AADD /* CalendarView */,
 				8B8012AC2C931C2900E8AADD /* UserInfo */,
 				8B8012AF2C931C4300E8AADD /* PostView */,
 				8B81DBBE2CA22A0000274D28 /* UploadView */,
@@ -618,7 +618,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "모닝글로리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라에 대한 접근을 허용해주세요.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치의 날씨 정보를 얻기 위해 권한을 허용해주세요";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 사진에 대한 접근을 허용해주세요";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -658,7 +658,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "모닝글로리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "게시물 업로드를 위해 카메라에 대한 접근을 허용해주세요.";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보를 받아 그 위치에 해당하는 날씨 표현";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "현재 위치의 날씨 정보를 얻기 위해 권한을 허용해주세요";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "게시물 업로드를 위해 사진에 대한 접근을 허용해주세요";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

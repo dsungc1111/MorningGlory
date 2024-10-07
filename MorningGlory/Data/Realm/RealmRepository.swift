@@ -12,7 +12,7 @@ import RealmSwift
 protocol DatabaseRepository {
     
     func getFetchedMissionList(todayDate: Date) -> [MissionData]
-    func isMissionComplete(index: Int) -> Bool
+    func missionComplete(missionData: MissionData, index: Int) -> Bool
     
     func fetchData<T: Object>(of type: T.Type) -> [T]
     func removeData<T: Object>(data: T)
@@ -156,24 +156,29 @@ final class RealmRepository: DatabaseRepository {
         return count
     }
     
-    func isMissionComplete(index: Int) -> Bool {
+    func missionComplete(missionData: MissionData, index: Int) -> Bool {
         
-        switch index {
-        case 1:
-            missiondata[index].mission1Complete.toggle()
-        case 2:
-            missiondata[index].mission2Complete.toggle()
-        case 3:
-            missiondata[index].mission3Complete.toggle()
-        default:
-            break
+        if let mission = missionData.thaw() {
+            try? mission.realm?.write {
+                switch index {
+                case 1:
+                    mission.mission1Complete.toggle()
+                case 2:
+                    mission.mission2Complete.toggle()
+                case 3:
+                    mission.mission3Complete.toggle()
+                default:
+                    break
+                }
+                if mission.mission1Complete && mission.mission2Complete && mission.mission3Complete {
+                    mission.success = true
+                } else {
+                    mission.success = false
+                }
+                
+            }
         }
-        if missiondata[index].mission1Complete && missiondata[index].mission2Complete && missiondata[index].mission3Complete {
-            missiondata[index].success = true
-        } else {
-            missiondata[index].success = false
-        }
-        
+    
         return missiondata[index].success
     }
     

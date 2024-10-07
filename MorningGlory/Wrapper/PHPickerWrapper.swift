@@ -58,6 +58,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 //MARK: - 사진촬영
 
 struct CameraView: UIViewControllerRepresentable {
+    
     @Binding var selectedImage: UIImage?
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {

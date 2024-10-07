@@ -32,6 +32,5 @@ final class GetWeather {
         let decodeData = try JSONDecoder().decode(Weather.self, from: data)
         
         return decodeData
-        
     }
 }

@@ -43,6 +43,7 @@ struct MissionListView: View {
                 VStack(alignment: .leading) {
                     Text(userMissionList.mission1)
                         .customFontBold(size: 20)
+                        .foregroundStyle(.black)
                         .padding(.bottom, 2)
                     Text("05:30 ~ 06:30")
                         .customFontRegular(size: 14)
@@ -72,6 +73,7 @@ struct MissionListView: View {
                 .padding(.trailing, 20)
                 VStack(alignment: .leading) {
                     Text(userMissionList.mission2)
+                        .foregroundStyle(.black)
                         .customFontBold(size: 20)
                         .padding(.bottom, 2)
                     Text("06:30 ~ 07:30")
@@ -102,6 +104,7 @@ struct MissionListView: View {
                 .padding(.trailing, 20)
                 VStack(alignment: .leading) {
                     Text(userMissionList.mission3)
+                        .foregroundStyle(.black)
                         .customFontBold(size: 20)
                         .padding(.bottom, 2)
                     Text("07:30 ~ 08:30")
