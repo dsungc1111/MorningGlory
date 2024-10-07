@@ -8,10 +8,6 @@
 import Foundation
 
 final class GetWeather {
-    
-    static let shared = GetWeather()
-    
-    private init() {}
 
     func getWeather(lat: Double, lon: Double) async throws -> Weather {
         
@@ -31,7 +27,7 @@ final class GetWeather {
             throw URLError(.badURL)
         }
         
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let (data, _) = try await URLSession.shared.data(from: url)
         
         let decodeData = try JSONDecoder().decode(Weather.self, from: data)
         

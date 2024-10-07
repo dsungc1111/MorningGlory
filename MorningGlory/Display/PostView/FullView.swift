@@ -49,8 +49,10 @@ struct FullView: View {
                                 
                                 Menu(content: {
                                     Button(action: {
-                                        realmRepo.removeImageFromDocument(filename: "\(list.id)")
-                                        realmRepo.removeData(data: list)
+                                        removePost(list)
+                                        
+//                                        realmRepo.removeImageFromDocument(filename: "\(list.id)")
+//                                        realmRepo.removeData(data: list)
                                     }, label: {
                                         Text("삭제")
                                         Image(systemName: "trash")
@@ -76,7 +78,11 @@ struct FullView: View {
             .padding(.bottom, 20)
         }
     }
-    
+    private func removePost(_ post: PostData) {
+        print("postpostpostpost = ", post)
+        realmRepo.removeImageFromDocument(filename: "\(post.id)")
+        realmRepo.removeData(data: post)
+    }
     
 }
 

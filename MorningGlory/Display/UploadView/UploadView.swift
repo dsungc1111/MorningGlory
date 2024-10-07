@@ -66,7 +66,6 @@ struct UploadView: View {
                         .frame(width: 50, height: 50)
                         .clipShape(RoundedRectangle(cornerRadius: 35))
                         .scaledToFill()
-                      
                 }
                 Text(UserDefaultsManager.nickname)
                     .customFontRegular(size: 16)
@@ -107,12 +106,12 @@ struct UploadView: View {
                             
                             if newImage.size.height > targetHeight {
                                 if let resizedImage = newImage.resize(toWidth: deviceWidth, toHeight: targetHeight),
-                                   let data = resizedImage.pngData() {
+                                   let data = resizedImage.jpegData(compressionQuality: 0.3) {
                                     print("리사이즈 성공")
                                     uploadVM.output.imageData = data
                                 }
                             } else if let resizedImage = newImage.resize(toWidth: deviceWidth, toHeight: newImage.size.height),
-                                      let data = resizedImage.pngData() {
+                                      let data = resizedImage.jpegData(compressionQuality: 0.3) {
                                 uploadVM.output.imageData = data
                             }
                         }

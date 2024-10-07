@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditView: View {
     
-    @State private var text = ""
+    @State private var text = UserDefaultsManager.nickname
     
     @State private var removeNickname = ""
     @Environment(\.dismiss) private var dismiss
@@ -43,12 +43,26 @@ struct EditView: View {
             .padding(.bottom, 20)
             .onAppear() {
                 removeNickname = UserDefaultsManager.nickname
-                if imageData == nil {
-                    if let realImage = UIImage(named: "smilesmilesmile"),
-                       let imageData = realImage.pngData() {
-                        self.imageData = imageData
-                    }
+                
+                if let image = realmRepo.loadImageToDocument(filename: UserDefaultsManager.nickname) {
+                    imageData = image.pngData()
                 }
+                
+//                else {
+//                    if let realImage = UIImage(named: "smilesmilesmile"),
+//                       let imageData = realImage.jpegData(compressionQuality: 0.3) {
+//                        self.imageData = imageData
+//                    }
+//                }
+//                
+                
+//                imageData = realmRepo.loadImageToDocument(filename: UserDefaultsManager.nickname)?.pngData()
+//                if imageData == nil {
+//                    if let realImage = UIImage(named: "smilesmilesmile"),
+//                       let imageData = realImage.pngData() {
+//                        self.imageData = imageData
+//                    }
+//                }
             }
             
          
@@ -65,6 +79,8 @@ struct EditView: View {
         usernickname = UserDefaultsManager.nickname
         if let image = imageData {
             realmRepo.removeImageFromDocument(filename: removeNickname)
+            
+            
             realmRepo.saveImageToDocument(image: image, filename: UserDefaultsManager.nickname)
         }
         
@@ -97,13 +113,13 @@ struct EditView: View {
                 return nil
             }, set: { newImage in
                 if let newImage = newImage {
-                    if let data = newImage.pngData() {
+                    if let resizedImage = newImage.resize(toWidth: 150, toHeight: 150),
+                       let data = resizedImage.pngData() {
                         imageData = data
                     }
                 }
             })
             )
-            
         })
     }
     

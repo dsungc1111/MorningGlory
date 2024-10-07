@@ -111,8 +111,10 @@ extension ToDoVM {
 extension ToDoVM {
     
     func saveInfo() {
-        print(#function)
-        RandomFamousSaying.shared.getSaying { result in
+        
+        let saying = RandomFamousSaying()
+        
+        saying.getSaying { result in
             switch result {
             case .success(let success):
                 UserDefaultsManager.saying = success.message
@@ -129,15 +131,9 @@ extension ToDoVM {
             saveInfo()
         }
         if let location = locationManager.location {
-//            GetWeather.shared.callWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude) { [weak self] result in
-//                guard let self else { return }
-//                output.weatherIcon = result.weather.first?.icon ?? "아이콘"
-//                output.temperature = result.main.temp
-//                output.weatherText = result.weather.first?.main ?? ""
-//            }
-            
             Task {
-                let result = try await GetWeather.shared.getWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
+                let weatherService = GetWeather()
+                let result = try await weatherService.getWeather(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                 DispatchQueue.main.async { [weak self] in
                     guard let self else { return }
                     output.weatherIcon = result.weather.first?.icon ?? ""
@@ -184,7 +180,6 @@ extension ToDoVM {
             mission2: output.mission2,
             mission3: output.mission3
         )
-        missionRepo.saveOrUpdateMission(todayDate: todayDate, missionData: newMission)
         
         // 전체 리스트 업데이트
         output.allMissionList = missionRepo.fetchData(of: MissionData.self)
@@ -195,13 +190,12 @@ extension ToDoVM {
         } else {
             output.toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
         }
+        missionRepo.saveOrUpdateMission(todayDate: todayDate, missionData: newMission)
     }
     
     
     func saveWakeUpTime(time: Date) {
-        
         output.wakeupTime = Date.getWakeUpTime(from: time)
-        print("기상 시간 저장", output.wakeupTime)
     }
     
 }

@@ -26,12 +26,9 @@ struct UserInfoView: View {
     
     var body: some View {
         
-        
         NavigationView {
             VStack {
-                
                 mainView()
-                    
             }
             .background(Color(hex: "#d7eff9"))
         }

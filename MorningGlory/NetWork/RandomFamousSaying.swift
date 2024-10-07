@@ -11,16 +11,12 @@ import Alamofire
 struct GetSaying: Decodable {
     let message: String
 }
+
 final class RandomFamousSaying {
-    
-    static let shared = RandomFamousSaying()
-    
-    private init() {}
     
     func getSaying(completionHandler: @escaping (Result<GetSaying, Error>) -> Void) {
         
         let url = "https://korean-advice-open-api.vercel.app/api/advice"
-        
         
         AF.request(url)
             .responseDecodable(of: GetSaying.self) { response in
@@ -31,7 +27,5 @@ final class RandomFamousSaying {
                     completionHandler(.failure(error))
                 }
             }
-        
     }
-    
 }

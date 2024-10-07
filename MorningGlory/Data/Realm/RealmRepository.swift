@@ -31,9 +31,6 @@ protocol DatabaseRepository {
 
 final class RealmRepository: DatabaseRepository {
     
-    func aa() {
-        print("dfdfd")
-    }
     
     private let calendar = Calendar.current
     
@@ -61,14 +58,25 @@ final class RealmRepository: DatabaseRepository {
     
     func removeData<T: Object>(data: T) {
         do {
-            let realm = try Realm()
-            try realm.write {
-                realm.delete(data)
+            
+            guard let realm = data.realm else { return }
+            
+            let thawedRealm = realm.isFrozen ? realm.thaw() : realm
+            
+            let thawedData = data.isFrozen ? data.thaw() : data
+            
+            guard let validData = thawedData else { return }
+            
+            try thawedRealm.write {
+                print("삭제할 데이터: \(validData)")
+                thawedRealm.delete(validData)
             }
+            
         } catch {
             print("데이터 삭제 에러: \(error)")
         }
     }
+    
     
     func saveData<T: Object>(data: T) {
         do {
@@ -117,8 +125,8 @@ final class RealmRepository: DatabaseRepository {
     }
     
     
-    
     var failCount: Int {
+        
         let date = Date()
         let startOfDay = calendar.startOfDay(for: date)
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
