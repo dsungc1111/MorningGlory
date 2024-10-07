@@ -45,7 +45,7 @@
 - 테스트 용이성과 코드 구현에 있어 유연성 향상을 위해 DIP를 적용해, 여러개의 ViewModel이 구체적인 구현에 의존하지 않고, 추상화에 의존하도록 구현
 
 ![poster](./model.png)
-
+<br>
 ### - 데이터 상태 변화 관리
   - 데이터의 상태 변화를 Combine의 PassthroughSubject를 통해  제어
 <br>
