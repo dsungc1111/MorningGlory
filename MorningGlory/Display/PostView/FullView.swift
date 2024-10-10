@@ -13,6 +13,8 @@ struct FullView: View {
     @ObservedResults(PostData.self)
     var postList
     
+    @StateObject private var postVM = PostVM(postRepo: RealmRepository())
+    
     private let realmRepo = RealmRepository()
     
     var body: some View {

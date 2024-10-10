@@ -65,7 +65,7 @@ struct TabBarView: View {
                                Text("User")
                            }
                            .tag(3)
-                       PostView(selectedPost: PostData())
+                       PostView()
                            .tabItem {
                                Image(systemName: "text.below.photo")
                                Text("Posts")

@@ -52,6 +52,7 @@
 		8BA3D8542CA672D80020D5B1 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 8BA3D8412CA55B580020D5B1 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8BA3D8572CA691F60020D5B1 /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3D8562CA691F60020D5B1 /* UserSettingView.swift */; };
 		8BA3D8592CAFA55E0020D5B1 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3D8582CAFA55E0020D5B1 /* EditView.swift */; };
+		8BA3D8852CB4B7FA0020D5B1 /* PostVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3D8842CB4B7FA0020D5B1 /* PostVM.swift */; };
 		8BC463A62C93D67100701B4B /* RandomFamousSaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */; };
 		8BC463AE2C93D80900701B4B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8BC463AD2C93D80900701B4B /* .gitignore */; };
 		8BC463B92C93FE6F00701B4B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */; };
@@ -117,6 +118,7 @@
 		8B9632092C9D4D93005DF6FB /* MissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionListView.swift; sourceTree = "<group>"; };
 		8BA3D8562CA691F60020D5B1 /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
 		8BA3D8582CAFA55E0020D5B1 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		8BA3D8842CB4B7FA0020D5B1 /* PostVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostVM.swift; sourceTree = "<group>"; };
 		8BC463A52C93D67100701B4B /* RandomFamousSaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFamousSaying.swift; sourceTree = "<group>"; };
 		8BC463AD2C93D80900701B4B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8BC463B82C93FE6F00701B4B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				8B8012B02C931CFB00E8AADD /* PostView.swift */,
 				8B81DBC92CA3F93B00274D28 /* FullView.swift */,
 				8B81DBCB2CA3F9DB00274D28 /* ShortView.swift */,
+				8BA3D8842CB4B7FA0020D5B1 /* PostVM.swift */,
 			);
 			path = PostView;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				8B8012B42C931F4700E8AADD /* DateValue.swift in Sources */,
 				8B8012962C93185000E8AADD /* MorningGloryApp.swift in Sources */,
 				8BC463C32C95335300701B4B /* KeyBoardManager.swift in Sources */,
+				8BA3D8852CB4B7FA0020D5B1 /* PostVM.swift in Sources */,
 				8BC463A62C93D67100701B4B /* RandomFamousSaying.swift in Sources */,
 				8B6500902C9AAC8F00D924E9 /* MissionData.swift in Sources */,
 				8B81DBBB2CA195B400274D28 /* PostData.swift in Sources */,
@@ -625,12 +629,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DS.MorningGlory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -665,12 +670,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DS.MorningGlory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -5,18 +5,17 @@ import PopupView
 
 struct PostView: View {
     
-    @State private var selection = 0
-    @State private var showPageSheet = false
-    @State var selectedPost: PostData
-    @State var isPresented: Bool = false
+    @StateObject private var postVM = PostVM(postRepo: RealmRepository())
     
     @ObservedResults(PostData.self)
     var postList
     
     var body: some View {
-        
+        mainView()
+    }
+    
+    private func mainView() -> some View {
         NavigationView {
-            
             segementedControlView()
                 .navigationTitle("Post")
                 .navigationBarTitleDisplayMode(.inline)
@@ -24,7 +23,7 @@ struct PostView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
-                            showPageSheet = true
+                            postVM.action(.pageSheet)
                         }, label: {
                             HStack {
                                 Text("글 추가")
@@ -32,15 +31,14 @@ struct PostView: View {
                                     .foregroundStyle(.black)
                             }
                         })
-                        .sheet(isPresented: $showPageSheet) {
+                        .sheet(isPresented: $postVM.output.showPageSheet) {
                             UploadView()
                         }
                     }
                 }
-                .popup(isPresented: $isPresented) {
-                    DetailView(postData: $selectedPost)
+                .popup(isPresented: $postVM.output.isPresented) {
+                    DetailView(postData: $postVM.output.selectedPost)
                         .padding(.top, 200)
-                    
             } customize: {
                 $0
                     .type(.toast)
@@ -53,6 +51,7 @@ struct PostView: View {
         }
     }
     
+    
     private func segementedControlView() -> some View {
         
         VStack {
@@ -61,7 +60,7 @@ struct PostView: View {
                     .customFontRegular(size: 20)
                     .padding(.leading, 25)
                 Spacer()
-                Picker(selection: $selection, label: Text("Picker")) {
+                Picker(selection: $postVM.output.selection, label: Text("Picker")) {
                     Image(systemName: "squareshape").tag(0)
                     Image(systemName: "square.grid.3x3").tag(1)
                 }
@@ -70,11 +69,11 @@ struct PostView: View {
                 .padding(.trailing, 20)
             }
             ScrollView(.vertical, showsIndicators: false) {
-                if selection == 0 {
+                if postVM.output.selection == 0 {
                     FullView()
                     
                 } else {
-                    ShortView(isPresented: $isPresented, selectedPost: $selectedPost)
+                    ShortView(isPresented: $postVM.output.isPresented, selectedPost: $postVM.output.selectedPost)
                 }
                 
             }

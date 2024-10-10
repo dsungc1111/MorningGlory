@@ -17,6 +17,8 @@ struct ShortView: View {
     
     @Binding var selectedPost: PostData
     
+    @StateObject private var postVM = PostVM(postRepo: RealmRepository())
+    
     private let realmRepo = RealmRepository()
     
 

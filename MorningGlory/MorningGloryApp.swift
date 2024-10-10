@@ -11,12 +11,12 @@ import RealmSwift
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-      setupRealm()
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        setupRealm()
+        return true
+    }
 }
 
 
@@ -36,9 +36,9 @@ struct YourApp: SwiftUI.App {
                 }
                 KeyBoardManager().frame(width: 0, height: 0)
             }
-//            .onAppear() {
-//                UserDefaultsManager.nickname = ""
-//            }
+            //            .onAppear() {
+            //                UserDefaultsManager.nickname = ""
+            //            }
         }
     }
 }
@@ -46,9 +46,9 @@ func setupRealm() {
     let config = Realm.Configuration(
         schemaVersion: 7,
         migrationBlock: { migration, oldSchemaVersion in
-         
+            
             if oldSchemaVersion < 7 {
-               // 미션 1,2,3에 대한 T/F 추가
+                // 미션 1,2,3에 대한 T/F 추가
             }
         }
     )
