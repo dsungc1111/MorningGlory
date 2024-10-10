@@ -36,6 +36,7 @@
 
 
 <br> <br> 
+
 # 👉  상세 기능 구현 설명
 
 ### - Realm 데이터 관리 및 UI업데이트 설계
@@ -50,6 +51,7 @@
 
 ### - 데이터 상태 변화 관리
   - 데이터의 상태 변화를 Combine의 PassthroughSubject를 통해  제어
+
 <br>
 
 ### - 이미지 파일 관리
@@ -63,14 +65,27 @@
 - 사용자 위치 정보 처리 : CoreLocation을 사용하여 위치 정보 기반 날씨 데이터 제공
 - 위치 업데이트: CLLocationManager를 사용하여 사용자의 위치를 지속적으로 업데이트하고 관리
 
+<br>
+
+### - 컴파일 최적화
+  - private, final 키워드를 통해 dynamic dispatch를 static dispatch로 변환
+
+<br>
+
+### - 앱 안정성 향상
+  - Firebase Analytics를 통해 사용자 행동을 분석하고, Crashlytics로 오류 모니터링
+
+
 <br> <br> 
-# 👿 트러블슈팅 😈
+# 👿 트러블슈팅 
 
 
 ## 두 개 이상의 구조체에서 하나의 ViewModel을 공유하려면?
 
+### **문제**: 화면을 상위모델 내에 두 개의 하위모델로 구성했을 때, 뷰모델 요소에 변화를 주어도 하위뷰에서 변경된 값이 공유되지 않는 문제
 
-## 데이터 전달 오류
+### **해결**: 뷰모델 선언 시, 상위모듈에선 @StateObject, 하위뷰에 @EnvironmentObject 로 선언하여 뷰모델의 값을 공유하도록 수정
+
 
 
 
