@@ -50,14 +50,13 @@
 <br>
 
 ### - 데이터 상태 변화 관리
-  - 데이터의 상태 변화를 Combine의 PassthroughSubject를 통해  제어
+  - 데이터의 상태 변화를 Combine의 PassthroughSubject를 통해 제어
 
 <br>
 
 ### - 이미지 파일 관리
 
-- 프로필 이미지: 리사이징 후, pngData로 저장하여 메모리 용량 축소
-- 포스트 이미지: 최대한으로 품질 저하를 막고, 빠른 로딩을 위해 Jpeg로 이미지 압축하여 저장
+
 
 <br>
 
