@@ -41,8 +41,6 @@
 
 ### - Realm 데이터 관리 및 UI업데이트 설계
 
-- Realm의 데이터 변경 사항을 자동으로 UI에 반영할 수 있도록 ObservedRealmObject와 ObservedObject를 활용하여 구현.  
-
 - 테스트 용이성과 코드 구현에 있어 유연성 향상을 위해 DIP를 적용해, 여러개의 ViewModel이 구체적인 구현에 의존하지 않고, 추상화에 의존하도록 구현
 
 ![poster](./model.png)
