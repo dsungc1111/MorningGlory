@@ -32,7 +32,7 @@
 
 - 네트워킹 및 데이터 처리: Alamofire, Realm
 - UI 및 이미지 처리: SwiftUI, Charts, WidgetKit
-- 앱 모니터링 및 분석: Firebase Crashlytics, Firebase Analytics, Firebase Messaging
+- 앱 모니터링 및 분석: Firebase Crashlytics, Firebase Analytics
 
 
 <br> <br> 
