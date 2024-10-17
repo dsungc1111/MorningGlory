@@ -67,8 +67,7 @@
 <br>
 
 ### - 컴파일 최적화
-  - private, final 키워드를 통해 dynamic dispatch를 static dispatch로 변환
-
+ - private을 통해 외부 접근을 제한하여 캡슐화를 강화하고, final를 통해 클래스와 메서드가 상속되지 않게 선언해 메서드 호출을 인라인으로 대체하여 코드 최적화 수행
 <br>
 
 ### - 앱 안정성 향상
