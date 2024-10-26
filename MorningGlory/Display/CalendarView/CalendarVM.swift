@@ -27,7 +27,7 @@ final class CalendarVM: ViewModelType {
         
         var filteredMissionList: [MissionData] = []
         var allMissionList: [MissionData] = []
-        var missionSuccess = false
+//        var missionSuccess = false
     }
     
     private let missionRepo: DatabaseRepository
@@ -49,6 +49,8 @@ final class CalendarVM: ViewModelType {
         self.missionRepo = missionRepo
         transform()
         output.allMissionList = missionRepo.fetchData(of: MissionData.self)
+        
+
     }
     
     
@@ -65,7 +67,7 @@ final class CalendarVM: ViewModelType {
         input.missionComplete
             .sink { [weak self] (data, index) in
                 guard let self else { return }
-                output.missionSuccess = missionRepo.missionComplete(missionData: data, index: index)
+                missionRepo.missionComplete(missionData: data, index: index)
             }
             .store(in: &cancellables)
     }

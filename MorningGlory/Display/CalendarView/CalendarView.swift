@@ -14,7 +14,7 @@ struct CalendarView: View {
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
     @ObservedResults(MissionData.self)
-    var userMissionList
+    private var userMissionList
     
     @StateObject private var calendarVM = CalendarVM(missionRepo: RealmRepository())
     

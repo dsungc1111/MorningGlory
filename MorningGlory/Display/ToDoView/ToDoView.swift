@@ -7,13 +7,13 @@
 import SwiftUI
 
 struct ToDoView: View {
+    
     @StateObject private var todoVM = ToDoVM(missionRepo: RealmRepository())
     @StateObject private var calendarVM = CalendarVM(missionRepo: RealmRepository())
     @State private var wakeUp = false
     
     @Environment(\.colorScheme) var scheme
 
-    
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -25,14 +25,12 @@ struct ToDoView: View {
                     Spacer()
                 }
                 .padding(.top)
-                
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Text("Mission").font(.system(size: 18).bold()).foregroundStyle(.black)
                     }
                     ToolbarItem(placement: .topBarTrailing) { buttonView() }
                 }
-//                .navigationTitle("Mission")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackButtonHidden(true)
                 .onAppear {

@@ -48,21 +48,6 @@ struct EditView: View {
                     imageData = image.pngData()
                 }
                 
-//                else {
-//                    if let realImage = UIImage(named: "smilesmilesmile"),
-//                       let imageData = realImage.jpegData(compressionQuality: 0.3) {
-//                        self.imageData = imageData
-//                    }
-//                }
-//                
-                
-//                imageData = realmRepo.loadImageToDocument(filename: UserDefaultsManager.nickname)?.pngData()
-//                if imageData == nil {
-//                    if let realImage = UIImage(named: "smilesmilesmile"),
-//                       let imageData = realImage.pngData() {
-//                        self.imageData = imageData
-//                    }
-//                }
             }
             
          
@@ -79,11 +64,8 @@ struct EditView: View {
         usernickname = UserDefaultsManager.nickname
         if let image = imageData {
             realmRepo.removeImageFromDocument(filename: removeNickname)
-            
-            
             realmRepo.saveImageToDocument(image: image, filename: UserDefaultsManager.nickname)
         }
-        
     }
     
     func profileImageButton() -> some View {
@@ -114,7 +96,7 @@ struct EditView: View {
             }, set: { newImage in
                 if let newImage = newImage {
                     if let resizedImage = newImage.resize(toWidth: 150, toHeight: 150),
-                       let data = resizedImage.pngData() {
+                       let data = resizedImage.jpegData(compressionQuality: 0.5) {
                         imageData = data
                     }
                 }

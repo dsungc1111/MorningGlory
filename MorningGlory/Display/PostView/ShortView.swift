@@ -25,7 +25,6 @@ struct ShortView: View {
     @ObservedResults(PostData.self)
     var postList
     
-    
     var body: some View {
         mainView()
             .onAppear() {

@@ -12,7 +12,7 @@ import RealmSwift
 protocol DatabaseRepository {
     
     func getFetchedMissionList(todayDate: Date) -> [MissionData]
-    func missionComplete(missionData: MissionData, index: Int) -> Bool
+    func missionComplete(missionData: MissionData, index: Int)
     
     func fetchData<T: Object>(of type: T.Type) -> [T]
     func removeData<T: Object>(data: T)
@@ -57,6 +57,7 @@ final class RealmRepository: DatabaseRepository {
     }
     
     func removeData<T: Object>(data: T) {
+        
         do {
             
             guard let realm = data.realm else { return }
@@ -107,7 +108,6 @@ final class RealmRepository: DatabaseRepository {
                 print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
             }
         } else {
-            // 미션이 없을 경우 새로 추가
             do {
                 let realm = try Realm()
                 try realm.write {
@@ -156,7 +156,7 @@ final class RealmRepository: DatabaseRepository {
         return count
     }
     
-    func missionComplete(missionData: MissionData, index: Int) -> Bool {
+    func missionComplete(missionData: MissionData, index: Int)  {
         
         if let mission = missionData.thaw() {
             try? mission.realm?.write {
@@ -179,7 +179,7 @@ final class RealmRepository: DatabaseRepository {
             }
         }
     
-        return missiondata[index].success
+//        return missiondata[index].success
     }
     
     func getFetchedMissionList(todayDate: Date) -> [MissionData] {

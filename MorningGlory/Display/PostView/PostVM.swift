@@ -47,7 +47,6 @@ final class PostVM: ViewModelType {
             }
             .store(in: &cancellables)
     }
-    
 }
 
 extension PostVM {
@@ -59,8 +58,6 @@ extension PostVM {
         }
         
     }
-    
-    
     
     func isPageSheetOn() {
         output.showPageSheet = true
