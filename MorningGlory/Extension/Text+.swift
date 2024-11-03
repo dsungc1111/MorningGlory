@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CustomFontModifier: ViewModifier {
+    
     let size: CGFloat
     let weight: Font.Weight
     
@@ -20,10 +21,10 @@ struct CustomFontModifier: ViewModifier {
 extension View {
     
     func customFontRegular(size: CGFloat) -> some View {
-          self.modifier(CustomFontModifier(size: size, weight: .regular))
-      }
-      
-      func customFontBold(size: CGFloat) -> some View {
-          self.modifier(CustomFontModifier(size: size, weight: .bold))
-      }
+        self.modifier(CustomFontModifier(size: size, weight: .regular))
+    }
+    
+    func customFontBold(size: CGFloat) -> some View {
+        self.modifier(CustomFontModifier(size: size, weight: .bold))
+    }
 }

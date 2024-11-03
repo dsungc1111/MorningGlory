@@ -11,7 +11,7 @@ final class GetWeather {
 
     func getWeather(lat: Double, lon: Double) async throws -> Weather {
         
-        let url = "https://api.openweathermap.org/data/2.5/weather?"
+        let url = APIKey.weatherURL
         
         var components = URLComponents(string: url)
         

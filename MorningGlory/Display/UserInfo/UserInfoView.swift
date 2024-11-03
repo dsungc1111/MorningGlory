@@ -178,6 +178,8 @@ struct UserInfoView: View {
         percentage = Double(successCount) / Double(totalDays)
         failCount = realmRepo.failCount
         
+        UserDefaults.groupShared.set(successCount, forKey: "success")
+        
         
         print("value 값", successCount, failCount)
     }

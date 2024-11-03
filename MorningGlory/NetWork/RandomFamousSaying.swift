@@ -16,7 +16,7 @@ final class RandomFamousSaying {
     
     func getSaying(completionHandler: @escaping (Result<GetSaying, Error>) -> Void) {
         
-        let url = "https://korean-advice-open-api.vercel.app/api/advice"
+        let url = APIKey.sayingURL
         
         AF.request(url)
             .responseDecodable(of: GetSaying.self) { response in
