@@ -49,7 +49,7 @@ struct SuccessWidgetEntryView : View {
     
     let totalDays = 30
     
-    @State private var successCount = ""
+    @State private var successCount = UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? ""
     @State private var percentage = 0.0
     
     var entry: Provider.Entry
@@ -60,7 +60,7 @@ struct SuccessWidgetEntryView : View {
     func statisticsView() -> some View {
         
         VStack {
-            Text("\(Int(UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? "")!)일 성공!")
+            Text( successCount == "0" ?  "도전하러가기" : "\(Int(successCount) ?? 0)일 성공!")
                 .bold()
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                 .padding(.top, 10)
@@ -89,30 +89,16 @@ struct SuccessWidgetEntryView : View {
                 .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.black.opacity(0.3), .clear]), startPoint: .bottomTrailing, endPoint: .topLeading))
             
             Circle()
-                .trim(from: 0, to: (Double(UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? "") ?? 0.0) / Double(30))
+                .trim(from: 0, to: (Double(successCount) ?? 0.0) / Double(30))
                 .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .frame(width: 80, height: 80)
                 .rotationEffect(.degrees(-90))
                 .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing))
             
-            Text(String(format: "%.1f", (Double(UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? "") ?? 0.0) / Double(30)*100) + "%")
+            Text(String(format: "%.1f", (Double(successCount) ?? 0.0) / Double(30)*100) + "%")
                 .font(.system(size: 12))
-
+            
         }
-        .task() {
-            checkSuccess()
-        }
-    }
-    
-    func checkSuccess() {
-       
-        successCount = UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? ""
-        successCount = Int(successCount) ?? 0 >= 30 ? String(30) : successCount
-        percentage = (Double(UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? "") ?? 0.0) / Double(30)
-//        failCount = realmRepo.failCount
-        
-        
-        print("value 값", successCount)
     }
 }
 
@@ -130,17 +116,9 @@ struct SuccessWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("Success")
-        .description("Rate of your Success.")
+        .configurationDisplayName("모닝글로리")
+        .description("30일간의 도전!")
+        .supportedFamilies([.systemSmall])
     }
 }
 
-
-
-
-#Preview(as: .systemSmall) {
-    SuccessWidget()
-} timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
-}
