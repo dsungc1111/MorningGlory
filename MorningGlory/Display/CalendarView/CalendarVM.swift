@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import WidgetKit
 
 final class CalendarVM: ViewModelType {
     
@@ -68,6 +69,13 @@ final class CalendarVM: ViewModelType {
             .sink { [weak self] (data, index) in
                 guard let self else { return }
                 missionRepo.missionComplete(missionData: data, index: index)
+                
+                let successCount = missionRepo.successCount
+                
+                UserDefaults.groupShared.set(successCount, forKey: "success")
+                
+                print("value 값", successCount)
+                WidgetCenter.shared.reloadTimelines(ofKind: "SuccessWidget")
             }
             .store(in: &cancellables)
     }

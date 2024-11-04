@@ -57,13 +57,10 @@ struct SuccessWidgetEntryView : View {
     var body: some View {
         statisticsView()
     }
-    
-    
-    
     func statisticsView() -> some View {
         
         VStack {
-            Text("\(successCount)일 성공!")
+            Text("\(Int(UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? "")!)일 성공!")
                 .bold()
                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                 .padding(.top, 10)
@@ -92,17 +89,17 @@ struct SuccessWidgetEntryView : View {
                 .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.black.opacity(0.3), .clear]), startPoint: .bottomTrailing, endPoint: .topLeading))
             
             Circle()
-                .trim(from: 0, to: percentage)
+                .trim(from: 0, to: (Double(UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? "") ?? 0.0) / Double(30))
                 .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .frame(width: 80, height: 80)
                 .rotationEffect(.degrees(-90))
                 .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: .topLeading, endPoint: .bottomTrailing))
             
-            Text(String(format: "%.1f", percentage*100) + "%")
+            Text(String(format: "%.1f", (Double(UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? "") ?? 0.0) / Double(30)*100) + "%")
                 .font(.system(size: 12))
 
         }
-        .onAppear() {
+        .task() {
             checkSuccess()
         }
     }
@@ -111,7 +108,7 @@ struct SuccessWidgetEntryView : View {
        
         successCount = UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? ""
         successCount = Int(successCount) ?? 0 >= 30 ? String(30) : successCount
-        percentage = (Double(successCount) ?? 0.0) / Double(totalDays)
+        percentage = (Double(UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? "") ?? 0.0) / Double(30)
 //        failCount = realmRepo.failCount
         
         
@@ -133,8 +130,8 @@ struct SuccessWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Success")
+        .description("Rate of your Success.")
     }
 }
 
