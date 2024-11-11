@@ -11,6 +11,7 @@ struct ToDoView: View {
     @StateObject private var todoVM = ToDoVM(missionRepo: RealmRepository())
 
     @State private var wakeUp = false
+    @State private var isAddMissionViewPageSheet = false
     
     @Environment(\.colorScheme) var scheme
 
@@ -40,32 +41,38 @@ struct ToDoView: View {
     
     // Wake Up + Mission add View
     func checkWakeUpView() -> some View {
-        HStack {
-            Button(action: {
-                let date = Date()
-                wakeUp.toggle()
-                todoVM.action(.wakeUpTime(date))
-            }) {
-                HStack {
-                    Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
-                    Text(wakeUp ? "기상완료" : "기상하셨나요?").customFontBold(size: 17)
+            HStack {
+                Button(action: {
+                    let date = Date()
+                    wakeUp.toggle()
+                    todoVM.action(.wakeUpTime(date))
+                }) {
+                    HStack {
+                        Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
+                        Text(wakeUp ? "기상완료" : "기상하셨나요?").customFontBold(size: 17)
+                    }
+                }
+                
+                Spacer()
+                
+                Button(action: {
+                    isAddMissionViewPageSheet.toggle()
+                }, label: {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                        Text("미션 추가").customFontBold(size: 17)
+                    }
+                })
+                .sheet(isPresented: $isAddMissionViewPageSheet) {
+                    
+                    AddMissionView()
+                        .presentationDetents([.fraction(0.5)])
+                        .presentationDragIndicator(.visible)
                 }
             }
-            
-            Spacer()
-            
-            Button(action: {
-                AddMissionView()
-            }, label: {
-                HStack {
-                    Image(systemName: "plus.circle.fill")
-                    Text("미션 추가").customFontBold(size: 17)
-                }
-            })
-        }
-        .foregroundStyle(.black)
-        .padding(.horizontal, 25)
-        .padding(.bottom, 10)
+            .foregroundStyle(.black)
+            .padding(.horizontal, 25)
+            .padding(.bottom, 10)
     }
     
     // Mission List View
