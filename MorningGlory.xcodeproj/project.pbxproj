@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8B34372F2CD721A0003B3104 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B34372E2CD721A0003B3104 /* UserDefaults+.swift */; };
+		8B39701D2CE1931D00069824 /* AddMissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39701C2CE1931D00069824 /* AddMissionView.swift */; };
+		8B39701F2CE193A000069824 /* MissionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B39701E2CE193A000069824 /* MissionCardView.swift */; };
 		8B3F7C5A2CA0E5A200716E29 /* PHPickerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C592CA0E5A200716E29 /* PHPickerWrapper.swift */; };
 		8B3F7C5E2CA0EDB100716E29 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C5D2CA0EDB100716E29 /* UploadView.swift */; };
 		8B3F7C602CA0EE4900716E29 /* PageSheetWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F7C5F2CA0EE4900716E29 /* PageSheetWrapper.swift */; };
@@ -110,6 +112,8 @@
 		8B34372C2CD72034003B3104 /* MorningGlory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MorningGlory.entitlements; sourceTree = "<group>"; };
 		8B34372D2CD7206B003B3104 /* SuccessWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SuccessWidgetExtension.entitlements; sourceTree = "<group>"; };
 		8B34372E2CD721A0003B3104 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
+		8B39701C2CE1931D00069824 /* AddMissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMissionView.swift; sourceTree = "<group>"; };
+		8B39701E2CE193A000069824 /* MissionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCardView.swift; sourceTree = "<group>"; };
 		8B3F7C592CA0E5A200716E29 /* PHPickerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerWrapper.swift; sourceTree = "<group>"; };
 		8B3F7C5D2CA0EDB100716E29 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		8B3F7C5F2CA0EE4900716E29 /* PageSheetWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSheetWrapper.swift; sourceTree = "<group>"; };
@@ -291,6 +295,8 @@
 			children = (
 				8B8012A92C931C0100E8AADD /* ToDoView.swift */,
 				8B9353E32C9C0C8C00B61053 /* ToDoVM.swift */,
+				8B39701C2CE1931D00069824 /* AddMissionView.swift */,
+				8B39701E2CE193A000069824 /* MissionCardView.swift */,
 			);
 			path = ToDoView;
 			sourceTree = "<group>";
@@ -568,6 +574,7 @@
 				8B81DBB92CA18EA600274D28 /* TextViewWrapper.swift in Sources */,
 				8B3F7C5A2CA0E5A200716E29 /* PHPickerWrapper.swift in Sources */,
 				8B8012A82C9319BA00E8AADD /* CalendarView.swift in Sources */,
+				8B39701D2CE1931D00069824 /* AddMissionView.swift in Sources */,
 				8B65008E2C986CFE00D924E9 /* PostItData.swift in Sources */,
 				8B3F7C632CA138C400716E29 /* RealmRepository.swift in Sources */,
 				8BA3D8592CAFA55E0020D5B1 /* EditView.swift in Sources */,
@@ -581,6 +588,7 @@
 				8BC463C32C95335300701B4B /* KeyBoardManager.swift in Sources */,
 				8BA3D8852CB4B7FA0020D5B1 /* PostVM.swift in Sources */,
 				8BC463A62C93D67100701B4B /* RandomFamousSaying.swift in Sources */,
+				8B39701F2CE193A000069824 /* MissionCardView.swift in Sources */,
 				8B6500902C9AAC8F00D924E9 /* MissionData.swift in Sources */,
 				8B81DBBB2CA195B400274D28 /* PostData.swift in Sources */,
 				8B81DBC02CA22A1300274D28 /* UploadVM.swift in Sources */,

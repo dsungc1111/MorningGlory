@@ -9,7 +9,7 @@ import SwiftUI
 struct ToDoView: View {
     
     @StateObject private var todoVM = ToDoVM(missionRepo: RealmRepository())
-    @StateObject private var calendarVM = CalendarVM(missionRepo: RealmRepository())
+
     @State private var wakeUp = false
     
     @Environment(\.colorScheme) var scheme
@@ -19,63 +19,52 @@ struct ToDoView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 10) {
                     sayingView()
-                    wakeUpView()
-                    
+                    checkWakeUpView()
                     missionListView()
                     Spacer()
                 }
                 .padding(.top)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text("Mission").font(.system(size: 18).bold()).foregroundStyle(.black)
-                    }
-                    ToolbarItem(placement: .topBarTrailing) { buttonView() }
-                }
+                .navigationTitle("Mission").customFontBold(size: 16)
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationBarBackButtonHidden(true)
                 .onAppear {
                     if let list = todoVM.output.filteredMissionList.first {
                         wakeUp = list.wakeUpTime != nil
+                        print("⭐️⭐️⭐️⭐️일어났니? >>>>>>> ", wakeUp)
                     }
                 }
-                
             }
             .background(Color(hex: "#d7eff9"))
         }
         .toastView(toast: $todoVM.output.toast)
     }
     
-    // Wake Up View
-    func wakeUpView() -> some View {
+    // Wake Up + Mission add View
+    func checkWakeUpView() -> some View {
         HStack {
-            Image(wakeUp ? "smilesmilesmile" : "sadsadsadsad")
-                .resizable()
-                .frame(width: 80, height: 80)
-                .padding(.leading, 10)
-            
-            ZStack(alignment: .leading) {
-                RoundedCorner(radius: 15, corners: [.bottomLeft, .bottomRight, .topRight])
-                    .fill(PostItColor.yellow.background)
-                    .frame(width: wakeUp ? 120 : 160, height: 40)
-                
-                Button(action: {
-                    let date = Date()
-                    wakeUp.toggle()
-                    todoVM.action(.wakeUpTime(date))
-                }) {
-                    HStack {
-                        Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
-                            .foregroundStyle(.black)
-                        
-                        Text(wakeUp ? "기상완료" : "기상하셨나요?")
-                            .customFontBold(size: 17)
-                            .foregroundStyle(.black)
-                    }
+            Button(action: {
+                let date = Date()
+                wakeUp.toggle()
+                todoVM.action(.wakeUpTime(date))
+            }) {
+                HStack {
+                    Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
+                    Text(wakeUp ? "기상완료" : "기상하셨나요?").customFontBold(size: 17)
                 }
-                .padding(.leading, 10)
             }
+            
+            Spacer()
+            
+            Button(action: {
+                AddMissionView()
+            }, label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("미션 추가").customFontBold(size: 17)
+                }
+            })
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .foregroundStyle(.black)
+        .padding(.horizontal, 25)
         .padding(.bottom, 10)
     }
     
@@ -92,6 +81,7 @@ struct ToDoView: View {
     // Saying View
     func sayingView() -> some View {
         ZStack(alignment: .top) {
+            
             RoundedRectangle(cornerRadius: 25)
                 .fill(Color(hex: "#B2D3E3"))
                 .shadow(radius: 5)
@@ -111,6 +101,7 @@ struct ToDoView: View {
                     .padding(.horizontal, 30)
                     .padding(.bottom, 40)
             }
+            
         }
         .task {
             todoVM.action(.weather)
@@ -170,35 +161,5 @@ struct ToDoView: View {
             }
         }
         .disabled(!todoVM.areAllMissionsFilled)
-    }
-}
-
-struct MissionCards: View {
-    var time: String
-    
-    @Binding var mission: String
-    
-    var backgroundColor: Color
-    
-    var body: some View {
-        RoundedRectangle(cornerRadius: 15)
-            .fill(backgroundColor)
-            .frame(height: 80)
-            .overlay(
-                HStack {
-                    Text(time)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.black)
-                        .padding(.trailing, 10)
-                    
-                    TextField("미션을 입력하세요", text: $mission)
-                        .font(.headline)
-                        .foregroundColor(.black)
-                }
-                    .padding(.horizontal, 20)
-            )
-            .padding(.horizontal, 20)
-            .padding(.bottom, 10)
     }
 }

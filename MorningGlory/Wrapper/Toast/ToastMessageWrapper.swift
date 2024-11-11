@@ -28,7 +28,8 @@ struct ToastMessageWrapper: ViewModifier {
             }
     }
     
-    @ViewBuilder func mainToastView() -> some View {
+    @ViewBuilder 
+    func mainToastView() -> some View {
         if let toast = toast {
             VStack {
                 Spacer()
@@ -42,7 +43,6 @@ struct ToastMessageWrapper: ViewModifier {
             .transition(.move(edge: .bottom))
         }
     }
-    
     
     private func showToast() {
         guard let toast = toast else { return }

@@ -16,7 +16,6 @@ final class ToDoVM: ViewModelType {
     private var locationManager = LocationManager()
     
     private var missionRepo: DatabaseRepository
-    //    private let realmRepo = RealmRepository()
     
     struct Input {
         let getWeather = PassthroughSubject<Void, Never>()
@@ -196,6 +195,7 @@ extension ToDoVM {
     
     func saveWakeUpTime(time: Date) {
         output.wakeupTime = Date.getWakeUpTime(from: time)
+        
     }
     
 }
