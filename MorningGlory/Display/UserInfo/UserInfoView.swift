@@ -177,6 +177,8 @@ struct UserInfoView: View {
         successCount = successCount >= 30 ? 30 : successCount
         percentage = Double(successCount) / Double(totalDays)
         failCount = realmRepo.failCount
+        print("🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫성공횟수 = ", successCount)
+        UserDefaults.groupShared.set(successCount, forKey: "success")
     }
     
     

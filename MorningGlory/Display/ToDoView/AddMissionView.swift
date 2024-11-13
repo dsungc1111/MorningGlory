@@ -14,14 +14,23 @@ struct AddMissionView: View {
     @State private var endTime = Date()
     @State private var missionText = ""
     
+    @StateObject private var todoVM = ToDoVM(missionRepo: RealmRepository())
+    
     var body: some View {
-//        NavigationView {
             mainView()
-//                .navigationTitle("미션 추가").customFontBold(size: 20)
-//                .navigationBarTitleDisplayMode(.inline)
                 .background(Color(hex: "#d7eff9"))
-//        }
-//        .background(Color(hex: "#d7eff9"))
+                .onChange(of: startTime) { newStartTime in
+                    todoVM.output.startTime = newStartTime
+                    print("미션 시작 시간 = ", todoVM.output.startTime)
+                }
+                .onChange(of: endTime) { newEndTime in
+                    todoVM.output.endTime = newEndTime
+                    print("미션 종료 시간 = ", todoVM.output.endTime)
+                }
+                .onChange(of: missionText) { missionText in
+                    todoVM.output.mission1 = missionText
+                    print("미션 텍스트 = ", missionText)
+                }
     }
     
     private func mainView() -> some View {
@@ -52,7 +61,11 @@ struct AddMissionView: View {
                 .padding(.bottom, 40)
             
             Button {
+                todoVM.action(.mission)
                 print("저장저장")
+                print("🥶🥶🥶🥶🥶🥶🥶🥶시작시간", startTime)
+                print("🥶🥶🥶🥶🥶🥶🥶🥶종료시간", endTime)
+                print("🥶🥶🥶🥶🥶🥶🥶🥶미션 텍스트", missionText)
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)

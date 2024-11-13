@@ -18,8 +18,7 @@ struct MissionListView: View {
     var body: some View {
         VStack {
             mission1View()
-            mission2View()
-            mission3View()
+       
         }
         .padding(.horizontal, 10)
     }
@@ -34,14 +33,14 @@ struct MissionListView: View {
                 Button(action: {
                     calendarVM.action(.missionComplete((userMissionList, 1)))
                 }, label: {
-                    Image(systemName: userMissionList.mission1Complete ? "checkmark.square.fill" : "checkmark.square" )
+                    Image(systemName: userMissionList.missionComplete ? "checkmark.square.fill" : "checkmark.square" )
                         .resizable()
                         .frame(width: 40, height: 40)
                         .tint(.white)
                 })
                 .padding(.trailing, 20)
                 VStack(alignment: .leading) {
-                    Text(userMissionList.mission1)
+                    Text(userMissionList.mission)
                         .customFontBold(size: 20)
                         .foregroundStyle(.black)
                         .padding(.bottom, 2)
@@ -54,66 +53,66 @@ struct MissionListView: View {
         }
         .padding(.bottom, 10)
     }
-    
-    private func mission2View() -> some View  {
-        ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(PostItColor.yellow.background)
-                .frame(height: 70)
-                .padding(.horizontal, 10)
-            HStack {
-                Button(action: {
-                    calendarVM.action(.missionComplete((userMissionList, 2)))
-                }, label: {
-                    Image(systemName: userMissionList.mission2Complete ? "checkmark.square.fill" : "checkmark.square" )
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .tint(.white)
-                })
-                .padding(.trailing, 20)
-                VStack(alignment: .leading) {
-                    Text(userMissionList.mission2)
-                        .foregroundStyle(.black)
-                        .customFontBold(size: 20)
-                        .padding(.bottom, 2)
-                    Text("06:30 ~ 07:30")
-                        .customFontRegular(size: 14)
-                        .foregroundStyle(.white)
-                }
-            }
-            .padding(.horizontal, 30)
-        }
-        .padding(.bottom, 10)
-    }
-    
-    private func mission3View() -> some View {
-        ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(PostItColor.green.background)
-                .frame(height: 70)
-                .padding(.horizontal, 10)
-            HStack {
-                Button(action: {
-                    calendarVM.action(.missionComplete((userMissionList, 3)))
-                }, label: {
-                    Image(systemName: userMissionList.mission3Complete ? "checkmark.square.fill" : "checkmark.square" )
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .tint(.white)
-                })
-                .padding(.trailing, 20)
-                VStack(alignment: .leading) {
-                    Text(userMissionList.mission3)
-                        .foregroundStyle(.black)
-                        .customFontBold(size: 20)
-                        .padding(.bottom, 2)
-                    Text("07:30 ~ 08:30")
-                        .customFontRegular(size: 14)
-                        .foregroundStyle(.white)
-                }
-            }
-            .padding(.horizontal, 30)
-        }
-        .padding(.bottom, 10)
-    }
+//    
+//    private func mission2View() -> some View  {
+//        ZStack(alignment: .leading) {
+//            RoundedRectangle(cornerRadius: 20)
+//                .fill(PostItColor.yellow.background)
+//                .frame(height: 70)
+//                .padding(.horizontal, 10)
+//            HStack {
+//                Button(action: {
+//                    calendarVM.action(.missionComplete((userMissionList, 2)))
+//                }, label: {
+//                    Image(systemName: userMissionList.mission2Complete ? "checkmark.square.fill" : "checkmark.square" )
+//                        .resizable()
+//                        .frame(width: 40, height: 40)
+//                        .tint(.white)
+//                })
+//                .padding(.trailing, 20)
+//                VStack(alignment: .leading) {
+//                    Text(userMissionList.mission2)
+//                        .foregroundStyle(.black)
+//                        .customFontBold(size: 20)
+//                        .padding(.bottom, 2)
+//                    Text("06:30 ~ 07:30")
+//                        .customFontRegular(size: 14)
+//                        .foregroundStyle(.white)
+//                }
+//            }
+//            .padding(.horizontal, 30)
+//        }
+//        .padding(.bottom, 10)
+//    }
+//    
+//    private func mission3View() -> some View {
+//        ZStack(alignment: .leading) {
+//            RoundedRectangle(cornerRadius: 20)
+//                .fill(PostItColor.green.background)
+//                .frame(height: 70)
+//                .padding(.horizontal, 10)
+//            HStack {
+//                Button(action: {
+//                    calendarVM.action(.missionComplete((userMissionList, 3)))
+//                }, label: {
+//                    Image(systemName: userMissionList.mission3Complete ? "checkmark.square.fill" : "checkmark.square" )
+//                        .resizable()
+//                        .frame(width: 40, height: 40)
+//                        .tint(.white)
+//                })
+//                .padding(.trailing, 20)
+//                VStack(alignment: .leading) {
+//                    Text(userMissionList.mission3)
+//                        .foregroundStyle(.black)
+//                        .customFontBold(size: 20)
+//                        .padding(.bottom, 2)
+//                    Text("07:30 ~ 08:30")
+//                        .customFontRegular(size: 14)
+//                        .foregroundStyle(.white)
+//                }
+//            }
+//            .padding(.horizontal, 30)
+//        }
+//        .padding(.bottom, 10)
+//    }
 }

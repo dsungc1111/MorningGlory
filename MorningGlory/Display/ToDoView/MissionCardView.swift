@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct MissionCards: View {
     var time: String
     

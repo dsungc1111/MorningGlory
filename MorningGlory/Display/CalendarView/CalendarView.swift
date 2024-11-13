@@ -114,10 +114,11 @@ extension CalendarView {
                 if let mission = userMissionList.first(where: { mission in
                     calendarVM.isSameDay(date1: mission.todayDate, date2: value.date)
                 }) {
-                    Image(systemName: mission.success ? "star.fill" : "")
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(mission.success ? Color(hex: "#b69a51") : .gray)
+                    // 별모양 
+//                    Image(systemName: mission.success ? "star.fill" : "")
+//                        .resizable()
+//                        .frame(width: 20, height: 20)
+//                        .foregroundColor(mission.success ? Color(hex: "#b69a51") : .gray)
                 }
             }
         }

@@ -36,18 +36,15 @@ struct YourApp: SwiftUI.App {
                 }
                 KeyBoardManager().frame(width: 0, height: 0)
             }
-            //            .onAppear() {
-            //                UserDefaultsManager.nickname = ""
-            //            }
         }
     }
 }
 func setupRealm() {
     let config = Realm.Configuration(
-        schemaVersion: 7,
+        schemaVersion: 8,
         migrationBlock: { migration, oldSchemaVersion in
             
-            if oldSchemaVersion < 7 {
+            if oldSchemaVersion < 8 {
                 // 미션 1,2,3에 대한 T/F 추가
             }
         }

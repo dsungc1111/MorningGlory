@@ -32,6 +32,9 @@ final class ToDoVM: ViewModelType {
         var weatherText = ""
         var temperature: Double = 0.0
         var wakeupTime = Date()
+        var missionComplete = false
+        var startTime = Date()
+        var endTime = Date()
         
         var filteredMissionList: [MissionData] = []
         var allMissionList: [MissionData] = []
@@ -164,7 +167,6 @@ extension ToDoVM {
 
 extension ToDoVM {
     
-    
     func saveMission() {
         
         let date = Date()
@@ -175,9 +177,8 @@ extension ToDoVM {
         let newMission = MissionData(
             todayDate: todayDate,
             wakeUpTime: output.wakeupTime,
-            mission1: output.mission1,
-            mission2: output.mission2,
-            mission3: output.mission3
+            mission: output.mission1,
+            missionComplete: output.missionComplete
         )
         
         // 전체 리스트 업데이트
@@ -192,10 +193,9 @@ extension ToDoVM {
         missionRepo.saveOrUpdateMission(todayDate: todayDate, missionData: newMission)
     }
     
-    
+    // date 포맷 바꿔서 저장
     func saveWakeUpTime(time: Date) {
         output.wakeupTime = Date.getWakeUpTime(from: time)
-        
     }
     
 }

@@ -96,14 +96,7 @@ final class RealmRepository: DatabaseRepository {
             
             if let editMission = existingMission.thaw() {
                 try? editMission.realm?.write {
-                    editMission.mission1 = missionData.mission1
-                    editMission.mission2 = missionData.mission2
-                    editMission.mission3 = missionData.mission3
-                    editMission.wakeUpTime = missionData.wakeUpTime
-                    editMission.mission1Complete = missionData.mission1Complete
-                    editMission.mission2Complete = missionData.mission2Complete
-                    editMission.mission3Complete = missionData.mission3Complete
-                    editMission.success = missionData.success
+          
                 }
                 print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
             }
@@ -145,9 +138,9 @@ final class RealmRepository: DatabaseRepository {
                 count += 1
             } else {
                 if let mission = objects.first(where: { calendar.isDate($0.todayDate, inSameDayAs: currentDate) }) {
-                    if mission.success == false {
-                        count += 1
-                    }
+//                    if mission.success == false {
+//                        count += 1
+//                    }
                 }
             }
             currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
@@ -162,19 +155,15 @@ final class RealmRepository: DatabaseRepository {
             try? mission.realm?.write {
                 switch index {
                 case 1:
-                    mission.mission1Complete.toggle()
+                    mission.missionComplete.toggle()
                 case 2:
-                    mission.mission2Complete.toggle()
+                    mission.missionComplete.toggle()
                 case 3:
-                    mission.mission3Complete.toggle()
+                    mission.missionComplete.toggle()
                 default:
                     break
                 }
-                if mission.mission1Complete && mission.mission2Complete && mission.mission3Complete {
-                    mission.success = true
-                } else {
-                    mission.success = false
-                }
+              
                 
             }
         }
