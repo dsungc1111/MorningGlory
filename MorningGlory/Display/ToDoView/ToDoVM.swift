@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import RealmSwift
 
 
 final class ToDoVM: ViewModelType {
@@ -173,7 +174,6 @@ extension ToDoVM {
         
         let todayDate = Date.todayDate(from: date)
         
-        
         let newMission = MissionData(
             todayDate: todayDate,
             wakeUpTime: output.wakeupTime,
@@ -185,11 +185,23 @@ extension ToDoVM {
         output.allMissionList = missionRepo.fetchData(of: MissionData.self)
         
         // 사용자 피드백
-        if output.allMissionList.contains(where: { $0.todayDate == todayDate }) {
-            output.toast = Toast(type: .edit, title: "수정완료 🌞🌞", message: "미션을 수정했어요!", duration: 3.0)
-        } else {
-            output.toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
-        }
+        // 해당 날짜에 컨텐츠가 있는지 없는지
+        if let existingDateList = missionRepo.fetchDateList(for: todayDate) {
+             // 기존 DateList에 새 미션 추가
+            print("😈😈😈😈😈😈😈 DateList 이미 있음!!")
+             try! existingDateList.realm?.write {
+                 existingDateList.mission.append(newMission)
+             }
+//             output.toast = Toast(type: .edit, title: "수정완료 🌞🌞", message: "미션을 수정했어요!", duration: 3.0)
+         } else {
+             // 새로운 DateList 생성 및 미션 추가
+             print("🔫🔫🔫🔫🔫🔫🔫 DateList 없어서 새로 추가!!")
+             let newDateList = DateList(mission: List<MissionData>(), today: todayDate)
+             newDateList.mission.append(newMission)
+             
+             missionRepo.save(newDateList)
+//             output.toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
+         }
         missionRepo.saveOrUpdateMission(todayDate: todayDate, missionData: newMission)
     }
     

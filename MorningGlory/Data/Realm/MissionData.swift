@@ -11,10 +11,12 @@ import RealmSwift
 final class DateList: Object,ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var mission: List<MissionData>
+    @Persisted var today: Date
     
-    convenience init(mission: List<MissionData>) {
+    convenience init(mission: List<MissionData>, today: Date) {
         self.init()
         self.mission = mission
+        self.today = today
     }
 }
 
@@ -29,7 +31,7 @@ final class MissionData: Object, ObjectKeyIdentifiable {
     
     @Persisted(originProperty: "mission") var main: LinkingObjects<DateList>
     
-    convenience init(todayDate: Date, wakeUpTime: Date, mission: String, missionComplete: Bool, success: Bool = false) {
+    convenience init(todayDate: Date, wakeUpTime: Date, mission: String, missionComplete: Bool) {
         self.init()
         self.todayDate = todayDate
         self.mission = mission

@@ -25,7 +25,8 @@ protocol DatabaseRepository {
     
     var successCount: Int { get }
     var failCount: Int { get }
-    
+    func fetchDateList(for date: Date) -> DateList?
+    func save(_ dateList: DateList)
 }
 
 
@@ -92,29 +93,35 @@ final class RealmRepository: DatabaseRepository {
     
     func saveOrUpdateMission(todayDate: Date, missionData: MissionData) {
         
-        if let existingMission = missiondata.filter("todayDate == %@", todayDate).first {
-            
-            if let editMission = existingMission.thaw() {
-                try? editMission.realm?.write {
-          
-                }
-                print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
+        //        if let existingMission = missiondata.filter("todayDate == %@", todayDate).first {
+        //
+        //            if let editMission = existingMission.thaw() {
+        //                try? editMission.realm?.write {
+        //
+        //                }
+        //                print("🔫🔫🔫🔫데이터 수정 완료: ", editMission)
+        //            }
+        //        } else {
+        
+        
+        
+        
+        
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(missionData)
             }
-        } else {
-            do {
-                let realm = try Realm()
-                try realm.write {
-                    realm.add(missionData)
-                }
-                print("🔫🔫🔫🔫새 데이터 추가 완료: ", missionData)
-            } catch {
-                print("데이터 저장 에러: \(error)")
-            }
+            print("🔫🔫🔫🔫새 데이터 추가 완료: ", missionData)
+        } catch {
+            print("데이터 저장 에러: \(error)")
         }
+        //        }
     }
     
     var successCount: Int {
-        missiondata.filter("success == true").count
+        missiondata.filter("missionComplete == true").count
     }
     
     
@@ -138,9 +145,9 @@ final class RealmRepository: DatabaseRepository {
                 count += 1
             } else {
                 if let mission = objects.first(where: { calendar.isDate($0.todayDate, inSameDayAs: currentDate) }) {
-//                    if mission.success == false {
-//                        count += 1
-//                    }
+                    //                    if mission.success == false {
+                    //                        count += 1
+                    //                    }
                 }
             }
             currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
@@ -163,12 +170,12 @@ final class RealmRepository: DatabaseRepository {
                 default:
                     break
                 }
-              
+                
                 
             }
         }
-    
-//        return missiondata[index].success
+        
+        //        return missiondata[index].success
     }
     
     func getFetchedMissionList(todayDate: Date) -> [MissionData] {
@@ -176,6 +183,17 @@ final class RealmRepository: DatabaseRepository {
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
         let objects = missiondata.filter("todayDate >= %@ AND todayDate < %@", startOfDay, endOfDay)
         return Array(objects)
+    }
+    func fetchDateList(for date: Date) -> DateList? {
+        let realm = try! Realm()
+        return realm.objects(DateList.self).filter("today == %@", date).first
+    }
+    
+    func save(_ dateList: DateList) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(dateList)
+        }
     }
     
 }
