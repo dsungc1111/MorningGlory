@@ -53,6 +53,11 @@ extension Date {
         let timeString = Date.dateFormatter.string(from: date)
         return timeString
     }
+    static func dateToTimeString(from date: Date) -> String {
+        Date.dateFormatter.dateFormat =  "HH:mm"
+        let timeString = Date.dateFormatter.string(from: date)
+        return timeString
+    }
     
     static func messageTime(writeDate: Date, currentDate: Date) -> String {
         

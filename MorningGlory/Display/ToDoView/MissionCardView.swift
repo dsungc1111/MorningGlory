@@ -7,26 +7,26 @@
 
 import SwiftUI
 
+
 struct MissionCards: View {
-    var time: String
     
-    @Binding var mission: String
+    @ObservedObject
+    var missionItem: MissionData
     
-    var backgroundColor: Color
     
     var body: some View {
         RoundedRectangle(cornerRadius: 15)
-            .fill(backgroundColor)
+            .fill(.white)
             .frame(height: 80)
             .overlay(
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("05:20 ~ 06:40")
+                        Text("\(Date.dateToTimeString(from: missionItem.startTime)) ~ \(Date.dateToTimeString(from: missionItem.endTiem))")
                             .customFontBold(size: 16)
                             .padding(.bottom, 10)
                             .foregroundStyle(.gray)
                         
-                        Text("여기에 미션이 들어갈거임")
+                        Text(missionItem.mission)
                             .customFontBold(size: 20)
                             .foregroundColor(.black)
                     }

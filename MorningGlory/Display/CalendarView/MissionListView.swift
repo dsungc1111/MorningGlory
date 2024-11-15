@@ -18,7 +18,6 @@ struct MissionListView: View {
     var body: some View {
         VStack {
             mission1View()
-       
         }
         .padding(.horizontal, 10)
     }

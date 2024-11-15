@@ -25,9 +25,12 @@ final class ToDoVM: ViewModelType {
     }
     
     struct Output {
-        var mission1 = ""
+        
         var mission2 = ""
         var mission3 = ""
+        
+        
+        var mission = ""
         var toast: Toast? = nil
         var weatherIcon: String = ""
         var weatherText = ""
@@ -37,12 +40,8 @@ final class ToDoVM: ViewModelType {
         var startTime = Date()
         var endTime = Date()
         
-        var filteredMissionList: [MissionData] = []
-        var allMissionList: [MissionData] = []
-    }
-    
-    var areAllMissionsFilled: Bool {
-        return !output.mission1.isEmpty && !output.mission2.isEmpty && !output.mission3.isEmpty
+        var filteredMissionList: [MissionData] = [] // 오늘날짜만
+        var allMissionList: [MissionData] = [] // 미션 전체
     }
     
     var input = Input()
@@ -177,8 +176,10 @@ extension ToDoVM {
         let newMission = MissionData(
             todayDate: todayDate,
             wakeUpTime: output.wakeupTime,
-            mission: output.mission1,
-            missionComplete: output.missionComplete
+            mission: output.mission,
+            missionComplete: output.missionComplete,
+            startTime: output.startTime,
+            endTime: output.endTime
         )
         
         // 전체 리스트 업데이트
@@ -203,6 +204,8 @@ extension ToDoVM {
 //             output.toast = Toast(type: .success, title: "등록완료 🌞🌞", message: "미션을 등록했어요!", duration: 3.0)
          }
         missionRepo.saveOrUpdateMission(todayDate: todayDate, missionData: newMission)
+        output.filteredMissionList = missionRepo.getFetchedMissionList(todayDate: todayDate)
+        print("🔫🔫🔫🔫🔫🔫🔫 오늘 미션 개수", output.filteredMissionList.count)
     }
     
     // date 포맷 바꿔서 저장

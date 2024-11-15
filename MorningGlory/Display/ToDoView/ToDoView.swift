@@ -9,12 +9,12 @@ import SwiftUI
 struct ToDoView: View {
     
     @StateObject private var todoVM = ToDoVM(missionRepo: RealmRepository())
-
+    
     @State private var wakeUp = false
     @State private var isAddMissionViewPageSheet = false
     
     @Environment(\.colorScheme) var scheme
-
+    
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false) {
@@ -41,48 +41,53 @@ struct ToDoView: View {
     
     // Wake Up + Mission add View
     func checkWakeUpView() -> some View {
-            HStack {
-                Button(action: {
-                    let date = Date()
-                    wakeUp.toggle()
-                    todoVM.action(.wakeUpTime(date))
-                }) {
-                    HStack {
-                        Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
-                        Text(wakeUp ? "기상완료" : "기상하셨나요?").customFontBold(size: 17)
-                    }
-                }
-                
-                Spacer()
-                
-                Button(action: {
-                    isAddMissionViewPageSheet.toggle()
-                }, label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("미션 추가").customFontBold(size: 17)
-                    }
-                })
-                .sheet(isPresented: $isAddMissionViewPageSheet) {
-                    
-                    AddMissionView()
-                        .presentationDetents([.fraction(0.5)])
-                        .presentationDragIndicator(.visible)
+        HStack {
+            Button(action: {
+                let date = Date()
+                wakeUp.toggle()
+                todoVM.action(.wakeUpTime(date))
+            }) {
+                HStack {
+                    Image(systemName: wakeUp ? "checkmark.square.fill" : "checkmark.square")
+                    Text(wakeUp ? "기상완료" : "기상하셨나요?").customFontBold(size: 17)
                 }
             }
-            .foregroundStyle(.black)
-            .padding(.horizontal, 25)
-            .padding(.bottom, 10)
+            
+            Spacer()
+            
+            Button(action: {
+                isAddMissionViewPageSheet.toggle()
+            }, label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("미션 추가").customFontBold(size: 17)
+                }
+            })
+            .sheet(isPresented: $isAddMissionViewPageSheet) {
+                
+                AddMissionView()
+                    .environmentObject(todoVM)
+                    .presentationDetents([.fraction(0.5)])
+                    .presentationDragIndicator(.visible)
+            }
+        }
+        .foregroundStyle(.black)
+        .padding(.horizontal, 25)
+        .padding(.bottom, 10)
     }
     
     // Mission List View
     func missionListView() -> some View {
         VStack(spacing: 10) {
-            MissionCards(time: PostItColor.pink.time, mission: $todoVM.output.mission1, backgroundColor: .white)
-            MissionCards(time: PostItColor.yellow.time, mission: $todoVM.output.mission2, backgroundColor: .white)
-            MissionCards(time: PostItColor.green.time, mission: $todoVM.output.mission3, backgroundColor: .white)
+            
+            ForEach(todoVM.output.filteredMissionList, id: \.id) { item in
+                
+                MissionCards(missionItem: item)
+            }
         }
         .padding(.bottom, 10)
+        
+        
     }
     
     // Saying View
@@ -150,23 +155,5 @@ struct ToDoView: View {
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 20)
-    }
-    
-    // Button View
-    func buttonView() -> some View {
-        Button {
-            todoVM.action(.mission)
-        } label: {
-            HStack {
-                Image(todoVM.areAllMissionsFilled ? "smilesmilesmile" : "")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                
-                Text("저장")
-                    .customFontRegular(size: 16)
-                    .foregroundStyle(todoVM.areAllMissionsFilled ? .blue : .gray)
-            }
-        }
-        .disabled(!todoVM.areAllMissionsFilled)
     }
 }

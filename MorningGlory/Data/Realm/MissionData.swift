@@ -26,16 +26,20 @@ final class MissionData: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var todayDate: Date
     @Persisted var wakeUpTime: Date?
+    @Persisted var startTime: Date
+    @Persisted var endTiem: Date
     @Persisted var mission: String
     @Persisted var missionComplete: Bool
     
     @Persisted(originProperty: "mission") var main: LinkingObjects<DateList>
     
-    convenience init(todayDate: Date, wakeUpTime: Date, mission: String, missionComplete: Bool) {
+    convenience init(todayDate: Date, wakeUpTime: Date, mission: String, missionComplete: Bool, startTime: Date, endTime: Date) {
         self.init()
         self.todayDate = todayDate
         self.mission = mission
         self.missionComplete = missionComplete
         self.wakeUpTime = wakeUpTime
+        self.startTime = startTime
+        self.endTiem = endTime
     }
 }

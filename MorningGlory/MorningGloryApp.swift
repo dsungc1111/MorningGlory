@@ -41,10 +41,10 @@ struct YourApp: SwiftUI.App {
 }
 func setupRealm() {
     let config = Realm.Configuration(
-        schemaVersion: 1,
+        schemaVersion: 2,
         migrationBlock: { migration, oldSchemaVersion in
             
-            if oldSchemaVersion < 1 {
+            if oldSchemaVersion < 2 {
                 // 미션 1,2,3에 대한 T/F 추가
             }
         }
