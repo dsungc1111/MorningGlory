@@ -107,6 +107,9 @@ let sharedDefaults = UserDefaults(suiteName: "group.com.myapp.shared")
 - App Group UserdDefaults로 데이터 저장하여 앱과 위젯에서 동일한 데이터에 접근하도록 구현
 
 <br>
+<br>
+<br>
+
 
 
 
