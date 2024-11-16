@@ -118,11 +118,14 @@ let sharedDefaults = UserDefaults(suiteName: "group.com.myapp.shared")
 
 #### 원인
 - 각 뷰의 역할 판단
-- MissionCards: 상위뷰의 정보만 받아와서 뷰 상태 업데이트, 뷰모델과 상위 뷰의 상태에 영향을 주지 않음
-- AddMissionView: 단순히 상위 뷰의 데이터를 받는 것이 아니라, 해당 뷰에서 발생한 데이터 변경 사항을 상위 뷰와 뷰모델이 인지하여 즉각적으로 업데이트
+- MissionCards:   
+  • 상위뷰의 정보만 받아와서 뷰 상태 업데이트, 뷰모델과 상위 뷰의 상태에 영향을 주지 않음
+- AddMissionView:   
+  • 단순히 상위 뷰의 데이터를 받는 것이 아니라, 해당 뷰에서 발생한 데이터 변경 사항을 상위 뷰와 뷰모델이 인지하여 즉각적으로 업데이트
 
 #### 해결 방법
-- MissionCards: 상위뷰에서 데이터를 @ObservedObject로 받아, 개별 데이터의 변경 사항만 감지하여 독립적으로 뷰 업데이트
+- MissionCards:    
+• 상위뷰에서 데이터를 @ObservedObject로 받아, 개별 데이터의 변경 사항만 감지하여 독립적으로 뷰 업데이트
 - AddMissionView:   
-•@EnvironmentObject를 사용하여 ToDoVM 전체에 접근할 수 있도록 구현했습니다.   
-•데이터를 추가하거나 수정할 경우, 뷰모델이 이를 즉시 반영하며 상위 뷰에서도 곧바로 업데이트가 이루어지도록 설계
+• @EnvironmentObject를 사용하여 ToDoVM 전체에 접근할 수 있도록 구현했습니다.   
+• 데이터를 추가하거나 수정할 경우, 뷰모델이 이를 즉시 반영하며 상위 뷰에서도 곧바로 업데이트가 이루어지도록 설계
