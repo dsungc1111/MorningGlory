@@ -36,7 +36,7 @@ final class RealmRepository: DatabaseRepository {
     private let calendar = Calendar.current
     
     private var missiondata: Results<MissionData> {
-        
+       
         let realm = try! Realm()
         return realm.objects(MissionData.self)
     }
@@ -175,7 +175,6 @@ final class RealmRepository: DatabaseRepository {
             }
         }
         
-        //        return missiondata[index].success
     }
     
     func getFetchedMissionList(todayDate: Date) -> [MissionData] {

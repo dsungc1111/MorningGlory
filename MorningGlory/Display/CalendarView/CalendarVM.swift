@@ -72,6 +72,7 @@ final class CalendarVM: ViewModelType {
                 
                 let successCount = missionRepo.successCount
                 print("🔫🔫🔫🔫🔫🔫🔫🔫🔫🔫성공횟수 = ", successCount)
+                
                 UserDefaults.groupShared.set(successCount, forKey: "success")
                 
                 print("value 값", successCount)

@@ -49,7 +49,8 @@ struct SuccessWidgetEntryView : View {
     
     let totalDays = 30
     
-    @State private var successCount = UserDefaults(suiteName: "group.com.morningGlory")?.string(forKey: "success") ?? ""
+    @State private var successCount = UserDefaults.groupShared.string(forKey: "success") ?? ""
+    
     @State private var percentage = 0.0
     
     var entry: Provider.Entry
@@ -58,6 +59,7 @@ struct SuccessWidgetEntryView : View {
         statisticsView()
     }
     func statisticsView() -> some View {
+        
         
         VStack {
             Text( successCount == "0" ?  "도전하러가기" : "\(Int(successCount) ?? 0)일 성공!")
@@ -122,3 +124,12 @@ struct SuccessWidget: Widget {
     }
 }
 
+
+extension UserDefaults {
+    
+    static var groupShared: UserDefaults {
+        let appID = "group.com.morningGlory"
+        return UserDefaults(suiteName: appID)!
+    }
+    
+}

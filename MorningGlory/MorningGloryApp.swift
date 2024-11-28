@@ -13,7 +13,7 @@ import RealmSwift
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
+        
         setupRealm()
         return true
     }
@@ -25,6 +25,8 @@ struct YourApp: SwiftUI.App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    let coreDataManager = CoreDataManager.shared
+    
     var body: some Scene {
         WindowGroup {
             
@@ -33,12 +35,15 @@ struct YourApp: SwiftUI.App {
                     UserSettingView()
                 } else {
                     TabBarView()
+                        .environment(\.managedObjectContext, coreDataManager.context)
+                      
                 }
                 KeyBoardManager().frame(width: 0, height: 0)
             }
         }
     }
 }
+
 func setupRealm() {
     let config = Realm.Configuration(
         schemaVersion: 2,

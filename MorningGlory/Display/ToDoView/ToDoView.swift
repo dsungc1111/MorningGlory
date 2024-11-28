@@ -10,6 +10,15 @@ struct ToDoView: View {
     
     @StateObject private var todoVM = ToDoVM(missionRepo: RealmRepository())
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        entity: Missions.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Missions.startTime, ascending: true)],
+        predicate: NSPredicate(format: "todayDate == %@", Calendar.current.startOfDay(for: Date()) as NSDate)
+    ) var missions: FetchedResults<Missions>
+    
+    
     @State private var wakeUp = false
     @State private var isAddMissionViewPageSheet = false
     
@@ -79,15 +88,11 @@ struct ToDoView: View {
     // Mission List View
     func missionListView() -> some View {
         VStack(spacing: 10) {
-            
-            ForEach(todoVM.output.filteredMissionList, id: \.id) { item in
-                
-                MissionCards(missionItem: item)
+            ForEach(missions, id: \.self) { mission in
+                MissionCards(missionItem: mission)
             }
         }
         .padding(.bottom, 10)
-        
-        
     }
     
     // Saying View

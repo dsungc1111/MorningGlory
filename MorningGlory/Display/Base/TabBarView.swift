@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-
-import SwiftUI
-
 struct TabBarView: View {
 
     init() {
@@ -38,7 +35,6 @@ struct TabBarView: View {
     var body: some View {
         
         ZStack {
-//            KeyBoardManager().frame(width: 0, height: 0)
             LinearGradient(
                        gradient: Gradient(colors: [Color(hex: "#469AF6"), Color(hex: "#F3D8A3")]),
                        startPoint: .topLeading,
@@ -74,6 +70,7 @@ struct TabBarView: View {
                    }
                    .accentColor(Color(hex: "#57a3ff"))
               }
+       
       }
 }
 

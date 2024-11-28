@@ -7,27 +7,17 @@
 
 import SwiftUI
 
-
 struct AddMissionView: View {
-    
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) private var presentationMode
+
     @State private var startTime = Date()
     @State private var endTime = Date()
     @State private var missionText = ""
-    
-    @EnvironmentObject private var todoVM: ToDoVM
-    
+
     var body: some View {
-            mainView()
-                .background(Color(hex: "#d7eff9"))
-                .onChange(of: startTime) { newStartTime in
-                    todoVM.output.startTime = newStartTime
-                }
-                .onChange(of: endTime) { newEndTime in
-                    todoVM.output.endTime = newEndTime
-                }
-                .onChange(of: missionText) { missionText in
-                    todoVM.output.mission = missionText
-                }
+        mainView()
+            .background(Color(hex: "#d7eff9"))
     }
     
     private func mainView() -> some View {
@@ -40,8 +30,7 @@ struct AddMissionView: View {
             VStack {
                 DatePicker("시작 시간",
                            selection: $startTime,
-                           displayedComponents: [.hourAndMinute]
-                )
+                           displayedComponents: [.hourAndMinute])
                 DatePicker("종료 시간",
                            selection: $endTime,
                            displayedComponents: [.hourAndMinute])
@@ -58,7 +47,8 @@ struct AddMissionView: View {
                 .padding(.bottom, 40)
             
             Button {
-                todoVM.action(.mission)
+                saveMission()
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
@@ -73,5 +63,21 @@ struct AddMissionView: View {
             Spacer()
         }
         .padding(.horizontal, 20)
+    }
+    
+    private func saveMission() {
+        let newMission = Missions(context: viewContext)
+        newMission.todayDate = Calendar.current.startOfDay(for: Date())
+        newMission.startTime = startTime
+        newMission.endTime = endTime
+        newMission.mission = missionText
+        newMission.missionComplete = false
+        
+        do {
+            try viewContext.save()
+            print("✅ 미션 저장 완료!")
+        } catch {
+            print("❌ 저장 실패: \(error)")
+        }
     }
 }

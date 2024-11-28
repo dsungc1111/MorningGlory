@@ -206,6 +206,7 @@ extension ToDoVM {
         missionRepo.saveOrUpdateMission(todayDate: todayDate, missionData: newMission)
         output.filteredMissionList = missionRepo.getFetchedMissionList(todayDate: todayDate)
         print("🔫🔫🔫🔫🔫🔫🔫 오늘 미션 개수", output.filteredMissionList.count)
+        
     }
     
     // date 포맷 바꿔서 저장

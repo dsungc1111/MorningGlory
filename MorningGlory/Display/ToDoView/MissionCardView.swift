@@ -6,14 +6,9 @@
 //
 
 import SwiftUI
-
-
 struct MissionCards: View {
-    
-    @ObservedObject
-    var missionItem: MissionData
-    
-    
+    var missionItem: Missions
+
     var body: some View {
         RoundedRectangle(cornerRadius: 15)
             .fill(.white)
@@ -21,12 +16,12 @@ struct MissionCards: View {
             .overlay(
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("\(Date.dateToTimeString(from: missionItem.startTime)) ~ \(Date.dateToTimeString(from: missionItem.endTiem))")
+                        Text("\(Date.dateToTimeString(from: missionItem.startTime ?? Date())) ~ \(Date.dateToTimeString(from: missionItem.endTime ?? Date()))")
                             .customFontBold(size: 16)
                             .padding(.bottom, 10)
                             .foregroundStyle(.gray)
                         
-                        Text(missionItem.mission)
+                        Text(missionItem.mission ?? "No Mission")
                             .customFontBold(size: 20)
                             .foregroundColor(.black)
                     }

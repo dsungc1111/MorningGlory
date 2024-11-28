@@ -27,9 +27,7 @@ struct ShortView: View {
     
     var body: some View {
         mainView()
-            .onAppear() {
-                print("다시 생서애서ㅐㅇ러ㅑㄴ렁내ㅓ랴ㅐㄴ러")
-            }
+            
     }
     
     private func mainView() -> some View {
@@ -64,7 +62,7 @@ struct ShortView: View {
         }
     }
 }
-// cliped
+
 struct DetailView: View {
     
     @Binding var postData: PostData

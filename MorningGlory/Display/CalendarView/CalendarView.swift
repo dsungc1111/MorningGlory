@@ -11,6 +11,14 @@ import RealmSwift
 
 struct CalendarView: View {
     
+    @FetchRequest(
+        entity: Missions.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Missions.startTime, ascending: true)],
+        predicate: NSPredicate(format: "todayDate == %@", Calendar.current.startOfDay(for: Date()) as NSDate)
+        
+    ) var missions: FetchedResults<Missions>
+    
+    
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
     @ObservedResults(MissionData.self)
@@ -21,7 +29,7 @@ struct CalendarView: View {
     var body: some View {
         mainView()
     }
-    
+
     func mainView() -> some View {
         NavigationView {
                 ScrollView(.vertical, showsIndicators: false) {
@@ -29,8 +37,8 @@ struct CalendarView: View {
                         topCalendarView()
                         weekdaysView()
                         daysComponentView(colums: columns)
-                        ForEach(calendarVM.output.filteredMissionList, id: \.id) { item in
-                            MissionListView(userMissionList: item)
+                        ForEach(missions, id: \.self) { mission in
+                            MissionListView(mission: mission)
                         }
                     }
                 }
@@ -114,11 +122,10 @@ extension CalendarView {
                 if let mission = userMissionList.first(where: { mission in
                     calendarVM.isSameDay(date1: mission.todayDate, date2: value.date)
                 }) {
-                    // 별모양 
-//                    Image(systemName: mission.success ? "star.fill" : "")
-//                        .resizable()
-//                        .frame(width: 20, height: 20)
-//                        .foregroundColor(mission.success ? Color(hex: "#b69a51") : .gray)
+                    Image(systemName: mission.missionComplete ? "star.fill" : "")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(mission.missionComplete ? Color(hex: "#b69a51") : .gray)
                 }
             }
         }
