@@ -10,25 +10,23 @@ import SwiftUI
 struct TabBarView: View {
 
     init() {
-          let appearance = UINavigationBarAppearance()
-          appearance.configureWithOpaqueBackground()
-          appearance.backgroundColor = UIColor(Color(hex: "#d7eff9"))
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor(Color(hex: "#d7eff9"))
 
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            UINavigationBar.appearance().compactAppearance = appearance
 
-          UINavigationBar.appearance().standardAppearance = appearance
-          UINavigationBar.appearance().scrollEdgeAppearance = appearance
-          UINavigationBar.appearance().compactAppearance = appearance
-        
-        let tabbar = UITabBarAppearance()
-        tabbar.backgroundColor = UIColor(Color(hex: "#d7eff9"))
-//
-        let scrollTabbar = UITabBarAppearance()
-        scrollTabbar.backgroundColor = UIColor(Color(hex: "#d7eff9"))
-//
-        UITabBar.appearance().scrollEdgeAppearance = tabbar
-//        UITabBar.appearance().standardAppearance = tabbar
-        UITabBar.appearance().standardAppearance = tabbar
-      }
+            
+            let tabbar = UITabBarAppearance()
+            tabbar.backgroundColor = UIColor(Color(hex: "#d7eff9"))
+            tabbar.stackedLayoutAppearance.selected.iconColor = .black
+            tabbar.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.black]
+
+            UITabBar.appearance().standardAppearance = tabbar
+            UITabBar.appearance().scrollEdgeAppearance = tabbar
+        }
     
     @State private var selectedTab: Int = 2
     

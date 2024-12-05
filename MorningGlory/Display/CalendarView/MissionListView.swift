@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-import RealmSwift
+import CoreData
 
 struct MissionListView: View {
-    var mission: Missions // Core Data에서 가져온 개별 Mission 객체
+    
+    @ObservedObject var mission: Missions // Core Data 객체를 ObservedObject로 감지
     
     var body: some View {
         VStack {
@@ -24,13 +25,17 @@ struct MissionListView: View {
                 .fill(Color.pink.opacity(0.5))
                 .frame(height: 70)
                 .padding(.horizontal, 10)
-            
             HStack {
-                Image(systemName: mission.missionComplete ? "checkmark.square.fill" : "checkmark.square")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .tint(.white)
-                    .padding(.trailing, 20)
+                Button {
+                    mission.missionComplete.toggle() // 상태 변경
+                    saveChanges() // Core Data 변경 사항 저장
+                } label: {
+                    Image(systemName: mission.missionComplete ? "checkmark.square.fill" : "checkmark.square")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .tint(.white)
+                        .padding(.trailing, 20)
+                }
                 
                 VStack(alignment: .leading) {
                     Text(mission.mission ?? "No Mission")
@@ -38,7 +43,7 @@ struct MissionListView: View {
                         .foregroundColor(.black)
                         .padding(.bottom, 2)
                     
-                    Text("\( Date.dateToTimeString(from: mission.startTime ?? Date())) ~ \(Date.dateToTimeString(from: mission.endTime ?? Date()))")
+                    Text("\(Date.dateToTimeString(from: mission.startTime ?? Date())) ~ \(Date.dateToTimeString(from: mission.endTime ?? Date()))")
                         .font(.subheadline)
                         .foregroundColor(.white)
                 }
@@ -46,5 +51,15 @@ struct MissionListView: View {
             .padding(.horizontal, 30)
         }
         .padding(.bottom, 10)
+    }
+    
+    private func saveChanges() {
+        guard let context = mission.managedObjectContext else { return }
+        do {
+            try context.save()
+            print("Changes saved successfully.")
+        } catch {
+            print("Failed to save changes: \(error)")
+        }
     }
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 import RealmSwift
 
+import SwiftUI
+import CoreData
 
 struct CalendarView: View {
     
@@ -15,13 +17,11 @@ struct CalendarView: View {
         entity: Missions.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Missions.startTime, ascending: true)],
         predicate: NSPredicate(format: "todayDate == %@", Calendar.current.startOfDay(for: Date()) as NSDate)
-        
     ) var missions: FetchedResults<Missions>
-    
     
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
-    @ObservedResults(MissionData.self)
+    @ObservedResults(MissionData.self) // Realm 데이터 감지
     private var userMissionList
     
     @StateObject private var calendarVM = CalendarVM(missionRepo: RealmRepository())
@@ -29,29 +29,35 @@ struct CalendarView: View {
     var body: some View {
         mainView()
     }
-
+    
     func mainView() -> some View {
         NavigationView {
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 20) {
-                        topCalendarView()
-                        weekdaysView()
-                        daysComponentView(colums: columns)
-                        ForEach(missions, id: \.self) { mission in
-                            MissionListView(mission: mission)
-                        }
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 20) {
+                    topCalendarView()
+                    weekdaysView()
+                    daysComponentView(colums: columns)
+                    
+                    // Core Data 미션 리스트
+                    ForEach(missions, id: \.self) { mission in
+                        MissionListView(mission: mission)
                     }
                 }
-                .padding(.top, 10)
-                .onAppear {
-                    calendarVM.action(.changeDate(Date()))
-                    print("필터된 놈들", calendarVM.output.filteredMissionList)
-                    print(Realm.Configuration.defaultConfiguration.fileURL ?? "")
-                }
+            }
+            .padding(.top, 10)
+            .onAppear {
+                calendarVM.action(.changeDate(Date()))
+                print("필터된 Realm 데이터: \(calendarVM.output.filteredMissionList)")
+                print("Realm 파일 위치: \(Realm.Configuration.defaultConfiguration.fileURL ?? URL(fileURLWithPath: ""))")
+            }
             .background(Color(hex: "#d7eff9"))
-        }.navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
+
+
+
 //MARK: about View
 extension CalendarView {
     
